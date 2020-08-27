@@ -1,0 +1,7 @@
+{
+  "name": "mc-trainer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
