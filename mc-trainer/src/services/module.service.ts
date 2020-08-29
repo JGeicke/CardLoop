@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AlertController} from '@ionic/angular';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

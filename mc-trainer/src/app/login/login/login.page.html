@@ -5,5 +5,18 @@
 </ion-header>
 
 <ion-content>
-
+  <!-- TESTING - REMOVE IF NO LONGER NEEDED -->
+  <ion-list>
+    <ion-label>E-Mail:</ion-label>
+    <ion-item>
+      <ion-input [(ngModel)]="emailInput" name="email" type="text"></ion-input>
+    </ion-item>
+    <ion-label>Password:</ion-label>
+    <ion-item>
+      <ion-input [(ngModel)]="passwordInput" name="password" type="password"></ion-input>
+    </ion-item>
+    <ion-button (click)="Register()" size="large" type="submit" expand="block">Register</ion-button>
+    <ion-button (click)="Login()" size="large" type="submit" expand="block">Login</ion-button>
+  </ion-list>
+  <!-- END -->
 </ion-content>
