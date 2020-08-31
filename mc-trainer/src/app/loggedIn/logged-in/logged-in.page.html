@@ -1,9 +1,49 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>loggedIn</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <h1>Card Loop</h1>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <h2>Welcome Back, Tina!</h2>
+        </ion-row>
+        <h3>Pick up where you left</h3>
+        <div>
+            <p>hier ist das modul später</p>
+        </div>
 
-<ion-content>
-  <h1>Landing Page</h1>
+        <h3>Last Achievement</h3>
+        <div>
+            <p>hier ist das Achievement später</p>
+        </div>
+
+        <h3>Recommendations</h3>
+        <div>
+            <p>Hier sind die Empfehlungen später</p>
+        </div>
+    </ion-grid>
 </ion-content>
+
+<ion-tabs>
+    <!-- Bottom Navigation -->
+    <ion-tab-bar slot="bottom" class="botnav">
+        <ion-tab-button tab="account" routerLink="">
+            <img src="../../../assets/icons/home-solid.svg" alt="little house"
+                 srcset="../../../assets/icons/home-solid.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="account" routerLink="/achievement">
+            <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
+                 srcset="../../../assets/icons/trophy-solid.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="contact" routerLink="/module-list">
+            <img src="../../../assets/icons/lessons.svg" alt="little book" srcset="../../../assets/icons/lessons.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="settings" routerLink="/import-modules">
+            <img src="../../../assets/icons/cloud-download.svg" alt="little cloud with downward arrow"
+                 srcset="../../../assets/icons/cloud-download.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="settings" routerLink="/user-profile">
+            <img src="../../../assets/icons/user-circle-solid.svg" alt="person in a circle"
+                 srcset="../../../assets/icons/user-circle-solid.svg">
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

@@ -34,7 +34,12 @@ const routes: Routes = [
   {
     path: 'achievement',
     loadChildren: () => import('./achievement/achievement/achievement.module').then( m => m.AchievementPageModule)
+  },  {
+    path: 'import-modules',
+    loadChildren: () => import('./import-modules/import-modules.module').then( m => m.ImportModulesPageModule)
   },
+
+
 ];
 
 @NgModule({
