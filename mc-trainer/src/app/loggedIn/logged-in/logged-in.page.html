@@ -1,9 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>loggedIn</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <h1>Card Loop</h1>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <h2>Welcome Back, Tina!</h2>
+        </ion-row>
+        <ion-row>
+            <h3>Pick up where you left</h3>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <div class="module">
+                <div class="inner-module-wrapper">
+                    <span class="module-title">Mobile Application Dev</span>
+                    <div class="white-box">
+                        <div>
+                            <span>Fortschrittsbalken 80%</span>
+                        </div>
+                        <div>
+                            <span class="tags">#Programming #Computer Science .. +6 more</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-row>
 
-<ion-content>
-  <h1>Landing Page</h1>
+        <h3>Last Achievement</h3>
+        <ion-row class="ion-justify-content-center">
+            <div class="achievement">
+                <ion-row class="inner-achievement">
+                    <ion-col size="2">
+
+                    </ion-col>
+                    <ion-col size="8">
+                        <span>You answered 200 Questions</span>
+                    </ion-col>
+                    <ion-col size="2">
+                        <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
+                             srcset="../../../assets/icons/achievement-right-arrow.svg">
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-row>
+        <h3>Recommendations</h3>
+        <div>
+            <p>Hier sind die Empfehlungen später</p>
+        </div>
+    </ion-grid>
 </ion-content>
+
+<ion-tabs>
+    <!-- Bottom Navigation -->
+    <ion-tab-bar slot="bottom" class="botnav">
+        <ion-tab-button tab="account" routerLink="">
+            <img src="../../../assets/icons/home-solid.svg" alt="little house"
+                 srcset="../../../assets/icons/home-solid.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="account" routerLink="/achievement">
+            <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
+                 srcset="../../../assets/icons/trophy-solid.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="contact" routerLink="/module-list">
+            <img src="../../../assets/icons/lessons.svg" alt="little book" srcset="../../../assets/icons/lessons.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="settings" routerLink="/import-modules">
+            <img src="../../../assets/icons/cloud-download.svg" alt="little cloud with downward arrow"
+                 srcset="../../../assets/icons/cloud-download.svg">
+        </ion-tab-button>
+        <ion-tab-button tab="settings" routerLink="/user-profile">
+            <img src="../../../assets/icons/user-circle-solid.svg" alt="person in a circle"
+                 srcset="../../../assets/icons/user-circle-solid.svg">
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>
