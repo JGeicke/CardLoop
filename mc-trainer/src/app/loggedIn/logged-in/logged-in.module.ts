@@ -9,7 +9,7 @@ import { LoggedInPageRoutingModule } from './logged-in-routing.module';
 import { LoggedInPage } from './logged-in.page';
 
 import {ProgressBarModule} from 'angular-progress-bar';
-import {NavbarPageModule} from "../../navbar/navbar.module";
+import {NavbarPageModule} from '../../navbar/navbar.module';
 
 
 @NgModule({
