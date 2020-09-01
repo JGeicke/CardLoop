@@ -43,8 +43,10 @@
                             <span>You answered 200 Questions</span>
                         </ion-col>
                         <ion-col size="2">
+                            <a routerLink="/achievement">
                             <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
                                  srcset="../../../assets/icons/achievement-right-arrow.svg">
+                            </a>
                         </ion-col>
                     </ion-row>
                 </div>
@@ -55,7 +57,7 @@
         <h3>Recommendations</h3>
         <ion-slides [options]="sliderConfig">
             <ion-slide *ngFor="let recommendation of recommendations">
-                <div class="recommendation">
+                <div class="recommendation" (click)="lessonDetails()">
                     <ion-row class="ion-justify-content-between">
                         <span class="recommendation-title">{{recommendation.name}}</span>
                         <span>{{recommendation.cards}}
