@@ -11,11 +11,14 @@
         </ion-row>
         <ion-row class="ion-justify-content-center">
             <div class="module">
+                <img src="../../../assets/icons/play-circle-solid.svg" alt="arrow pointing right"
+                     srcset="../../../assets/icons/play-circle-solid.svg">
                 <div class="inner-module-wrapper">
                     <span class="module-title">Mobile Application Dev</span>
                     <div class="white-box">
                         <div>
-                            <span>Fortschrittsbalken 80%</span>
+                            <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                            </progress-bar>
                         </div>
                         <div>
                             <span class="tags">#Programming #Computer Science .. +6 more</span>
