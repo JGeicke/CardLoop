@@ -95,6 +95,9 @@ progress-bar {
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
 }
 
+.has-tabs-bottom {
+  margin-bottom: 100px;
+}
 
 /**
   Recommendations Styling
@@ -119,14 +122,3 @@ progress-bar {
   padding-left: 0.3rem;
 }
 
-/**
-  Bottom Navigation
- */
-
-ion-tab-bar.botnav {
-  --background: #1B5777;
-}
-
-ion-tab-bar.botnav ion-tab-button img{
-  height: 2.3rem;
-}

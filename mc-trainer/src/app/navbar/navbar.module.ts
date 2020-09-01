@@ -4,19 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { NavbarPageRoutingModule } from './navbar-routing.module';
 
-import { LoginPage } from './login.page';
-import {NavbarPageModule} from '../../navbar/navbar.module';
+import { NavbarPage } from './navbar.page';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        LoginPageRoutingModule,
-        NavbarPageModule
+        NavbarPageRoutingModule
     ],
-  declarations: [LoginPage]
+    exports: [
+        NavbarPage
+    ],
+    declarations: [NavbarPage]
 })
-export class LoginPageModule {}
+export class NavbarPageModule {}

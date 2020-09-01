@@ -1,4 +1,4 @@
-<ion-content class="ion-padding has-tabs-bottom">
+<ion-content class="ion-padding">
     <ion-grid>
         <ion-row class="ion-justify-content-center">
             <img class="logo" src="../../../assets/img/logo-simple-ring.svg"
@@ -24,7 +24,8 @@
                                 </progress-bar>
                             </div>
                             <div>
-                                <span class="tags">#Programming #Computer Science .. +6 more</span>
+                                <span class="tags">#{{recommendation.tags[0]}} #{{recommendation.tags[1]}}..
+                                    +{{recommendation.tags.length-2}} more</span>
                             </div>
                         </div>
                     </div>
@@ -44,8 +45,8 @@
                         </ion-col>
                         <ion-col size="2">
                             <a routerLink="/achievement">
-                            <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
-                                 srcset="../../../assets/icons/achievement-right-arrow.svg">
+                                <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
+                                     srcset="../../../assets/icons/achievement-right-arrow.svg">
                             </a>
                         </ion-col>
                     </ion-row>
@@ -66,7 +67,8 @@
                             </span>
                     </ion-row>
                     <ion-row>
-                        <span class="tags">{{recommendation.tags}}</span>
+                        <span class="tags">#{{recommendation.tags[0]}}.. +
+                        {{recommendation.tags.length-1}} more</span>
                     </ion-row>
                 </div>
             </ion-slide>
@@ -74,27 +76,4 @@
     </ion-col>
 </ion-content>
 
-<ion-tabs>
-    <!-- Bottom Navigation -->
-    <ion-tab-bar slot="bottom" class="botnav">
-        <ion-tab-button tab="account" routerLink="">
-            <img src="../../../assets/icons/home-solid.svg" alt="little house"
-                 srcset="../../../assets/icons/home-solid.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="account" routerLink="/achievement">
-            <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
-                 srcset="../../../assets/icons/trophy-solid.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="contact" routerLink="/module-list">
-            <img src="../../../assets/icons/lessons.svg" alt="little book" srcset="../../../assets/icons/lessons.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="settings" routerLink="/import-modules">
-            <img src="../../../assets/icons/cloud-download.svg" alt="little cloud with downward arrow"
-                 srcset="../../../assets/icons/cloud-download.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="settings" routerLink="/user-profile">
-            <img src="../../../assets/icons/user-circle-solid.svg" alt="person in a circle"
-                 srcset="../../../assets/icons/user-circle-solid.svg">
-        </ion-tab-button>
-    </ion-tab-bar>
-</ion-tabs>
+<app-navbar></app-navbar>

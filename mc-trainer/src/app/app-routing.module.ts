@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'achievement',
     loadChildren: () => import('./achievement/achievement/achievement.module').then( m => m.AchievementPageModule)
+  },  {
+    path: 'navbar',
+    loadChildren: () => import('./navbar/navbar.module').then( m => m.NavbarPageModule)
   },
+
 ];
 
 @NgModule({
