@@ -1,20 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { AchievementPageRoutingModule } from './achievement-routing.module';
+import {AchievementPageRoutingModule} from './achievement-routing.module';
 
-import { AchievementPage } from './achievement.page';
+import {AchievementPage} from './achievement.page';
+import {Achievement} from '../../../services/achievement.model';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AchievementPageRoutingModule
+    AchievementPageRoutingModule,
+    RoundProgressModule
   ],
   declarations: [AchievementPage]
 })
-export class AchievementPageModule {}
+export class AchievementPageModule {
+}

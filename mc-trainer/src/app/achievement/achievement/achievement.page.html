@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>achievement</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <div class="achievement">
+                    <div class="achievement_image">
+                        <img src="../../assets/mountain_with_flag.svg" alt="mountain with a flag"
+                             srcset="../../assets/mountain_with_flag.svg" height="60%" width="60%">
+                    </div>
+                    <round-progress
+                            [current]="6" [color]="'#97BF78'"
+                            [radius]="30" [stroke]="8" [max]="10" [background]="'#DFDFDF'" [clockwise]="false"
+                            [responsive]="true">
+                    </round-progress>
+                </div>
+                <ion-text class="achievement_numbers">test</ion-text>
+            </ion-col>
+            <ion-col>
+                <div class="achievement_image">
+                    <img src="../../assets/mountain_with_flag.svg" alt="mountain with a flag"
+                         srcset="../../assets/mountain_with_flag.svg" height="60%" width="60%">
+                </div>
+                <round-progress
+                        [current]="6" [color]="'#97BF78'"
+                        [radius]="30" [stroke]="8" [max]="10" [background]="'#DFDFDF'" [clockwise]="false"
+                        [responsive]="true">
+                </round-progress>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
