@@ -12,4 +12,8 @@ export class LoggedInPage implements OnInit {
   ngOnInit() {
   }
 
+  playLesson(){
+    console.log('playlesson called');
+  }
+
 }

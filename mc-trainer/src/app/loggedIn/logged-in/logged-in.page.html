@@ -6,12 +6,12 @@
         <ion-row class="ion-justify-content-center">
             <h2>Welcome Back, Tina!</h2>
         </ion-row>
-        <ion-row>
-            <h3>Pick up where you left</h3>
+        <ion-row class="ion-justify-content-center">
+                <h3>Pick up where you left</h3>
         </ion-row>
         <ion-row class="ion-justify-content-center">
             <div class="module">
-                <img src="../../../assets/icons/play-circle-solid.svg" alt="arrow pointing right"
+                <img (click)="playLesson()" src="../../../assets/icons/play-circle-solid.svg" alt="arrow pointing right"
                      srcset="../../../assets/icons/play-circle-solid.svg">
                 <div class="inner-module-wrapper">
                     <span class="module-title">Mobile Application Dev</span>
@@ -27,8 +27,9 @@
                 </div>
             </div>
         </ion-row>
-
-        <h3>Last Achievement</h3>
+        <ion-row class="ion-justify-content-center">
+            <h3>Last Achievement</h3>
+        </ion-row>
         <ion-row class="ion-justify-content-center">
             <div class="achievement">
                 <ion-row class="inner-achievement">
@@ -45,10 +46,21 @@
                 </ion-row>
             </div>
         </ion-row>
-        <h3>Recommendations</h3>
-        <div>
-            <p>Hier sind die Empfehlungen später</p>
-        </div>
+        <ion-row class="ion-justify-content-center">
+            <h3>Recommendations</h3>
+        </ion-row>
+        <ion-row>
+            <div class="recommendation">
+                <ion-row class="ion-justify-content-between">
+                        <span class="recommendation-title">Compilerbau</span>
+                        <img src="../../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                             srcset="../../../assets/icons/sd-card-solid.svg">
+                </ion-row>
+                <ion-row>
+                    <span class="tags">#Programming .. +2 more</span>
+                </ion-row>
+            </div>
+        </ion-row>
     </ion-grid>
 </ion-content>
 

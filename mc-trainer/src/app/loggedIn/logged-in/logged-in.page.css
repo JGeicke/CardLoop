@@ -1,14 +1,13 @@
 /**
   General Overhead
  */
-
 * {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
+
 /**
   HEADERS
  */
-
 h2 {
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -32,7 +31,6 @@ progress-bar {
 /**
   Module Styling
  */
-
 .module {
   background-color: #CF5D5D;
   border-radius: 18px;
@@ -47,7 +45,7 @@ progress-bar {
   right: 0.5rem;
 }
 
-.inner-module-wrapper{
+.inner-module-wrapper {
   padding: 0.8rem 0.8rem 0.1rem 0.8rem;
 }
 
@@ -90,11 +88,9 @@ progress-bar {
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
 }
 
-
 /**
   Recommendations Styling
  */
-
 .recommendation {
   background: #97BF78;
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
@@ -120,6 +116,8 @@ ion-tab-bar.botnav {
   --background: #1B5777;
 }
 
-ion-tab-bar.botnav ion-tab-button img{
+ion-tab-bar.botnav ion-tab-button img {
   height: 2.3rem;
 }
+
+/*# sourceMappingURL=logged-in.page.css.map */
