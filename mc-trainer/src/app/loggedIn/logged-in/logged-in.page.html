@@ -1,67 +1,75 @@
-<ion-content class="ion-padding">
+<ion-content class="ion-padding has-tabs-bottom">
     <ion-grid>
         <ion-row class="ion-justify-content-center">
-            <h1>Card Loop</h1>
+            <img class="logo" src="../../../assets/img/logo-simple-ring.svg"
+                 alt="logo: 4 cards with a loop around"
+                 srcset="../../../assets/img/logo-simple-ring.svg">
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <h2>Welcome Back, Tina!</h2>
+            <h2 class="ion-text-center">Welcome Back, <br>Tina!</h2>
         </ion-row>
         <ion-row class="ion-justify-content-center">
+            <div class="ion-margin-bottom">
                 <h3>Pick up where you left</h3>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <div class="module">
-                <img (click)="playLesson()" src="../../../assets/icons/play-circle-solid.svg" alt="arrow pointing right"
-                     srcset="../../../assets/icons/play-circle-solid.svg">
-                <div class="inner-module-wrapper">
-                    <span class="module-title">Mobile Application Dev</span>
-                    <div class="white-box">
-                        <div>
-                            <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
-                            </progress-bar>
-                        </div>
-                        <div>
-                            <span class="tags">#Programming #Computer Science .. +6 more</span>
+
+                <div class="module" (click)="lessonDetails()">
+                    <img (click)="playLesson()" src="../../../assets/icons/play-circle-solid.svg"
+                         alt="arrow pointing right"
+                         srcset="../../../assets/icons/play-circle-solid.svg">
+                    <div class="inner-module-wrapper">
+                        <span class="module-title">Mobile Application Dev</span>
+                        <div class="white-box">
+                            <div>
+                                <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                </progress-bar>
+                            </div>
+                            <div>
+                                <span class="tags">#Programming #Computer Science .. +6 more</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <h3>Last Achievement</h3>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <div class="achievement">
-                <ion-row class="inner-achievement">
-                    <ion-col size="2">
+            <div class="ion-margin-bottom">
+                <h3>Last Achievement</h3>
+                <div class="achievement">
+                    <ion-row class="inner-achievement">
+                        <ion-col size="2">
 
-                    </ion-col>
-                    <ion-col size="8">
-                        <span>You answered 200 Questions</span>
-                    </ion-col>
-                    <ion-col size="2">
-                        <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
-                             srcset="../../../assets/icons/achievement-right-arrow.svg">
-                    </ion-col>
-                </ion-row>
-            </div>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <h3>Recommendations</h3>
-        </ion-row>
-        <ion-row>
-            <div class="recommendation">
-                <ion-row class="ion-justify-content-between">
-                        <span class="recommendation-title">Compilerbau</span>
-                        <img src="../../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
-                             srcset="../../../assets/icons/sd-card-solid.svg">
-                </ion-row>
-                <ion-row>
-                    <span class="tags">#Programming .. +2 more</span>
-                </ion-row>
+                        </ion-col>
+                        <ion-col size="8">
+                            <span>You answered 200 Questions</span>
+                        </ion-col>
+                        <ion-col size="2">
+                            <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
+                                 srcset="../../../assets/icons/achievement-right-arrow.svg">
+                        </ion-col>
+                    </ion-row>
+                </div>
             </div>
         </ion-row>
     </ion-grid>
+    <ion-col class="ion-float-left">
+        <h3>Recommendations</h3>
+        <ion-slides [options]="sliderConfig">
+            <ion-slide *ngFor="let recommendation of recommendations">
+                <div class="recommendation">
+                    <ion-row class="ion-justify-content-between">
+                        <span class="recommendation-title">{{recommendation.name}}</span>
+                        <span>{{recommendation.cards}}
+                            <img src="../../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                                 srcset="../../../assets/icons/sd-card-solid.svg">
+                            </span>
+                    </ion-row>
+                    <ion-row>
+                        <span class="tags">{{recommendation.tags}}</span>
+                    </ion-row>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </ion-col>
 </ion-content>
 
 <ion-tabs>

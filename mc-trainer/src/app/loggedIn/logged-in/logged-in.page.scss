@@ -9,6 +9,10 @@
   HEADERS
  */
 
+.logo {
+  height: 5rem;
+}
+
 h2 {
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -16,6 +20,7 @@ h2 {
   font-size: 1.5rem;
   font-variant: small-caps;
   color: #ffffff;
+  margin-bottom: 4rem;
 }
 
 h3 {
@@ -111,11 +116,13 @@ progress-bar {
 .recommendation img {
   height: 1rem;
   float: right;
+  padding-left: 0.3rem;
 }
 
 /**
   Bottom Navigation
  */
+
 ion-tab-bar.botnav {
   --background: #1B5777;
 }
