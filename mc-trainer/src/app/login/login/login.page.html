@@ -1,22 +1,84 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="showLogin">
   <!-- TESTING - REMOVE IF NO LONGER NEEDED -->
-  <ion-list>
-    <ion-label>E-Mail:</ion-label>
-    <ion-item>
-      <ion-input [(ngModel)]="emailInput" name="email" type="text"></ion-input>
+  <ion-list class="list">
+    <ion-item lines="none">
+      <img class="logo" src="../../../assets/img/logo-simple-ring.svg" alt="logo" srcset="../../../assets/img/logo-simple-ring.svg">
     </ion-item>
-    <ion-label>Password:</ion-label>
-    <ion-item>
-      <ion-input [(ngModel)]="passwordInput" name="password" type="password"></ion-input>
+    <ion-list-header class="item">
+      <ion-label class="list-header">LOG-IN</ion-label>
+    </ion-list-header>
+    <ion-item class="item" lines="none">
+      <ion-label class="sign-up-text">Don't have an Account? <a [routerLink]="" routerLinkActive="sign-up-link" (click)="toggleLogin()">Sign Up</a></ion-label>
     </ion-item>
-    <ion-button (click)="Register()" size="large" type="submit" expand="block">Register</ion-button>
-    <ion-button (click)="Login()" size="large" type="submit" expand="block">Login</ion-button>
+    <ion-item class="item" lines="none" *ngIf="hasWarning || hasAlert">
+      <ion-label class="alert">
+        <div *ngIf="hasWarning">
+          <ion-icon class="warning" name="warning"></ion-icon>
+          <ion-text class="warning">{{warningText}}</ion-text>
+        </div>
+        <div *ngIf="hasAlert">
+          <ion-icon name="checkmark-circle" class="success"></ion-icon>
+          <ion-text class="success">{{alertText}}</ion-text>
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="item item-form" lines="none">
+      <ion-label position="floating" class="label">E-Mail</ion-label>
+      <ion-input [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
+    </ion-item>
+    <ion-item class="item item-form" lines="none">
+      <ion-label position="floating" class="label">Password</ion-label>
+      <ion-input [(ngModel)]="passwordInput" name="password" type="password" class="form"></ion-input>
+    </ion-item>
+    <ion-button (click)="Login()" size="large" type="submit" expand="block" shape="round" class="button">Login</ion-button>
+    <ion-item lines="none">
+      <ion-note id="forgot-password">Forgot your password?</ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="return-text">Want to continue without an account? <br><a class="sign-up-link" [routerLink]="['/logged-in']" routerLinkActive="sign-up-link">Click here</a></ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- END -->
+</ion-content>
+<ion-content *ngIf="!showLogin">
+  <!-- TESTING - REMOVE IF NO LONGER NEEDED -->
+  <ion-list class="list">
+    <ion-item lines="none">
+      <img class="logo" src="../../../assets/img/logo-simple-ring.svg" alt="logo" srcset="../../../assets/img/logo-simple-ring.svg">
+    </ion-item>
+    <ion-list-header class="item">
+      <ion-label class="list-header">SIGN-UP</ion-label>
+    </ion-list-header>
+    <ion-item class="item" lines="none">
+      <ion-label class="sign-up-text">Have an Account? <a class="sign-up-link" [routerLink]="" routerLinkActive="sign-up-link" (click)="toggleLogin()">Sign In</a></ion-label>
+    </ion-item>
+    <ion-item class="item" lines="none" *ngIf="hasWarning || hasAlert">
+      <ion-label class="alert">
+        <div *ngIf="hasWarning">
+          <ion-icon name="warning" class="warning"></ion-icon>
+          <ion-text class="warning">{{warningText}}</ion-text>
+        </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="item item-form" lines="none">
+      <ion-label position="floating" class="label">E-Mail</ion-label>
+      <ion-input [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
+    </ion-item>
+    <ion-item class="item item-form" lines="none">
+      <ion-label position="floating" class="label">Password</ion-label>
+      <ion-input [(ngModel)]="passwordInput" name="password" type="password" class="form"></ion-input>
+    </ion-item>
+    <ion-item class="item item-form" lines="none">
+      <ion-label position="floating" class="label">Confirm Password:</ion-label>
+      <ion-input [(ngModel)]="passwordConfirmationInput" name="password" type="password" class="form"></ion-input>
+    </ion-item>
+    <ion-button (click)="Register()" size="large" type="submit" expand="block" shape="round" class="button">Register</ion-button>
+    <ion-item>
+      <ion-label class="return-text">Want to continue without an account? <br><a [routerLink]="['/logged-in']" routerLinkActive="sign-up-link">Click here</a></ion-label>
+    </ion-item>
   </ion-list>
   <!-- END -->
 </ion-content>

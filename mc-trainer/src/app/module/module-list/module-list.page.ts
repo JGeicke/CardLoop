@@ -1,3 +1,5 @@
+import { Component, OnInit } from '@angular/core';
+import {ModuleService} from '../../../services/module.service';
 import {Component, OnInit} from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import {PopoverPage} from '../../popover/popover.page';
@@ -27,8 +29,9 @@ export class ModuleListPage implements OnInit {
         }
     }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+    this.moduleService.getUserModules();
+  }
 
     playLesson() {
         console.log('playlesson called');
