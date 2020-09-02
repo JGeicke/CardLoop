@@ -1,4 +1,11 @@
 <ion-content class="ion-padding">
+    <ion-row class="ion-justify-content-end">
+        <a *ngIf="this.authService.loggedin == false" routerLink="/login">
+            <img class="reg-icon" src="../../../assets/icons/register.svg"
+                 alt="logo: 4 cards with a loop around"
+                 srcset="../../../assets/icons/register.svg">
+        </a>
+    </ion-row>
     <ion-grid>
         <ion-row class="ion-justify-content-center">
             <img class="logo" src="../../../assets/img/logo-simple-ring.svg"
@@ -13,9 +20,9 @@
                 <h3>Pick up where you left</h3>
 
                 <div class="module" (click)="lessonDetails()">
-                    <img (click)="playLesson()" src="../../../assets/icons/play-circle-solid.svg"
+                    <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                          alt="arrow pointing right"
-                         srcset="../../../assets/icons/play-circle-solid.svg">
+                         srcset="../../../assets/icons/play-button-orange.svg">
                     <div class="inner-module-wrapper">
                         <span class="module-title">Mobile Application Dev</span>
                         <div class="white-box">
@@ -25,7 +32,7 @@
                             </div>
                             <div>
                                 <span class="tags">#{{recommendation.tags[0]}} #{{recommendation.tags[1]}}..
-                                    +{{recommendation.tags.length-2}} more</span>
+                                    +{{recommendation.tags.length - 2}} more</span>
                             </div>
                         </div>
                     </div>
@@ -68,7 +75,7 @@
                     </ion-row>
                     <ion-row>
                         <span class="tags">#{{recommendation.tags[0]}}.. +
-                        {{recommendation.tags.length-1}} more</span>
+                            {{recommendation.tags.length - 1}} more</span>
                     </ion-row>
                 </div>
             </ion-slide>
