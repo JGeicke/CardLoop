@@ -1,7 +1,6 @@
 /**
   General Overhead
  */
-
 ion-content {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
@@ -9,12 +8,11 @@ ion-content {
 /**
   HEADERS
  */
-
 ion-header {
   --ion-background-color: #4ba3c3;
 }
 
-ion-icon[name="search-outline"] {
+ion-icon[name=search-outline] {
   color: #FFFFFF;
   font-size: 1.5rem;
   --ionicon-stroke-width: 64px;
@@ -41,3 +39,5 @@ h2 {
 .module {
   margin-bottom: 3rem;
 }
+
+/*# sourceMappingURL=module-list.page.css.map */

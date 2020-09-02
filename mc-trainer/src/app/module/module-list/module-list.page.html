@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>moduleList</ion-title>
-  </ion-toolbar>
+<ion-header translucent="true">
+    <ion-toolbar>
+        <ion-searchbar showCancelButton="focus" (ionCancel)="searchBool = false"></ion-searchbar>
+        <!--        <ion-icon *ngIf="!searchBool" (click)="searchBool = true;" name="search-outline"></ion-icon>-->
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen class="ion-padding">
+
+    <ion-row class="ion-justify-content-center">
+        <h2 class="ion-text-center">Your Lessons</h2>
+    </ion-row>
+
+
+    <ion-row class="ion-justify-content-center" *ngFor="let lesson of lessons">
+        <div class="module" (click)="lessonDetails()">
+            <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
+                 alt="arrow pointing right"
+                 srcset="../../../assets/icons/play-button-orange.svg">
+            <div class="inner-module-wrapper">
+                <span class="module-title">Mobile Application Dev</span>
+                <div class="white-box">
+                    <div>
+                        <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                        </progress-bar>
+                    </div>
+                    <div>
+                                <span class="tags">#{{lesson.tags[0]}} #{{lesson.tags[1]}}..
+                                    +{{lesson.tags.length - 2}} more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-row>
+
 
 </ion-content>
+
+<app-navbar></app-navbar>

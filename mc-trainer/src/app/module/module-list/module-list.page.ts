@@ -7,9 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModuleListPage implements OnInit {
 
-  constructor() { }
+  private searchBool = false;
+  private lessons: any[] = [];
+  private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
+
+  constructor() {
+    for (let i = 0; i < 5; i++) {
+      this.lessons.push(this.lesson);
+    }
+  }
 
   ngOnInit() {
+  }
+
+  playLesson() {
+    console.log('playlesson called');
+  }
+
+  lessonDetails() {
+    console.log('lessondetails called');
   }
 
 }
