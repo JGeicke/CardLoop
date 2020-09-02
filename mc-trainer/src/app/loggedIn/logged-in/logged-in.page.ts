@@ -18,7 +18,6 @@ export class LoggedInPage implements OnInit {
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
-
     }
 
     ngOnInit() {
