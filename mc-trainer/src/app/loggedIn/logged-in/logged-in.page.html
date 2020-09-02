@@ -1,49 +1,79 @@
 <ion-content class="ion-padding">
     <ion-grid>
         <ion-row class="ion-justify-content-center">
-            <h1>Card Loop</h1>
+            <img class="logo" src="../../../assets/img/logo-simple-ring.svg"
+                 alt="logo: 4 cards with a loop around"
+                 srcset="../../../assets/img/logo-simple-ring.svg">
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <h2>Welcome Back, Tina!</h2>
+            <h2 class="ion-text-center">Welcome Back, <br>Tina!</h2>
         </ion-row>
-        <h3>Pick up where you left</h3>
-        <div>
-            <p>hier ist das modul später</p>
-        </div>
+        <ion-row class="ion-justify-content-center">
+            <div class="ion-margin-bottom">
+                <h3>Pick up where you left</h3>
 
-        <h3>Last Achievement</h3>
-        <div>
-            <p>hier ist das Achievement später</p>
-        </div>
+                <div class="module" (click)="lessonDetails()">
+                    <img (click)="playLesson()" src="../../../assets/icons/play-circle-solid.svg"
+                         alt="arrow pointing right"
+                         srcset="../../../assets/icons/play-circle-solid.svg">
+                    <div class="inner-module-wrapper">
+                        <span class="module-title">Mobile Application Dev</span>
+                        <div class="white-box">
+                            <div>
+                                <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                </progress-bar>
+                            </div>
+                            <div>
+                                <span class="tags">#{{recommendation.tags[0]}} #{{recommendation.tags[1]}}..
+                                    +{{recommendation.tags.length-2}} more</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <div class="ion-margin-bottom">
+                <h3>Last Achievement</h3>
+                <div class="achievement">
+                    <ion-row class="inner-achievement">
+                        <ion-col size="2">
 
-        <h3>Recommendations</h3>
-        <div>
-            <p>Hier sind die Empfehlungen später</p>
-        </div>
+                        </ion-col>
+                        <ion-col size="8">
+                            <span>You answered 200 Questions</span>
+                        </ion-col>
+                        <ion-col size="2">
+                            <a routerLink="/achievement">
+                                <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
+                                     srcset="../../../assets/icons/achievement-right-arrow.svg">
+                            </a>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </div>
+        </ion-row>
     </ion-grid>
+    <ion-col class="ion-float-left">
+        <h3>Recommendations</h3>
+        <ion-slides [options]="sliderConfig">
+            <ion-slide *ngFor="let recommendation of recommendations">
+                <div class="recommendation" (click)="lessonDetails()">
+                    <ion-row class="ion-justify-content-between">
+                        <span class="recommendation-title">{{recommendation.name}}</span>
+                        <span>{{recommendation.cards}}
+                            <img src="../../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                                 srcset="../../../assets/icons/sd-card-solid.svg">
+                            </span>
+                    </ion-row>
+                    <ion-row>
+                        <span class="tags">#{{recommendation.tags[0]}}.. +
+                        {{recommendation.tags.length-1}} more</span>
+                    </ion-row>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </ion-col>
 </ion-content>
 
-<ion-tabs>
-    <!-- Bottom Navigation -->
-    <ion-tab-bar slot="bottom" class="botnav">
-        <ion-tab-button tab="account" routerLink="">
-            <img src="../../../assets/icons/home-solid.svg" alt="little house"
-                 srcset="../../../assets/icons/home-solid.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="account" routerLink="/achievement">
-            <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
-                 srcset="../../../assets/icons/trophy-solid.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="contact" routerLink="/module-list">
-            <img src="../../../assets/icons/lessons.svg" alt="little book" srcset="../../../assets/icons/lessons.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="settings" routerLink="/import-modules">
-            <img src="../../../assets/icons/cloud-download.svg" alt="little cloud with downward arrow"
-                 srcset="../../../assets/icons/cloud-download.svg">
-        </ion-tab-button>
-        <ion-tab-button tab="settings" routerLink="/user-profile">
-            <img src="../../../assets/icons/user-circle-solid.svg" alt="person in a circle"
-                 srcset="../../../assets/icons/user-circle-solid.svg">
-        </ion-tab-button>
-    </ion-tab-bar>
-</ion-tabs>
+<app-navbar></app-navbar>

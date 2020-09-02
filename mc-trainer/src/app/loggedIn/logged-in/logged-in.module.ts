@@ -8,13 +8,19 @@ import { LoggedInPageRoutingModule } from './logged-in-routing.module';
 
 import { LoggedInPage } from './logged-in.page';
 
+import {ProgressBarModule} from 'angular-progress-bar';
+import {NavbarPageModule} from '../../navbar/navbar.module';
+
+
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    LoggedInPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        LoggedInPageRoutingModule,
+        ProgressBarModule,
+        NavbarPageModule
+    ],
   declarations: [LoggedInPage]
 })
 export class LoggedInPageModule {}
