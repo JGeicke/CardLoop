@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../services/auth.service';
+import {AlertController, ModalController} from '@ionic/angular';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-logged-in',
@@ -14,13 +17,20 @@ export class LoggedInPage implements OnInit {
         slidesPerView: 1.4
     };
 
-    constructor() {
+    constructor(private router: Router,
+                private authService: AuthService,
+                private alertController: AlertController,
+                public modalController: ModalController) {
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
     }
 
     ngOnInit() {
+        console.log(this.authService.loggedin);
+        if (this.authService.loggedin === false) {
+            this.loginModal();
+        }
     }
 
     playLesson() {
@@ -31,4 +41,32 @@ export class LoggedInPage implements OnInit {
         console.log('lessondetails called');
     }
 
+    async loginModal() {
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Didn\'t sign into an account yet?',
+            message: 'Play around, have fun and whenever you' +
+                ' feel like it or when you want to save all ' +
+                'your progress. You can sign up by clicking ' +
+                'the button above!',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    }
+                }, {
+                    text: 'Go Back',
+                    handler: () => {
+                        this.router.navigate(['/login']);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+
+    }
 }

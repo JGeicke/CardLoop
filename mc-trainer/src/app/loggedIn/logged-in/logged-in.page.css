@@ -8,6 +8,11 @@
 /**
   HEADERS
  */
+.reg-icon {
+  height: 2.5rem;
+  filter: drop-shadow(0px 0px 4px #FFFFFF);
+}
+
 .logo {
   height: 5rem;
 }
