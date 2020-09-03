@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ProgressBarModule} from 'angular-progress-bar';
-import {NavbarPageModule} from "./navbar/navbar.module";
+import {NavbarPageModule} from './navbar/navbar.module';
 
 @NgModule({
   declarations: [AppComponent],

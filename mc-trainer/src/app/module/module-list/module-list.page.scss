@@ -11,7 +11,21 @@ ion-content {
  */
 
 ion-header {
+  padding: 1rem;
   --ion-background-color: #4ba3c3;
+}
+
+ion-toolbar {
+  --background: #4ba3c3;
+}
+
+ion-header > div {
+  background: #4ba3c3;
+  border: none;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0 0 0 0;
 }
 
 ion-icon[name="search-outline"] {
