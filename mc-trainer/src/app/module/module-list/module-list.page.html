@@ -13,11 +13,11 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let lesson of lessons">
-        <div class="module" (click)="popover($event); this.moduleService.currLesson = lesson">
+        <div class="module">
             <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
-            <div class="inner-module-wrapper">
+            <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = lesson">
                 <span class="module-title">Mobile Application Dev</span>
                 <div class="white-box">
                     <div>
