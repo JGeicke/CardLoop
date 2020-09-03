@@ -5,5 +5,22 @@ import { Injectable } from '@angular/core';
 })
 export class ModuleService {
 
-  constructor() { }
+  public currLesson;
+  public lessons = [];
+  private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
+
+
+  constructor() {
+    for (let i = 0; i < 5; i++) {
+      this.lessons.push(this.lesson);
+    }
+  }
+
+  lessonDetails(currLesson) {
+    console.log(currLesson);
+  }
+
+  deleteLesson(currLesson) {
+    console.log(currLesson);
+  }
 }
