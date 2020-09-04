@@ -27,7 +27,7 @@
     </ion-item>
     <ion-item class="item item-form" lines="none">
       <ion-label position="floating" class="label">E-Mail</ion-label>
-      <ion-input [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
+      <ion-input #loginMail [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
     </ion-item>
     <ion-item class="item item-form" lines="none">
       <ion-label position="floating" class="label">Password</ion-label>
@@ -65,7 +65,7 @@
     </ion-item>
     <ion-item class="item item-form" lines="none">
       <ion-label position="floating" class="label">E-Mail</ion-label>
-      <ion-input [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
+      <ion-input #signUpMail [(ngModel)]="emailInput" name="email" type="text" class="form"></ion-input>
     </ion-item>
     <ion-item class="item item-form" lines="none">
       <ion-label position="floating" class="label">Password</ion-label>

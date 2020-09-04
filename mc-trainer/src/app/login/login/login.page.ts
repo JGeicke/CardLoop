@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
+import {IonInput} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,20 @@ import {Router} from '@angular/router';
 })
 export class LoginPage implements OnInit {
   
-  private emailInput: string;
-  private passwordInput: string;
-  private passwordConfirmationInput: string;
+  private emailInput = '';
+  private passwordInput = '';
+  private passwordConfirmationInput = '';
   private showLogin = true;
 
   private warningText: string;
   private hasWarning = false;
   private hasAlert = false;
-  private alertText = 'Placeholder';
+  private alertText: string;
+
+  @ViewChild('loginMail')
+  private loginEmailInput: IonInput;
+  @ViewChild('signUpMail')
+  private signUpEmailInput: IonInput;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -43,33 +49,54 @@ export class LoginPage implements OnInit {
       });
     } else if (!this.matchPassword()){
       this.warningText = 'Passwords do not match!';
-      if (!this.hasWarning){
+      if (!this.hasWarning) {
         this.toggleWarning();
       }
-      // Clear passwords
-      this.passwordInput = '';
-      this.passwordConfirmationInput = '';
+    } else if (this.emailInput.length === 0){
+        this.warningText = 'Email was empty!';
+        if (!this.hasWarning) {
+          this.toggleWarning();
+        }
     }
   }
 
 
   // Log into account
   Login(){
-    this.authService.SignIn(this.emailInput, this.passwordInput).then((res) =>  {
-      if (res === 'auth/wrong-password'){
-        this.warningText = 'Wrong password!';
-        if (!this.hasWarning) {
-          this.toggleWarning();
-        }
-      } else {
-        this.warningText = 'Account not found!';
-        if (!this.hasWarning){
-          this.toggleWarning();
-        }
+    // No email input
+    if (this.emailInput.length === 0){
+      this.warningText = 'Email was empty!';
+      if (!this.hasWarning) {
+        this.toggleWarning();
       }
-    });
+      // no password input
+    } else if (this.passwordInput.length === 0){
+      this.warningText = 'Password was empty';
+      if (!this.hasWarning) {
+        this.toggleWarning();
+      }
+    } else {
+      this.authService.SignIn(this.emailInput, this.passwordInput).then((res) =>  {
+        // wrong password
+        if (res === 'auth/wrong-password'){
+          this.warningText = 'Wrong password!';
+          if (!this.hasWarning) {
+            this.toggleWarning();
+          }
+          // other errors
+        } else if (res !== '') {
+          this.warningText = 'Account not found!';
+          if (!this.hasWarning){
+            this.toggleWarning();
+          }
+          // successful login
+        } else {
+          // FIXME: `Change to proper routing`
+          this.router.navigate(['logged-in']);
+        }
+      });
+    }
     this.ClearInput();
-    this.router.navigate(['logged-in']);
   }
 
   // Toggles Login-View/Sign-Up View
@@ -78,20 +105,37 @@ export class LoginPage implements OnInit {
     this.hasWarning = false;
     this.hasAlert = false;
     this.ClearInput();
+    // Work around so that @ViewChild isn't undefined after swapping between views
+    setTimeout(() => {this.setFocusOnMail(); }, 250);
   }
 
   // Toggles warning text
   private toggleWarning(){
     this.hasWarning = !this.hasWarning;
-    setTimeout(() => this.hasWarning = false, 5000);
+    if (this.hasWarning && this.hasAlert){
+      this.toggleAlert();
+    }
   }
 
   // Toggles alert text
   private toggleAlert(){
     this.hasAlert = !this.hasAlert;
-    setTimeout(() => this.hasAlert = false, 5000);
+    // setTimeout(() => this.hasAlert = false, 5000);
   }
 
+  // Lifecycle handling to enhance UX
+  ionViewDidEnter(){
+    this.setFocusOnMail();
+  }
+
+  // Focus first Input element
+  private setFocusOnMail() {
+    if (this.showLogin){
+      this.loginEmailInput.setFocus();
+    } else {
+      this.signUpEmailInput.setFocus();
+    }
+  }
   // Clears all input forms
   private ClearInput(){
     this.emailInput = '';
