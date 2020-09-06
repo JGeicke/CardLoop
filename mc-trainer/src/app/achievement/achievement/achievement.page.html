@@ -1,34 +1,51 @@
 <ion-header>
+    <ion-title class="your_achievements">Your Achievements</ion-title>
 </ion-header>
 
 <ion-content>
     <ion-grid>
-        <ion-row>
-            <ion-col>
-                <div class="achievement">
-                    <div class="achievement_image">
+        <div>
+            <ion-row>
+                <ion-col>
+                    <div class="ion-text-center">
                         <img src="../../assets/mountain_with_flag.svg" alt="mountain with a flag"
-                             srcset="../../assets/mountain_with_flag.svg" height="60%" width="60%">
+                             srcset="../../assets/mountain_with_flag.svg" height="65%" width="65%">
+                    </div>
+                </ion-col>
+                <ion-col>
+                    <ion-text class="achievement_text ion-text-justify">Achieve a streak on 20 correct answered cards in
+                        any Lesson!
+                    </ion-text>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item-divider></ion-item-divider>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+    <div class="content-box">
+        <div class="flexbox-container">
+            <div class="flexbox-item" *ngFor="let achievement of this.achievements">
+                <a [routerLink]="" class="achievement" (click)="inspectAchievement()">
+                    <div class="achievement_image">
+                        <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
+                                 alt="mountain with a flag"></ion-img>
                     </div>
                     <round-progress
-                            [current]="6" [color]="'#97BF78'"
-                            [radius]="30" [stroke]="8" [max]="10" [background]="'#DFDFDF'" [clockwise]="false"
+                            current="{{this.achievement.currentNumber}}" [color]="'#97BF78'"
+                            [radius]="30" [stroke]="8" max="{{this.achievement.maxNumber}}" [background]="'#DFDFDF'"
+                            [clockwise]="false"
                             [responsive]="true">
                     </round-progress>
-                </div>
-                <ion-text class="achievement_numbers">test</ion-text>
-            </ion-col>
-            <ion-col>
-                <div class="achievement_image">
-                    <img src="../../assets/mountain_with_flag.svg" alt="mountain with a flag"
-                         srcset="../../assets/mountain_with_flag.svg" height="60%" width="60%">
-                </div>
-                <round-progress
-                        [current]="6" [color]="'#97BF78'"
-                        [radius]="30" [stroke]="8" [max]="10" [background]="'#DFDFDF'" [clockwise]="false"
-                        [responsive]="true">
-                </round-progress>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+                </a>
+                <ion-col>
+                    <ion-text class="achievement_text achievement_numbers"
+                              [ngStyle]="{'color': isSuccessAchievement(achievement)? '#66BF91' : 'white'}">{{this.achievement.currentNumber}}
+                        / {{this.achievement.maxNumber}}</ion-text>
+                </ion-col>
+            </div>
+        </div>
+    </div>
 </ion-content>

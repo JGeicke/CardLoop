@@ -1,32 +1,45 @@
+.content-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
+  max-width: 800px;
+}
+
+.flexbox-item {
+  position: relative;
+  max-height: 450px;
+  max-width: 300px;
+  min-height: 200px;
+  min-width: 150px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.achievement_image {
+  position: absolute;
+  z-index: 1;
+  max-height: 100px;
+  max-width: 100px;
+  min-height: 50px;
+  min-width: 50px;
+  bottom: 25%;
+  margin: 0 15%;
+}
+
 round-progress {
   background-color: white;
   border-radius: 100%;
 }
 
-.achievement_image {
-  position: absolute;
-  z-index: 10;
-  bottom: 0;
-  text-align: center;
-}
-
-ion-grid {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-ion-col {
-  margin: 5px 5px;
-}
-
 .achievement_text {
-  position: relative;
-  bottom: 0;
-  z-index: 11;
+  font-size: 1.5em;
+  font-variant: small-caps;
 }
-
-.achievement {
-  top: 0;
-}
-
