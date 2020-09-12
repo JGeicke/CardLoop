@@ -1,0 +1,14 @@
+ion-tab-bar.botnav {
+  --background: #1B5777;
+}
+
+ion-tab-bar.botnav ion-tab-button {
+  opacity: 0.7;
+  height: 2rem;
+}
+
+ion-tab-bar.botnav ion-tab-button:hover {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=logged-in.page.css.map */
