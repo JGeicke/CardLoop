@@ -16,10 +16,6 @@ ion-toolbar {
   --background: #4ba3c3;
 }
 
-ion-searchbar {
-  padding: 3rem 1rem 2rem 1rem;
-}
-
 ion-header > div {
   background: #4ba3c3;
   border: none;
@@ -38,6 +34,7 @@ ion-icon[name=search-outline] {
 }
 
 ion-searchbar {
+  padding: 3rem 1rem 2rem 1rem;
   --background: #FFFFFF;
   --border-radius: 12px;
   opacity: 0.6;

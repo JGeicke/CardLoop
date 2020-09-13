@@ -12,22 +12,32 @@ ion-header {
   --ion-background-color: #4ba3c3;
 }
 
-.header-ios ion-toolbar:last-of-type {
-  --border-width: 0 0 0 0;
-}
-
-ion-header > div {
-  padding: 1rem 1rem 0 1rem;
-  background: #4ba3c3;
-  border: none;
-}
-
 ion-toolbar {
   --background: #4ba3c3;
 }
 
+ion-header > div {
+  background: #4ba3c3;
+  border: none;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0 0 0 0;
+}
+
+ion-icon[name=search-outline] {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  --ionicon-stroke-width: 64px;
+  cursor: pointer;
+  padding-right: 2rem;
+}
+
 ion-searchbar {
-  padding-bottom: 0;
+  padding: 3rem 1rem 2rem 1rem;
+  --background: #FFFFFF;
+  --border-radius: 12px;
+  opacity: 0.6;
 }
 
 h2 {
@@ -51,12 +61,6 @@ ion-icon[name=search-outline] {
   font-size: 1.2rem;
   --ionicon-stroke-width: 64px;
   padding-left: 0.7rem;
-}
-
-ion-searchbar {
-  --background: #FFFFFF;
-  --border-radius: 12px;
-  opacity: 0.6;
 }
 
 /**
