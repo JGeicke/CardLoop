@@ -13,7 +13,7 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let lesson of lessons">
-        <div class="module">
+        <div class="module" (click)="lessonDetails()">
             <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">

@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {AlertController, ModalController} from '@ionic/angular';
-
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +8,7 @@ export class ModuleService {
   public currLesson;
   public lessons = [];
   private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
-
+  imported = false;
 
   constructor(private alertController: AlertController) {
     for (let i = 0; i < 5; i++) {
@@ -18,8 +16,12 @@ export class ModuleService {
     }
   }
 
-  lessonDetails(currLesson) {
-    console.log(currLesson);
+  lessonDetails(id) {
+    console.log(id);
+  }
+
+  importLesson() {
+    console.log('importlesson called');
   }
 
   async delDialog() {
