@@ -43,7 +43,11 @@ const routes: Routes = [
   {
     path: 'import-modules',
     loadChildren: () => import('./import-modules/import-modules.module').then( m => m.ImportModulesPageModule)
+  },  {
+    path: 'popover',
+    loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
   },
+
 
 
 ];
