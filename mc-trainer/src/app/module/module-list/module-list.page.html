@@ -1,7 +1,6 @@
-<ion-header translucent="true">
+<ion-header>
     <ion-toolbar>
-        <ion-searchbar showCancelButton="focus" (ionCancel)="searchBool = false"></ion-searchbar>
-        <!--        <ion-icon *ngIf="!searchBool" (click)="searchBool = true;" name="search-outline"></ion-icon>-->
+        <ion-searchbar showCancelButton="never" (ionCancel)="searchBool = false"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
@@ -13,7 +12,7 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let lesson of lessons">
-        <div class="module" (click)="lessonDetails()">
+        <div class="module" (click)="this.moduleService.lessonDetails(lesson.id)">
             <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">

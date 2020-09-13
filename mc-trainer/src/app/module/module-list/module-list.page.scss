@@ -11,12 +11,15 @@ ion-content {
  */
 
 ion-header {
-  padding: 1rem;
   --ion-background-color: #4ba3c3;
 }
 
 ion-toolbar {
   --background: #4ba3c3;
+}
+
+ion-searchbar{
+  padding: 3rem 1rem 2rem 1rem;
 }
 
 ion-header > div {
