@@ -131,6 +131,7 @@ ion-icon[name="search-outline"] {
 
 .recommendation-title {
   font-size: 1.1rem;
+  cursor: pointer;
 }
 
 .cards {
@@ -146,16 +147,22 @@ ion-icon[name="search-outline"] {
 }
 
 .tag-row {
-  margin-top: -1rem;
+  margin-top: -3rem;
   border-top: 1px solid #FFFFFF;
+}
+
+.cloud-box {
+  padding: 1rem;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  top: -3rem;
+  right: -1rem;
 }
 
 .cloud-down {
   height: 3rem;
+  color: white;
   float: right;
   position: relative;
-  top: -2rem;
-  right: -0.5rem;
-  color: white;
-  cursor: pointer;
 }

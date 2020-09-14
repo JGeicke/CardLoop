@@ -20,18 +20,19 @@
 
     <ion-row *ngFor="let lesson of lessons" class="ion-justify-content-center ion-align-items-center">
         <ion-col>
-            <div class="recommendation" (click)="this.moduleService.lessonDetails(lesson.id)">
+            <div class="recommendation">
                 <ion-row class="ion-justify-content-between">
-                    <div class="recommendation-title">
+                    <div class="recommendation-title" (click)="this.moduleService.lessonDetails(lesson.id)">
                         <span>{{lesson.name}}</span>
                     </div>
-                    <img class="cloud-down" *ngIf="!this.moduleService.imported"
-                         (click)="this.moduleService.importLesson(lesson.id)"
-                         src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
-                         srcset="../../assets/icons/cloud-download.svg">
-                    <img class="cloud-down" *ngIf="this.moduleService.imported" (click)="this.moduleService.importLesson()"
-                         src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
-                         srcset="../../assets/icons/cloud-download-checked.svg">
+                    <div class="cloud-box" (click)="this.moduleService.importLesson(lesson.id)">
+                        <img class="cloud-down" *ngIf="!this.moduleService.imported"
+                             src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
+                             srcset="../../assets/icons/cloud-download.svg">
+                        <img class="cloud-down" *ngIf="this.moduleService.imported"
+                             src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
+                             srcset="../../assets/icons/cloud-download-checked.svg">
+                    </div>
                 </ion-row>
                 <ion-row class="ion-justify-content-between tag-row">
                         <span class="tags">#{{lesson.tags[0]}}.. +
