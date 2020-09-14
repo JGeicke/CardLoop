@@ -1,7 +1,7 @@
 <ion-header>
-        <ion-toolbar>
-            <ion-searchbar #search showCancelButton="never"></ion-searchbar>
-        </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar #search showCancelButton="never"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
 
@@ -19,30 +19,31 @@
     </ion-row>
 
     <ion-row *ngFor="let lesson of lessons" class="ion-justify-content-center ion-align-items-center">
-        <ion-col size="10">
+        <ion-col>
             <div class="recommendation" (click)="this.moduleService.lessonDetails(lesson.id)">
-                <div class="recommendation-title">
-                    <span>{{lesson.name}}</span>
-                </div>
                 <ion-row class="ion-justify-content-between">
+                    <div class="recommendation-title">
+                        <span>{{lesson.name}}</span>
+                    </div>
+                    <img class="cloud-down" *ngIf="!this.moduleService.imported"
+                         (click)="this.moduleService.importLesson(lesson.id)"
+                         src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
+                         srcset="../../assets/icons/cloud-download.svg">
+                    <img class="cloud-down" *ngIf="this.moduleService.imported" (click)="this.moduleService.importLesson()"
+                         src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
+                         srcset="../../assets/icons/cloud-download-checked.svg">
+                </ion-row>
+                <ion-row class="ion-justify-content-between tag-row">
                         <span class="tags">#{{lesson.tags[0]}}.. +
                             {{lesson.tags.length - 1}} more
                         </span>
                     <span class="tags">
                     {{lesson.cards}}
-                        <img src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                        <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
                              srcset="../../assets/icons/sd-card-solid.svg">
                 </span>
                 </ion-row>
             </div>
-        </ion-col>
-        <ion-col size="2" class="clouds">
-            <img class="cloud-down" *ngIf="!this.moduleService.imported" (click)="this.moduleService.importLesson()"
-                 src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
-                 srcset="../../assets/icons/cloud-download.svg">
-            <img *ngIf="this.moduleService.imported" (click)="this.moduleService.importLesson()"
-                 src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
-                 srcset="../../assets/icons/cloud-download-checked.svg">
         </ion-col>
     </ion-row>
 

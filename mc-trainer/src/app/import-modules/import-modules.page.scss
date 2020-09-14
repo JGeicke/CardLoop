@@ -126,15 +126,14 @@ ion-icon[name="search-outline"] {
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
   width: 90%;
+  margin-bottom: 3rem;
 }
 
 .recommendation-title {
   font-size: 1.1rem;
-  border-bottom: 1px solid #FFFFFF;
-  padding-bottom: 0.3rem;
 }
 
-.recommendation img {
+.cards {
   height: 1rem;
   float: right;
   padding-left: 0.3rem;
@@ -146,12 +145,17 @@ ion-icon[name="search-outline"] {
   padding: 0.4rem 0.4rem 0.4rem 0.4rem;
 }
 
-.clouds {
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
+.tag-row {
+  margin-top: -1rem;
+  border-top: 1px solid #FFFFFF;
 }
 
 .cloud-down {
-
+  height: 3rem;
+  float: right;
+  position: relative;
+  top: -2rem;
+  right: -0.5rem;
+  color: white;
+  cursor: pointer;
 }

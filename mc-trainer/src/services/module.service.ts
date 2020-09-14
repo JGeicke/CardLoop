@@ -21,8 +21,13 @@ export class ModuleService {
     console.log(id);
   }
 
-  importLesson() {
-    console.log('importlesson called');
+  importLesson(id) {
+    // Idee: FindLessonById aufrufen und schauen, ob die Lesson bereits importiert ist.
+    // Das imported ist nur zum testen und kann dann ersetzt werden.
+    if (this.imported === false) {
+      console.log('importlesson called');
+      this.imported = !this.imported;
+    }
   }
 
   async delDialog() {
