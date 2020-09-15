@@ -9,7 +9,6 @@ ion-content {
   HEADERS
  */
 ion-header {
-  padding: 1rem;
   --ion-background-color: #4ba3c3;
 }
 
@@ -35,6 +34,7 @@ ion-icon[name=search-outline] {
 }
 
 ion-searchbar {
+  padding: 3rem 1rem 2rem 1rem;
   --background: #FFFFFF;
   --border-radius: 12px;
   opacity: 0.6;

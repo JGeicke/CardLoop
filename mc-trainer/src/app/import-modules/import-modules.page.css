@@ -12,22 +12,32 @@ ion-header {
   --ion-background-color: #4ba3c3;
 }
 
-.header-ios ion-toolbar:last-of-type {
-  --border-width: 0 0 0 0;
-}
-
-ion-header > div {
-  padding: 1rem 1rem 0 1rem;
-  background: #4ba3c3;
-  border: none;
-}
-
 ion-toolbar {
   --background: #4ba3c3;
 }
 
+ion-header > div {
+  background: #4ba3c3;
+  border: none;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0 0 0 0;
+}
+
+ion-icon[name=search-outline] {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  --ionicon-stroke-width: 64px;
+  cursor: pointer;
+  padding-right: 2rem;
+}
+
 ion-searchbar {
-  padding-bottom: 0;
+  padding: 3rem 1rem 2rem 1rem;
+  --background: #FFFFFF;
+  --border-radius: 12px;
+  opacity: 0.6;
 }
 
 h2 {
@@ -51,12 +61,6 @@ ion-icon[name=search-outline] {
   font-size: 1.2rem;
   --ionicon-stroke-width: 64px;
   padding-left: 0.7rem;
-}
-
-ion-searchbar {
-  --background: #FFFFFF;
-  --border-radius: 12px;
-  opacity: 0.6;
 }
 
 /**
@@ -115,15 +119,15 @@ ion-searchbar {
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
   width: 90%;
+  margin-bottom: 3rem;
 }
 
 .recommendation-title {
   font-size: 1.1rem;
-  border-bottom: 1px solid #FFFFFF;
-  padding-bottom: 0.3rem;
+  cursor: pointer;
 }
 
-.recommendation img {
+.cards {
   height: 1rem;
   float: right;
   padding-left: 0.3rem;
@@ -135,10 +139,25 @@ ion-searchbar {
   padding: 0.4rem 0.4rem 0.4rem 0.4rem;
 }
 
-.clouds {
-  text-align: center;
-  vertical-align: middle;
+.tag-row {
+  margin-top: -3rem;
+  border-top: 1px solid #FFFFFF;
+}
+
+.cloud-box {
+  padding: 1rem;
   cursor: pointer;
+  float: right;
+  position: relative;
+  top: -3rem;
+  right: -1rem;
+}
+
+.cloud-down {
+  height: 3rem;
+  color: white;
+  float: right;
+  position: relative;
 }
 
 /*# sourceMappingURL=import-modules.page.css.map */
