@@ -1,12 +1,89 @@
-ion-tab-bar.botnav {
-  --background: #1B5777;
+/**
+  General Overhead
+ */
+
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
-ion-tab-bar.botnav ion-tab-button {
-  opacity: 0.7;
+
+/**
+  HEADERS
+ */
+
+.reg-icon {
+  height: 2.5rem;
+  filter: drop-shadow(0px 0px 4px #FFFFFF);
+}
+
+
+.logo {
+  height: 5rem;
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  font-variant: small-caps;
+  color: #ffffff;
+  margin-bottom: 4rem;
+}
+
+h3 {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+progress-bar {
+  background-color: #798A93;
+}
+
+
+/**
+  Achievement Styling
+ */
+.achievement {
+  background: #466078;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #FFFFFF;
+}
+
+.inner-achievement img {
   height: 2rem;
 }
 
-ion-tab-bar.botnav ion-tab-button:hover {
-  opacity: 1.0;
+.inner-achievement {
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
+.has-tabs-bottom {
+  margin-bottom: 100px;
+}
+
+/**
+  Recommendations Styling
+ */
+
+.recommendation {
+  background: #97BF78;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #FFFFFF;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+}
+
+.recommendation .ion-justify-content-between {
+  border-bottom: 1px solid #FFFFFF;
+  padding-bottom: 0.5rem;
+}
+
+.recommendation img {
+  height: 1rem;
+  float: right;
+  padding-left: 0.3rem;
 }
 

@@ -1,9 +1,115 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>import-modules</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar #search showCancelButton="never"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content class="ion-padding">
+
+    <ion-row class="ion-justify-content-center">
+        <h2><span (click)="focusButton()">Search
+                <ion-icon name="search-outline"></ion-icon></span>
+            <br>
+            or
+
+            <br>
+            pick a topic
+        </h2>
+    </ion-row>
+
+    <ion-row *ngFor="let lesson of lessons" class="ion-justify-content-center ion-align-items-center">
+        <ion-col>
+            <div class="recommendation">
+                <ion-row class="ion-justify-content-between">
+                    <div class="recommendation-title" (click)="this.moduleService.lessonDetails(lesson.id)">
+                        <span>{{lesson.name}}</span>
+                    </div>
+                    <div class="cloud-box" (click)="this.moduleService.importLesson(lesson.id)">
+                        <img class="cloud-down" *ngIf="!this.moduleService.imported"
+                             src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
+                             srcset="../../assets/icons/cloud-download.svg">
+                        <img class="cloud-down" *ngIf="this.moduleService.imported"
+                             src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
+                             srcset="../../assets/icons/cloud-download-checked.svg">
+                    </div>
+                </ion-row>
+                <ion-row class="ion-justify-content-between tag-row">
+                        <span class="tags">#{{lesson.tags[0]}}.. +
+                            {{lesson.tags.length - 1}} more
+                        </span>
+                    <span class="tags">
+                    {{lesson.cards}}
+                        <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                             srcset="../../assets/icons/sd-card-solid.svg">
+                </span>
+                </ion-row>
+            </div>
+        </ion-col>
+    </ion-row>
+
+
+    <!--    <ion-grid *ngIf="searchstring.length !== 0">-->
+    <!--        <ion-row>-->
+    <!--            <ion-col>-->
+    <!--                <div class="category cat1">-->
+    <!--                    <img src="../../assets/icons/formula.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/formula.svg">-->
+    <!--                    Programming-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+
+    <!--            <ion-col>-->
+    <!--                <div class="category cat2">-->
+    <!--                    <img src="../../assets/icons/code.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/code.svg">-->
+    <!--                    <span>Mathematics</span>-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+    <!--        </ion-row>-->
+
+    <!--        <ion-row>-->
+    <!--            <ion-col>-->
+    <!--                <div class="category cat3">-->
+    <!--                    <img src="../../assets/icons/england.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/england.svg">-->
+    <!--                    Programming-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+
+    <!--            <ion-col>-->
+    <!--                <div class="category cat4">-->
+    <!--                    <img src="../../assets/icons/code.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/code.svg">-->
+    <!--                    <span>Mathematics</span>-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+    <!--        </ion-row>-->
+
+    <!--        <ion-row>-->
+    <!--            <ion-col>-->
+    <!--                <div class="category cat5">-->
+    <!--                    <img src="../../assets/icons/formula.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/formula.svg">-->
+    <!--                    Programming-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+
+    <!--            <ion-col>-->
+    <!--                <div class="category cat6">-->
+    <!--                    <img src="../../assets/icons/world-financial.svg"-->
+    <!--                         alt="arrow pointing right"-->
+    <!--                         srcset="../../assets/icons/world-financial.svg">-->
+    <!--                    <span>Mathematics</span>-->
+    <!--                </div>-->
+    <!--            </ion-col>-->
+    <!--        </ion-row>-->
+    <!--    </ion-grid>-->
 </ion-content>
+
+<app-navbar></app-navbar>
