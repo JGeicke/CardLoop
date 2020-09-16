@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>learnMode</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+    <div>
+        <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+        </progress-bar>
+    </div>
+    <ion-row class="ion-justify-content-center">
+        <div class="question-box">
+            <p>{{this.moduleService.currLesson.questions[0].question}}</p>
+        </div>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <div class="question-box">
+            <ion-row class="ion-justify-content-center" *ngFor="let answer of this.moduleService.currLesson.questions[0].answers">
+                    <div class="answer-box">
+                        <span>{{answer}}</span>
+                    </div>
+            </ion-row>
 
-<ion-content>
-
+        </div>
+    </ion-row>
+    <ion-row>
+        <div class="confirm">
+            <p>Confirm</p>
+        </div>
+    </ion-row>
 </ion-content>
+
+<app-navbar></app-navbar>

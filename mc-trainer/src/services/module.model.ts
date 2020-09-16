@@ -6,7 +6,7 @@ export class Module {
     name: string;
     tags: string[];
     questions: Question[];
-    
+
     constructor(uid: string, description: string, name: string, tags: string[]) {
         this.uid = uid;
         this.description = description;
