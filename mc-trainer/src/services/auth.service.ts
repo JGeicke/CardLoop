@@ -11,7 +11,6 @@ import {Observable} from 'rxjs';
 export class AuthService {
 
   public loggedin = false;
-  constructor() { }
 
   private user: User;
   isLoggedIn = false;

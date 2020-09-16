@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ModuleService} from '../../../services/module.service';
-import {Component, OnInit} from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import {PopoverPage} from '../../popover/popover.page';
 import {Router} from '@angular/router';
-import {ModuleService} from '../../../services/module.service';
 import {AlertController, ModalController} from '@ionic/angular';
 
 

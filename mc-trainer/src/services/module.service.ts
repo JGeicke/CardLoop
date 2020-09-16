@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from '@angular/fire/firestore';
 import {Module} from './module.model';
 import {AlertController} from '@ionic/angular';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
