@@ -1,17 +1,21 @@
-
 <ion-content>
     <ion-grid>
-        <div>
-            <ion-row>
-                <ion-col>
+        <ion-row>
+            <ion-col size="12" class="ion-text-center achievement_headline">
+                <ion-text *ngIf="!this.detailAchievement" class="achievement_text">Your Achievements</ion-text>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="this.detailAchievement">
+            <ion-row class="ion-align-items-around">
+                <ion-col size="12" size-sm="6">
                     <div class="ion-text-center">
-                        <img src="../../assets/mountain_with_flag.svg" alt="mountain with a flag"
-                             srcset="../../assets/mountain_with_flag.svg" height="65%" width="65%">
+                        <img src="../../assets/{{this.currAchievement.achievementSVG}}"
+                             alt="{{this.currAchievement.achievementSVG}}"
+                             height="35%" width="35%">
                     </div>
                 </ion-col>
-                <ion-col>
-                    <ion-text class="achievement_text ion-text-justify">Achieve a streak on 20 correct answered cards in
-                        any Lesson!
+                <ion-col class="ion-align-self-center ion-text-center">
+                    <ion-text class="achievement_text">{{this.currAchievement.achievementText}}
                     </ion-text>
                 </ion-col>
             </ion-row>
@@ -24,11 +28,32 @@
     </ion-grid>
     <div class="content-box">
         <div class="flexbox-container">
-            <div class="flexbox-item" *ngFor="let achievement of this.achievements">
-                <a [routerLink]="" class="achievement" (click)="inspectAchievement()">
-                    <div class="achievement_image">
-                        <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
-                                 alt="mountain with a flag"></ion-img>
+            <div class="flexbox-item" *ngFor="let achievement of this.achievements"
+                 [ngStyle]="{'filter': this.currAchievement!=this.achievement && this.detailAchievement ? 'blur(2px)' : ''}">
+                <div *ngIf="this.isLoggedInSimulation() || this.isSuccessAchievement(this.achievement)">
+                    <a [routerLink]="" class="achievement" (click)="inspectAchievement(this.achievement)">
+                        <div class="achievement_image">
+                            <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
+                                     alt="{{this.achievement.achievementSVG}}"></ion-img>
+                        </div>
+                        <round-progress
+                                current="{{this.achievement.currentNumber}}" [color]="'#97BF78'"
+                                [radius]="30" [stroke]="8" max="{{this.achievement.maxNumber}}" [background]="'#DFDFDF'"
+                                [clockwise]="false"
+                                [responsive]="true">
+                        </round-progress>
+                    </a>
+                    <div class="ach_num_div">
+                        <ion-text class="achievement_text"
+                                  [ngStyle]="{'color': isSuccessAchievement(achievement)? '#66BF91' : 'white'}">{{this.achievement.currentNumber}}
+                            / {{this.achievement.maxNumber}}</ion-text>
+                    </div>
+                </div>
+                <div class="achievement achievement_locked"
+                     *ngIf="!this.isLoggedInSimulation() && !this.isSuccessAchievement(this.achievement)">
+                    <div class="achievement_lock_icon">
+                        <ion-img src="../../assets/ach_lock.svg"
+                                 alt="a lock icon"></ion-img>
                     </div>
                     <round-progress
                             current="{{this.achievement.currentNumber}}" [color]="'#97BF78'"
@@ -36,12 +61,10 @@
                             [clockwise]="false"
                             [responsive]="true">
                     </round-progress>
-                </a>
-                <ion-col>
-                    <ion-text class="achievement_text achievement_numbers"
-                              [ngStyle]="{'color': isSuccessAchievement(achievement)? '#66BF91' : 'white'}">{{this.achievement.currentNumber}}
-                        / {{this.achievement.maxNumber}}</ion-text>
-                </ion-col>
+                    <div class="ach_num_div">
+                        <ion-text class="achievement_text">?</ion-text>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

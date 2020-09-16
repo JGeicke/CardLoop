@@ -10,6 +10,7 @@ export class AchievementPage implements OnInit {
 
   achievements: Achievement[] = [];
   detailAchievement: boolean;
+  currAchievement: Achievement;
 
   constructor() {
     this.detailAchievement = false;
@@ -36,8 +37,10 @@ export class AchievementPage implements OnInit {
         'Create a CardLoop Account!', 1, 1, 'mountain_with_flag.svg'));
   }
 
-  inspectAchievement() {
+  inspectAchievement(achievement: Achievement) {
     this.detailAchievement = !this.detailAchievement;
+    this.currAchievement = achievement;
+    console.log('detailAchievement is ' + this.detailAchievement);
   }
 
   isSuccessAchievement(achievement: Achievement) {
@@ -46,6 +49,10 @@ export class AchievementPage implements OnInit {
 
   sortAchievements() {
     this.achievements.sort((a, b) => (a.currentNumber / a.maxNumber) > (b.currentNumber / b.maxNumber) ? -1 : 1);
+  }
+
+  isLoggedInSimulation() {
+    return false;
   }
 
   ngOnInit() {
