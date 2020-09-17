@@ -1,115 +1,119 @@
-.form, .item, .list, .button{
-  --ion-background-color: transparent;
-}
+  * {
+    --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+  }
+  .form, .item, .list, .button{
+    --ion-background-color: transparent;
+  }
 
-// styling of input
-.form{
-  border: 0;
-  color:white;
-}
-
-//styling of LOGIN / SIGNUP text
-.list-header{
-  text-align: center;
-  color: #cce6f4;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 2.5rem;
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.3rem;
-}
-
-//styling of text above/below input formular
-.sign-up-text, .return-text{
-  color: white;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 0.8rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-//styling of "Sign Up" / "Sign In" / "Click here"
-.sign-up-link{
-  color:white;
-  :link :hover :active :visited {
+  // styling of input
+  .form{
+    border: 0;
     color:white;
   }
-}
 
-//styling forgot password text
-#forgot-password{
-  text-align: right;
-  color: white;
-  font-style: normal;
-  font-weight: normal;
-  margin-top:0.3rem;
-  margin-left: 50%;
-  font-size: 0.7rem;
-  text-decoration: underline;
-}
+  //styling of LOGIN / SIGNUP text
+  .list-header{
+    text-align: center;
+    color: #cce6f4;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.5rem;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.3rem;
+  }
 
-// ionic list styling
-.list{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 75%;
-}
+  //styling of text above/below input formular
+  .sign-up-text, .return-text{
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
 
-// warning styling
-.warning {
-  color: red;
-}
+  //styling of "Sign Up" / "Sign In" / "Click here"
+  .sign-up-link{
+    color:white;
+    :link :hover :active :visited {
+      color:white;
+    }
+  }
 
-// success styling
-.success{
-  color: #8fe431;
-}
+  //styling forgot password text
+  #forgot-password{
+    text-align: right;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+    margin-top:0.3rem;
+    margin-left: 50%;
+    font-size: 0.7rem;
+    text-decoration: underline;
+  }
 
-// alert styling
-.alert{
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
+  // ionic list styling
+  .list{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+  }
 
-//app logo styling
-.logo{
-  height: 6.4rem;
-  position: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
+  // warning styling
+  .warning {
+    color: red;
+  }
 
-// password, email, password confirmation ion-item styling
-.item-form{
-  border-bottom: 1px solid white;
-  margin-bottom: 0.8rem;
-}
+  // success styling
+  .success{
+    color: #8fe431;
+  }
 
-// label styling
-.label{
-  color: white;
-  text-align: center;
-}
+  // alert styling
+  .alert{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
 
-// Floating Label styling
-ion-item.item-has-focus > .label{
-  color: white;
-}
+  //app logo styling
+  .logo{
+    height: 6.4rem;
+    position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
 
-// Login/Register Button styling
-.button{
-  margin-top: 2rem;
-  height: 2.4rem;
-  margin-bottom: 0.6rem;
-}
+  // password, email, password confirmation ion-item styling
+  .item-form{
+    border-bottom: 1px solid white;
+    margin-bottom: 0.8rem;
+  }
+
+  // label styling
+  .label{
+    color: white;
+    text-align: center;
+  }
+
+  // Floating Label styling
+  ion-item.item-has-focus > .label{
+    color: white;
+  }
+
+  // Login/Register Button styling
+  .button{
+    margin-top: 2rem;
+    height: 2.4rem;
+    margin-bottom: 0.6rem;
+  }
+
 

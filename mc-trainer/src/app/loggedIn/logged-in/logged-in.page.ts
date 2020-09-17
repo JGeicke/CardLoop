@@ -27,8 +27,7 @@ export class LoggedInPage implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.authService.loggedin);
-        if (this.authService.loggedin === false) {
+        if (this.authService.isLoggedIn === false) {
             this.loginModal();
         }
     }
