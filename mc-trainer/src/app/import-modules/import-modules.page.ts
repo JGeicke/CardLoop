@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ModuleService } from '../../services/module.service';
+import {Module} from "../../services/module.model";
 
 @Component({
     selector: 'app-import-modules',
@@ -27,11 +28,8 @@ export class ImportModulesPage implements OnInit {
 
     constructor(private moduleService: ModuleService) {
         moduleService.getAllModules();
+        moduleService.getUserModules();
         this.lessons = this.moduleService.allModules;
-    }
-
-    ionViewWillEneter(){
-
     }
 
     ngOnInit() {
@@ -41,6 +39,21 @@ export class ImportModulesPage implements OnInit {
         setTimeout(() => {
             this.search.setFocus();
         }, 500);
+    }
+
+    importClicked(module: Module){
+        this.moduleService.importModule(module);
+        console.log('import Clicked');
+    }
+
+    playClicked(module: Module){
+        console.log('play Clicked');
+        // TODO: redirect to play this lesson
+    }
+
+    moduleDetailClicked(module: Module){
+        console.log('lesson deatil clicked');
+        // TODO: redirect to lesson Deatil page
     }
 
 }

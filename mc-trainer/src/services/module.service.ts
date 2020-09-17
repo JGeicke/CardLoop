@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
 import {Question} from './question.model';
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -35,24 +36,14 @@ export class ModuleService {
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
-                private alertController: AlertController) {
+                private alertController: AlertController,
+                private router: Router) {
         for (let i = 0; i < 5; i++) {
             this.lessons.push(this.lesson);
         }
         this.currLesson = this.testmodelesson;
     }
 
-    lessonDetails(id) {
-        console.log(id);
-    }
-
-    importLesson(id) {
-        // Das imported ist nur zum testen und kann dann ersetzt werden.
-        if (this.imported === false) {
-            console.log('importlesson called');
-            this.imported = !this.imported;
-        }
-    }
 
     async delDialog() {
         const alert = await this.alertController.create({
@@ -85,6 +76,7 @@ export class ModuleService {
 
     getUserModules() {
         let moduleIds = [];
+        this.userModules = [];
         const uid = this.authService.GetUID();
         if (uid != '') {
             this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
@@ -100,7 +92,7 @@ export class ModuleService {
 
     getAllModules() {
         let moduleIds = [];
-
+        this.allModules = [];
         this.firestore.collection('modules').get().toPromise().then((res) => {
             res.forEach(a => {
                 moduleIds.push(a.id);
@@ -147,10 +139,58 @@ export class ModuleService {
         });
     }
 
-
+    isModuleImported(module: Module): boolean{
+        for (const m of this.userModules) {
+            if (m.uid === module.uid)
+                return true
+        }
+        return false;
+    }
 
     deleteLesson(currLesson) {
         console.log(currLesson);
+    }
+
+    importModule(module: Module){
+        const userID = this.authService.GetUID();
+        // const userID = 'd2EoVNFP3bT53S3o2ptVqfdBouR2';
+        if (userID != ''){
+            let uModuleIDs = [];
+            for (let m of this.userModules){
+                uModuleIDs.push(m.uid);
+            }
+            uModuleIDs.push(module.uid);
+            this.firestore.collection('userModules').doc(userID).update({'modules': uModuleIDs});
+        }   else {
+            this.importLoginConflicktModal();
+        }
+    }
+
+    async importLoginConflicktModal(){
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Not Logged in!',
+            message: '<p>You need to LogIn to import Modules! ' +
+                ' </p>',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    }
+                }, {
+                    text: 'LogIn',
+                    handler: () => {
+                        this.router.navigate(['login']);
+
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }
 
