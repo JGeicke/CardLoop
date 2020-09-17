@@ -26,6 +26,12 @@ export class ImportModulesPage implements OnInit {
         {category: 'Science'}, {category: 'General'}, {category: 'Geography'}];
 
     constructor(private moduleService: ModuleService) {
+        moduleService.getAllModules();
+        this.lessons = this.moduleService.allModules;
+    }
+
+    ionViewWillEneter(){
+
     }
 
     ngOnInit() {

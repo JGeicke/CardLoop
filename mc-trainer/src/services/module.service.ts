@@ -12,8 +12,8 @@ import {Question} from './question.model';
 })
 export class ModuleService {
 
-    modules: Module[] = [];
-
+    userModules: Module[] = [];
+    allModules: Module[] = [];
     public currLesson;
     public lessons = [];
     // Testdaten können später ersetzt werden, nur für FrontEnd Dev
@@ -86,16 +86,32 @@ export class ModuleService {
     getUserModules() {
         let moduleIds = [];
         const uid = this.authService.GetUID();
-        if (uid !== '') {
+        if (uid != '') {
             this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
                 moduleIds = res.data().modules;
             }).then(() => {
-                return Promise.all(moduleIds.map(i => this.getModule(i)));
+                return Promise.all(moduleIds.map(i => this.getUserModule(i)));
                 /*moduleIds.forEach((i) => {
                   await this.getModule(i);
                 });*/
             });
         }
+    }
+
+    getAllModules() {
+        let moduleIds = [];
+
+        this.firestore.collection('modules').get().toPromise().then((res) => {
+            res.forEach(a => {
+                moduleIds.push(a.id);
+            });
+        }).then(() => {
+            return Promise.all(moduleIds.map(i => this.getModule(i)));
+            /*moduleIds.forEach((i) => {
+              await this.getModule(i);
+            });*/
+        });
+
     }
 
     private getModuleQuestions(module: Module) {
@@ -109,15 +125,28 @@ export class ModuleService {
 
     private getModule(uid: string) {
         this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.modules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
+            this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
         }).then(() => {
-            this.modules.map((i) => {
+            this.allModules.map((i) => {
                 this.getModuleQuestions(i);
             });
         }).then(() => {
-            console.log(this.modules[0]);
+            console.log(this.allModules[this.allModules.length-1]);
         });
     }
+
+    private getUserModule(uid: string) {
+        this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
+            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
+        }).then(() => {
+            this.userModules.map((i) => {
+                this.getModuleQuestions(i);
+            });
+        }).then(() => {
+            console.log(this.userModules[this.userModules.length-1]);
+        });
+    }
+
 
 
     deleteLesson(currLesson) {
