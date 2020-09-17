@@ -24,7 +24,7 @@ export class ModuleService {
             questions: [{
                 uid: '1', question: 'Was ist die Hauptstadt von Kamerun?',
                 answers: ['Jaunde', 'Maunde', 'Kalaunde', 'Schmaunde', 'Banaunde', 'Zigande'],
-                solutions: [1]
+                solutions: [0]
             }],
             tags: ['Geography', 'Capitol', 'Africa']
         };

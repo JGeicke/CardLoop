@@ -25,6 +25,17 @@
   width: 90%;
 }
 
+.chosen-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 1px 1px 4px 5px #ffffff;
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  width: 90%;
+  color: white;
+}
+
 .answer-box span {
   opacity: 1;
   color: white;
@@ -41,4 +52,28 @@
   width: 100%;
   margin-bottom: 2rem;
   padding: 0.7rem;
+}
+
+.right {
+  background: #66be90;
+}
+
+.wrong {
+  background: #8e798b;
+}
+
+/**
+  Bottom Navigation
+ */
+
+ion-toolbar {
+  --background: #1B5777;
+}
+
+ion-button {
+  background-color: transparent;
+}
+
+img{
+  height: 1.8rem;
 }
