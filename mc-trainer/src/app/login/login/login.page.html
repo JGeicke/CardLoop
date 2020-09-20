@@ -76,7 +76,7 @@
       <ion-input [(ngModel)]="passwordConfirmationInput" name="password" type="password" class="form"></ion-input>
     </ion-item>
     <ion-button (click)="Register()" size="large" type="submit" expand="block" shape="round" class="button">Register</ion-button>
-    <ion-item>
+    <ion-item lines="none">
       <ion-label class="return-text">Want to continue without an account? <br><a class="sign-up-link" [routerLink]="['/logged-in']" routerLinkActive="sign-up-link">Click here</a></ion-label>
     </ion-item>
   </ion-list>
