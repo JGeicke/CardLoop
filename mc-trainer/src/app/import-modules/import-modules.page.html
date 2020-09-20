@@ -22,16 +22,16 @@
         <ion-col>
             <div class="recommendation">
                 <ion-row class="ion-justify-content-between">
-                    <div class="recommendation-title" (click)="this.moduleService.lessonDetails(lesson.id)">
+                    <div class="recommendation-title" (click)="moduleDetailClicked(lesson)">
                         <span>{{lesson.name}}</span>
                     </div>
-                    <div class="cloud-box" (click)="this.moduleService.importLesson(lesson.id)">
-                        <img class="cloud-down" *ngIf="!this.moduleService.imported"
+                    <div class="cloud-box">
+                        <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)" (click)="importClicked(lesson)"
                              src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
                              srcset="../../assets/icons/cloud-download.svg">
-                        <img class="cloud-down" *ngIf="this.moduleService.imported"
-                             src="../../assets/icons/cloud-download-checked.svg" alt="cloud with check"
-                             srcset="../../assets/icons/cloud-download-checked.svg">
+                        <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)" (click)="playClicked(lesson)"
+                             src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
+                             srcset="../../assets/icons/play-button-orange.svg">
                     </div>
                 </ion-row>
                 <ion-row class="ion-justify-content-between tag-row">

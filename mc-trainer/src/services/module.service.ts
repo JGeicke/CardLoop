@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
 import {Question} from './question.model';
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -16,43 +17,14 @@ export class ModuleService {
     allModules: Module[] = [];
     public currLesson;
     public lessons = [];
-    // Testdaten können später ersetzt werden, nur für FrontEnd Dev
-    private testmodelesson: Module =
-        {
-            uid: '1', name: 'Capitols of Africa',
-            description: 'interesting facts about africa',
-            questions: [{
-                uid: '1', question: 'Was ist die Hauptstadt von Kamerun?',
-                answers: ['Jaunde', 'Maunde', 'Kalaunde', 'Schmaunde', 'Banaunde', 'Zigande'],
-                solutions: [0]
-            }],
-            tags: ['Geography', 'Capitol', 'Africa']
-        };
-
-
-    private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
-    imported = false;
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
-                private alertController: AlertController) {
-        for (let i = 0; i < 5; i++) {
-            this.lessons.push(this.lesson);
-        }
-        this.currLesson = this.testmodelesson;
+                private alertController: AlertController,
+                private router: Router) {
+        this.getAllModules();
     }
 
-    lessonDetails(id) {
-        console.log(id);
-    }
-
-    importLesson(id) {
-        // Das imported ist nur zum testen und kann dann ersetzt werden.
-        if (this.imported === false) {
-            console.log('importlesson called');
-            this.imported = !this.imported;
-        }
-    }
 
     async delDialog() {
         const alert = await this.alertController.create({
@@ -83,6 +55,7 @@ export class ModuleService {
         await alert.present();
     }
 
+    // loads all Modules that the currently logged in User has already imported
     getUserModules() {
         let moduleIds = [];
         const uid = this.authService.GetUID();
@@ -90,6 +63,7 @@ export class ModuleService {
             this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
                 moduleIds = res.data().modules;
             }).then(() => {
+                this.userModules = [];
                 return Promise.all(moduleIds.map(i => this.getUserModule(i)));
                 /*moduleIds.forEach((i) => {
                   await this.getModule(i);
@@ -98,9 +72,10 @@ export class ModuleService {
         }
     }
 
+    // loads all Modules that are currently stored in the Database
     getAllModules() {
         let moduleIds = [];
-
+        this.allModules = [];
         this.firestore.collection('modules').get().toPromise().then((res) => {
             res.forEach(a => {
                 moduleIds.push(a.id);
@@ -114,6 +89,7 @@ export class ModuleService {
 
     }
 
+    // loads the questions from the database and adds them to the given Module
     private getModuleQuestions(module: Module) {
         this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
             res.forEach(doc => {
@@ -122,6 +98,7 @@ export class ModuleService {
             });
         });
     }
+
 
     private getModule(uid: string) {
         this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
@@ -135,6 +112,7 @@ export class ModuleService {
         });
     }
 
+
     private getUserModule(uid: string) {
         this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
             this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
@@ -147,10 +125,63 @@ export class ModuleService {
         });
     }
 
-
+    // checks if the given module is already importted by the user that is logged in
+    isModuleImported(module: Module): boolean{
+        for (const m of this.userModules) {
+            if (m.uid === module.uid)
+                return true
+        }
+        return false;
+    }
 
     deleteLesson(currLesson) {
         console.log(currLesson);
+    }
+
+    importModule(module: Module){
+        const userID = this.authService.GetUID();
+        // check if any user is logged in
+        if (userID != ''){
+            let uModuleIDs = [];
+            for (let m of this.userModules){
+                uModuleIDs.push(m.uid);
+            }
+            uModuleIDs.push(module.uid);
+            this.firestore.collection('userModules').doc(userID).update({'modules': uModuleIDs}).then(() => {
+                this.getUserModules;
+            });
+        }   else {
+            // if noone is logged in
+            // show promt to let a user log on register
+            this.importLoginConflicktModal();
+        }
+    }
+
+    // shows promt to redirect to the login page or cancel the action
+    async importLoginConflicktModal(){
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Not Logged in!',
+            message: '<p>You need to LogIn to import Modules! ' +
+                ' </p>',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                    }
+                }, {
+                    text: 'LogIn',
+                    handler: () => {
+                        this.router.navigate(['login']);
+
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }
 
