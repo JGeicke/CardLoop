@@ -55,6 +55,7 @@ export class ModuleService {
         await alert.present();
     }
 
+    // loads all Modules that the currently logged in User has already imported
     getUserModules() {
         let moduleIds = [];
         const uid = this.authService.GetUID();
@@ -71,6 +72,7 @@ export class ModuleService {
         }
     }
 
+    // loads all Modules that are currently stored in the Database
     getAllModules() {
         let moduleIds = [];
         this.allModules = [];
@@ -87,6 +89,7 @@ export class ModuleService {
 
     }
 
+    // loads the questions from the database and adds them to the given Module
     private getModuleQuestions(module: Module) {
         this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
             res.forEach(doc => {
@@ -95,6 +98,7 @@ export class ModuleService {
             });
         });
     }
+
 
     private getModule(uid: string) {
         this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
@@ -108,6 +112,7 @@ export class ModuleService {
         });
     }
 
+
     private getUserModule(uid: string) {
         this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
             this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
@@ -120,6 +125,7 @@ export class ModuleService {
         });
     }
 
+    // checks if the given module is already importted by the user that is logged in
     isModuleImported(module: Module): boolean{
         for (const m of this.userModules) {
             if (m.uid === module.uid)
@@ -134,6 +140,7 @@ export class ModuleService {
 
     importModule(module: Module){
         const userID = this.authService.GetUID();
+        // check if any user is logged in
         if (userID != ''){
             let uModuleIDs = [];
             for (let m of this.userModules){
@@ -144,10 +151,13 @@ export class ModuleService {
                 this.getUserModules;
             });
         }   else {
+            // if noone is logged in
+            // show promt to let a user log on register
             this.importLoginConflicktModal();
         }
     }
 
+    // shows promt to redirect to the login page or cancel the action
     async importLoginConflicktModal(){
         const alert = await this.alertController.create({
             cssClass: 'my-custom-class',
@@ -160,7 +170,6 @@ export class ModuleService {
                     role: 'cancel',
                     cssClass: 'secondary',
                     handler: (blah) => {
-                        console.log('Confirm Cancel: blah');
                     }
                 }, {
                     text: 'LogIn',
