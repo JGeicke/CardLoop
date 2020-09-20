@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
 import {IonInput} from '@ionic/angular';
+import {ModuleService} from "../../../services/module.service";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
   @ViewChild('signUpMail')
   private signUpEmailInput: IonInput;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) { }
 
   // Create new Account
   Register() {
@@ -91,6 +92,7 @@ export class LoginPage implements OnInit {
           }
           // successful login
         } else {
+          this.moduleService.getUserModules();
           // FIXME: `Change to proper routing`
           this.router.navigate(['logged-in']);
         }
