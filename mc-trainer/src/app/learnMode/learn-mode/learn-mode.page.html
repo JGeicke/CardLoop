@@ -1,25 +1,25 @@
 <ion-content class="ion-padding">
     <div>
-        <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+        <progress-bar [progress]="this.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
         </progress-bar>
     </div>
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
-            <p>{{this.moduleService.currLesson.questions[0].question}}</p>
+            <p>{{this.question.question}}</p>
         </div>
     </ion-row>
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
-            <ion-row class="ion-justify-content-center" *ngFor="let answer of this.moduleService.currLesson.questions[0].answers; let i=index">
-                    <div class="answer-box" [class.chosen-box]="selectedIndex === i" [class.wrong]="i !== rightanswer && rightanswer !== null" [class.right]="i === rightanswer && rightanswer !== null" (click)="choose(i)" [style.background-color]="answer.BackgroundColour">
+            <ion-row class="ion-justify-content-center" *ngFor="let answer of this.question.answers; trackBy: track; let i=index">
+                    <div class="answer-box" [class.chosen-box]="selectedAnswers[i]" [class.wrong]="!rightAnswers[i] && confiremd" [class.right]="rightAnswers[i] && confiremd" (click)="choose(i)" [style.background-color]="answer.BackgroundColour">
                         <span>{{answer}}</span>
                     </div>
             </ion-row>
 
         </div>
     </ion-row>
-    <ion-row>
-        <div class="confirm" (click)="confirm()">
+    <ion-row *ngIf="multipleChoise">
+        <div class="confirm" (click)="confirm()" >
             <span>Confirm</span>
         </div>
     </ion-row>
@@ -27,25 +27,20 @@
 
 <ion-footer>
     <ion-toolbar>
-        <ion-row class="ion-justify-content-around">
+        <ion-row class="ion-justify-content-around" (click)="randomQuestion()">
             <ion-button size="small" color="none">
-                <img src="../../../assets/icons/shuffle.svg" alt="little house"
-                     srcset="../../../assets/icons/shuffle.svg">
+                <img src="../../../assets/icons/random-solid.svg" alt="little house"
+                     srcset="../../../assets/icons/random-solid.svg">
             </ion-button>
-            <ion-button size="small" color="none">
+            <ion-button size="small" color="none" (click)="gesLastQuestion()">
                 <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
                      srcset="../../../assets/icons/trophy-solid.svg">
             </ion-button>
-            <ion-button size="small" color="none">
-                <img src="../../../assets/icons/testmodus-restart.svg" alt="little book"
-                     srcset="../../../assets/icons/testmodus-restart.svg">
-
-            </ion-button>
-            <ion-button size="small" color="none">
+            <ion-button size="small" color="none" (click)="getNextQuestion()">
                 <img src="../../../assets/icons/testmodus-forward.svg" alt="little cloud with downward arrow"
                      srcset="../../../assets/icons/testmodus-forward.svg">
             </ion-button>
-            <ion-button size="small" color="none">
+            <ion-button size="small" color="none" (click)="endSession();">
                 <img src="../../../assets/icons/testmodus-close-X-icon.svg" alt="person in a circle"
                      srcset="../../../assets/icons/testmodus-close-X-icon.svg">
             </ion-button>
