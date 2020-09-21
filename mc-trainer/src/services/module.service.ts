@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
 import {Question} from './question.model';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +15,7 @@ export class ModuleService {
 
     userModules: Module[] = [];
     allModules: Module[] = [];
-    public currLesson;
+    public currLesson: Module;
     public lessons = [];
 
     constructor(private firestore: AngularFirestore,
@@ -23,6 +23,7 @@ export class ModuleService {
                 private alertController: AlertController,
                 private router: Router) {
         this.getAllModules();
+        this.currLesson = this.allModules[0];
     }
 
 
@@ -130,8 +131,9 @@ export class ModuleService {
     // checks if the given module is already importted by the user that is logged in
     isModuleImported(module: Module): boolean{
         for (const m of this.userModules) {
-            if (m.uid === module.uid)
-                return true
+            if (m.uid === module.uid) {
+                return true;
+            }
         }
         return false;
     }
