@@ -1,21 +1,20 @@
 <ion-header>
     <ion-toolbar>
-        <ion-searchbar #search showCancelButton="never"></ion-searchbar>
+        <ion-searchbar #search [hidden]="!searchBool" showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()" (ionChange)="searchModules()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
-
-
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" [hidden]="this.searchBool">
 
     <ion-row class="ion-justify-content-center">
         <h2><span (click)="focusButton()">Search
                 <ion-icon name="search-outline"></ion-icon></span>
-            <br>
-            or
+        <br>
+        or
 
-            <br>
-            pick a topic
+        <br>
+        pick a topic
         </h2>
+
     </ion-row>
 
     <ion-row *ngFor="let lesson of lessons" class="ion-justify-content-center ion-align-items-center">
@@ -110,6 +109,43 @@
     <!--            </ion-col>-->
     <!--        </ion-row>-->
     <!--    </ion-grid>-->
+</ion-content>
+<ion-content class="ion-padding" [hidden]="!this.searchBool">
+
+    <ion-row class="ion-justify-content-center">
+        <h2>{{filteredModule.length}} Lessons found
+        </h2>
+    </ion-row>
+
+    <ion-row *ngFor="let lesson of filteredModule" class="ion-justify-content-center ion-align-items-center">
+        <ion-col>
+            <div class="recommendation">
+                <ion-row class="ion-justify-content-between">
+                    <div class="recommendation-title" (click)="moduleDetailClicked(lesson)">
+                        <span>{{lesson.name}}</span>
+                    </div>
+                    <div class="cloud-box">
+                        <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)" (click)="importClicked(lesson)"
+                             src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
+                             srcset="../../assets/icons/cloud-download.svg">
+                        <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)" (click)="playClicked(lesson)"
+                             src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
+                             srcset="../../assets/icons/play-button-orange.svg">
+                    </div>
+                </ion-row>
+                <ion-row class="ion-justify-content-between tag-row">
+                        <span class="tags">#{{lesson.tags[0]}}.. +
+                            {{lesson.tags.length - 1}} more
+                        </span>
+                    <span class="tags">
+                    {{lesson.cards}}
+                        <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                             srcset="../../assets/icons/sd-card-solid.svg">
+                </span>
+                </ion-row>
+            </div>
+        </ion-col>
+    </ion-row>
 </ion-content>
 
 <app-navbar></app-navbar>
