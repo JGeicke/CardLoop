@@ -40,7 +40,7 @@ h3 {
   width: 100%;
 }
 
-.question-box p, span {
+.question-box p, .question-box span {
   opacity: 1;
   color: white;
   font-size: 1.2rem;
