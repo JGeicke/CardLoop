@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {AlertController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {ModuleService} from "../../../services/module.service";
 
 @Component({
     selector: 'app-logged-in',
@@ -20,7 +21,8 @@ export class LoggedInPage implements OnInit {
     constructor(private router: Router,
                 private authService: AuthService,
                 private alertController: AlertController,
-                public modalController: ModalController) {
+                public modalController: ModalController,
+                private moduleService: ModuleService) {
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
         this.recommendations.push(this.recommendation);
@@ -29,6 +31,8 @@ export class LoggedInPage implements OnInit {
     ngOnInit() {
         if (this.authService.isLoggedIn === false) {
             this.loginModal();
+        } else {
+            this.moduleService.getUserModules();
         }
     }
 

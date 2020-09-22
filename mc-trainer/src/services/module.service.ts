@@ -4,9 +4,9 @@ import {Module} from './module.model';
 import {AlertController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {map} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {Question} from './question.model';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -56,22 +56,26 @@ export class ModuleService {
     }
 
     // loads all Modules that the currently logged in User has already imported
-
-
-    getUserModules() {
+    async getUserModules() {
+        this.userModules = [];
         let moduleIds = [];
         const uid = this.authService.GetUID();
-        if (uid != '') {
-            this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
+        if (uid !== '') {
+            await this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
                 moduleIds = res.data().modules;
-            }).then(() => {
-                this.userModules = [];
-                return Promise.all(moduleIds.map(i => this.getUserModule(i)));
-                /*moduleIds.forEach((i) => {
-                  await this.getModule(i);
-                });*/
             });
+            for (const module of moduleIds){
+                await this.getUserModule(module);
+            }
+            for (const module of this.userModules){
+                await this.getModuleQuestions(module);
+                for (const question of module.questions){
+                    await this.getQuestionProgress(question);
+                }
+                module.calcProgress();
+            }
         }
+
     }
 
     // loads all Modules that are currently stored in the Database
@@ -89,14 +93,12 @@ export class ModuleService {
             });*/
         });
 
-    }
-
-    // loads the questions from the database and adds them to the given Module
+    // Accesses questions of module in firebase & recreates it locally
     private getModuleQuestions(module: Module) {
-        this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
+        return this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
             res.forEach(doc => {
                 const data = doc.data();
-                module.questions.push(new Question(data.uid, data.question, data.answers, data.solutions));
+                module.questions.push(new Question(doc.id, data.question, data.answers, data.solutions));
             });
         });
     }
@@ -114,28 +116,88 @@ export class ModuleService {
         });
     }
 
-
+        // Accesses module with uid in firebase & recreates it locally
     private getUserModule(uid: string) {
-        this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
+        return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
             this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
-        }).then(() => {
-            this.userModules.map((i) => {
-                this.getModuleQuestions(i);
-            });
-        }).then(() => {
-            console.log(this.userModules[this.userModules.length-1]);
         });
     }
 
-    // checks if the given module is already importted by the user that is logged in
-    isModuleImported(module: Module): boolean{
-        for (const m of this.userModules) {
-            if (m.uid === module.uid)
-                return true
+
+    searchModules(modules: Module[], query: string): Module[]{
+        const filteredModules = [];
+        const lowerCaseQuery = query.toLowerCase();
+        for (const module of modules){
+            if (module.name.toLowerCase().includes(lowerCaseQuery)){
+                filteredModules.push(module);
+            } else {
+                const tags = module.tags.filter(tag => tag.includes(lowerCaseQuery));
+                if (tags.length > 0){
+                    filteredModules.push(module);
+                }
+            }
         }
-        return false;
+        return filteredModules;
     }
 
+    // checks if the given module is already importted by the user that is logged in
+        isModuleImported(module: Module): boolean{
+            for (const m of this.userModules) {
+                if (m.uid === module.uid)
+                    return true
+            }
+            return false;
+        }
+
+    // Access progress of questions in firebase to display in view
+    private getQuestionProgress(question: Question){
+            const uid = this.authService.GetUID();
+            if (uid !== '') {
+                return this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).get().toPromise()
+                    .then((res) => {
+                        if (res.exists){
+                            question.setProgress(res.data().progress);
+                        }
+                    });
+            }
+        }
+
+        // Stores progress of question in cloud firestore
+    private setQuestionProgress(question: Question){
+            const uid = this.authService.GetUID();
+            if (uid !== '') {
+                return this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).set({
+                    progress: question.progress
+                });
+            }
+        }
+
+        // Increment progress of question after right answer
+        async incrementQuestionProgress(question: Question){
+            const uid = this.authService.GetUID();
+            if (uid !== '') {
+                question.incrementProgress();
+                await this.setQuestionProgress(question);
+                this.recalcModuleProgess();
+            }
+        }
+
+        // Reset progress of question after wrong answer to 0
+        async resetQuestionProgress(question: Question){
+            const uid = this.authService.GetUID();
+            if (uid !== '') {
+                question.resetProgress();
+                await this.setQuestionProgress(question);
+                this.recalcModuleProgess();
+            }
+        }
+
+        // Calculates module progress again after changes to question progress
+    private recalcModuleProgess(){
+            for (const module of this.userModules){
+                module.calcProgress();
+            }
+        }
     deleteLesson(currLesson) {
         console.log(currLesson);
     }

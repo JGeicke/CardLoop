@@ -4,6 +4,7 @@ import {PopoverController} from '@ionic/angular';
 import {PopoverPage} from '../../popover/popover.page';
 import {Router} from '@angular/router';
 import {AlertController, ModalController} from '@ionic/angular';
+import {Module} from '../../../services/module.model';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class ModuleListPage implements OnInit {
 
     private searchBool = false;
     private lessons: any[] = [];
+    private searchQuery = '';
+    private filteredModules: Module[] = [];
     private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
 
     constructor(public popoverController: PopoverController,
@@ -27,8 +30,13 @@ export class ModuleListPage implements OnInit {
         }
     }
 
+    searchModules(){
+        this.searchBool = true;
+        this.filteredModules = this.moduleService.searchModules(this.moduleService.userModules, this.searchQuery);
+        this.filteredModules.forEach(module => console.log(module));
+    }
+
   ngOnInit() {
-    this.moduleService.getUserModules();
   }
 
     playLesson() {
