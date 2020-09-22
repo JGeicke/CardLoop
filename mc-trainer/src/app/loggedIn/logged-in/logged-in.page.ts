@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {AlertController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {ModuleService} from "../../../services/module.service";
+import {ModuleService} from '../../../services/module.service';
 
 @Component({
     selector: 'app-logged-in',
@@ -31,8 +31,6 @@ export class LoggedInPage implements OnInit {
     ngOnInit() {
         if (this.authService.isLoggedIn === false) {
             this.loginModal();
-        } else {
-            this.moduleService.getUserModules();
         }
     }
 

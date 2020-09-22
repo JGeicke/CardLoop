@@ -80,7 +80,7 @@ export class ModuleService {
 
     // loads all Modules that are currently stored in the Database
     getAllModules() {
-        let moduleIds = [];
+        const moduleIds = [];
         this.allModules = [];
         this.firestore.collection('modules').get().toPromise().then((res) => {
             res.forEach(a => {
@@ -92,6 +92,7 @@ export class ModuleService {
               await this.getModule(i);
             });*/
         });
+    }
 
     // Accesses questions of module in firebase & recreates it locally
     private getModuleQuestions(module: Module) {
@@ -112,7 +113,7 @@ export class ModuleService {
                 this.getModuleQuestions(i);
             });
         }).then(() => {
-            console.log(this.allModules[this.allModules.length-1]);
+            console.log(this.allModules[this.allModules.length - 1]);
         });
     }
 
@@ -143,8 +144,9 @@ export class ModuleService {
     // checks if the given module is already importted by the user that is logged in
         isModuleImported(module: Module): boolean{
             for (const m of this.userModules) {
-                if (m.uid === module.uid)
-                    return true
+                if (m.uid === module.uid) {
+                    return true;
+                }
             }
             return false;
         }
@@ -205,14 +207,14 @@ export class ModuleService {
     importModule(module: Module){
         const userID = this.authService.GetUID();
         // check if any user is logged in
-        if (userID != ''){
-            let uModuleIDs = [];
-            for (let m of this.userModules){
+        if (userID !== ''){
+            const uModuleIDs = [];
+            for (const m of this.userModules){
                 uModuleIDs.push(m.uid);
             }
             uModuleIDs.push(module.uid);
-            this.firestore.collection('userModules').doc(userID).update({'modules': uModuleIDs}).then(() => {
-                this.getUserModules;
+            this.firestore.collection('userModules').doc(userID).update({modules: uModuleIDs}).then(() => {
+                this.getUserModules();
             });
         }   else {
             // if noone is logged in

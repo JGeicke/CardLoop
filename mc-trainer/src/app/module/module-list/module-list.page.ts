@@ -15,19 +15,14 @@ import {Module} from '../../../services/module.model';
 export class ModuleListPage implements OnInit {
 
     private searchBool = false;
-    private lessons: any[] = [];
     private searchQuery = '';
     private filteredModules: Module[] = [];
-    private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
 
     constructor(public popoverController: PopoverController,
                 private router: Router,
                 private moduleService: ModuleService,
                 private alertController: AlertController,
                 private modalController: ModalController) {
-        for (let i = 0; i < 5; i++) {
-            this.lessons.push(this.lesson);
-        }
     }
 
     searchModules(){

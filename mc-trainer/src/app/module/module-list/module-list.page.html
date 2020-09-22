@@ -12,7 +12,8 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
-        <div class="module" (click)="this.moduleService.lessonDetails(module.uid, module.progress)">
+        <!-- @TODO: On Click to Detail Page -->
+        <div class="module">
             <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
@@ -42,7 +43,8 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let module of this.filteredModules">
-        <div class="module" (click)="this.moduleService.lessonDetails(module.uid, module.progress)">
+        <!-- @TODO: On Click to Detail Page -->
+        <div class="module">
             <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
