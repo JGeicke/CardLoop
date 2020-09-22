@@ -4,7 +4,7 @@ import {Module} from './module.model';
 import {AlertController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {map} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import {Question} from './question.model';
 
 @Injectable({
@@ -12,12 +12,11 @@ import {Question} from './question.model';
 })
 export class ModuleService {
 
-    modules: Module[] = [];
+    userModules: Module[] = [];
 
     public currLesson;
-    public lessons = [];
-    // Testdaten können später ersetzt werden, nur für FrontEnd Dev
-    private testmodelesson: Module =
+    /* Testdaten können später ersetzt werden, nur für FrontEnd Dev
+    private testmodelesson: Module = new Module('1','interesting facts about africa', 'Capitols of Africa',)
         {
             uid: '1', name: 'Capitols of Africa',
             description: 'interesting facts about africa',
@@ -26,24 +25,21 @@ export class ModuleService {
                 answers: ['Jaunde', 'Maunde', 'Kalaunde', 'Schmaunde', 'Banaunde', 'Zigande'],
                 solutions: [1]
             }],
-            tags: ['Geography', 'Capitol', 'Africa']
+            tags: ['Geography', 'Capitol', 'Africa'],
+            progress: 0
         };
-
+    */
 
     private lesson = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
     imported = false;
 
-    constructor(private firestore: AngularFirestore,
-                private authService: AuthService,
-                private alertController: AlertController) {
-        for (let i = 0; i < 5; i++) {
-            this.lessons.push(this.lesson);
-        }
-        this.currLesson = this.testmodelesson;
+    constructor(private firestore: AngularFirestore, private authService: AuthService, private alertController: AlertController) {
     }
 
-    lessonDetails(id) {
+    lessonDetails(id, progress) {
         console.log(id);
+        console.log(progress);
+        this.userModules.forEach(e => console.log(e));
     }
 
     importLesson(id) {
@@ -83,43 +79,111 @@ export class ModuleService {
         await alert.present();
     }
 
-    getUserModules() {
+    // Gets modules of logged-in user with uid from firebase
+    async getUserModules() {
+        this.userModules = [];
         let moduleIds = [];
         const uid = this.authService.GetUID();
         if (uid !== '') {
-            this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
+            await this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
                 moduleIds = res.data().modules;
-            }).then(() => {
-                return Promise.all(moduleIds.map(i => this.getModule(i)));
-                /*moduleIds.forEach((i) => {
-                  await this.getModule(i);
-                });*/
+            });
+            for (const module of moduleIds){
+                await this.getModule(module);
+            }
+            for (const module of this.userModules){
+                await this.getModuleQuestions(module);
+                for (const question of module.questions){
+                    await this.getQuestionProgress(question);
+                }
+                module.calcProgress();
+            }
+        }
+
+    }
+
+    // Accesses questions of module in firebase & recreates it locally
+    private getModuleQuestions(module: Module) {
+        return this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
+            res.forEach(doc => {
+                const data = doc.data();
+                module.questions.push(new Question(doc.id, data.question, data.answers, data.solutions));
+            });
+        });
+    }
+
+    // Accesses module with uid in firebase & recreates it locally
+    private getModule(uid: string) {
+        return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
+            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
+        });
+    }
+
+    // Access progress of questions in firebase to display in view
+    private getQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            return this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).get().toPromise()
+                .then((res) => {
+                    if (res.exists){
+                        question.setProgress(res.data().progress);
+                    }
+                });
+        }
+    }
+
+    // Stores progress of question in cloud firestore
+    private setQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            return this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).set({
+                progress: question.progress
             });
         }
     }
 
-    private getModuleQuestions(module: Module) {
-        this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
-            res.forEach(doc => {
-                const data = doc.data();
-                module.questions.push(new Question(data.uid, data.question, data.answers, data.solutions));
-            });
-        });
+    // Increment progress of question after right answer
+    async incrementQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            question.incrementProgress();
+            await this.setQuestionProgress(question);
+            this.recalcModuleProgess();
+        }
     }
 
-    private getModule(uid: string) {
-        this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.modules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
-        }).then(() => {
-            this.modules.map((i) => {
-                this.getModuleQuestions(i);
-            });
-        }).then(() => {
-            console.log(this.modules[0]);
-        });
+    // Reset progress of question after wrong answer to 0
+    async resetQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            question.resetProgress();
+            await this.setQuestionProgress(question);
+            this.recalcModuleProgess();
+        }
     }
 
+    // Calculates module progress again after changes to question progress
+    private recalcModuleProgess(){
+        for (const module of this.userModules){
+            module.calcProgress();
+        }
+    }
 
+    searchModules(modules: Module[], query: string): Module[]{
+        const filteredModules = [];
+        const lowerCaseQuery = query.toLowerCase();
+        for (const module of modules){
+            if (module.name.toLowerCase().includes(lowerCaseQuery)){
+                filteredModules.push(module);
+            } else {
+                const tags = module.tags.filter(tag => tag.includes(lowerCaseQuery));
+                if (tags.length > 0){
+                    filteredModules.push(module);
+                }
+            }
+        }
+        return filteredModules;
+    }
     deleteLesson(currLesson) {
         console.log(currLesson);
     }
