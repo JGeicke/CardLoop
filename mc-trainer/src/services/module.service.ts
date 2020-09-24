@@ -57,7 +57,6 @@ export class ModuleService {
 
     // loads all Modules that the currently logged in User has already imported
 
-
     getUserModules() {
         let moduleIds = [];
         const uid = this.authService.GetUID();
@@ -88,7 +87,6 @@ export class ModuleService {
               await this.getModule(i);
             });*/
         });
-
     }
 
     // loads the questions from the database and adds them to the given Module

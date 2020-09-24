@@ -38,7 +38,7 @@ export class LearnModePage implements OnInit {
     }
 
     private changeProgress() {
-        this.progress = this.growth * this.nextQuestion;
+        this.progress = this.growth * (this.nextQuestion+1);
     }
 
     initNextQuestion() {

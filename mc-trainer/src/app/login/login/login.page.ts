@@ -26,7 +26,11 @@ export class LoginPage implements OnInit {
   @ViewChild('signUpMail')
   private signUpEmailInput: IonInput;
 
-  constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) { }
+  constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) {
+    if (this.authService.registerTriggered){
+      this.toggleLogin();
+    }
+  }
 
   // Create new Account
   Register() {
@@ -103,6 +107,7 @@ export class LoginPage implements OnInit {
 
   // Toggles Login-View/Sign-Up View
   private toggleLogin(){
+    this.authService.registerTriggered = false;
     this.showLogin = !this.showLogin;
     this.hasWarning = false;
     this.hasAlert = false;
