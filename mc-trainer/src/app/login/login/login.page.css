@@ -1,3 +1,7 @@
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
 .form, .item, .list, .button {
   --ion-background-color: transparent;
 }
@@ -32,6 +36,10 @@
   color: white;
 }
 .sign-up-link :link :hover :active :visited {
+  color: white;
+}
+
+a {
   color: white;
 }
 
