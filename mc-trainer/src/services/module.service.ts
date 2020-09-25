@@ -15,7 +15,8 @@ export class ModuleService {
 
     userModules: Module[] = [];
     allModules: Module[] = [];
-    public currLesson;
+    public recentlyPlayed: Module;
+    public currLesson: Module;
     public lessons = [];
 
     constructor(private firestore: AngularFirestore,
@@ -74,6 +75,7 @@ export class ModuleService {
                 }
                 module.calcProgress();
             }
+            return this.loadRecentlyPlayed();
         }
 
     }
@@ -181,6 +183,38 @@ export class ModuleService {
             question.incrementProgress();
             await this.setQuestionProgress(question);
             this.recalcModuleProgess();
+        }
+    }
+
+    // Save recently played lesson in firebase
+    saveRecentlyPlayed(){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            this.firestore.collection('userModules').doc(uid).update({
+                recentlyPlayed: this.currLesson.uid
+            });
+        }
+    }
+
+    loadRecentlyPlayed(){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            return this.firestore.collection('userModules').doc(uid).get().toPromise()
+                .then((res) => {
+                    if (res.exists){
+                        const id = res.data().recentlyPlayed;
+                        for (const module of this.userModules){
+                            console.log('Recently played check:' + module.name);
+                            if (module.uid === id){
+                                this.recentlyPlayed = module;
+                                break;
+                            }
+                        }
+                        if (this.recentlyPlayed === undefined){
+                           this.recentlyPlayed = this.allModules[Math.floor(Math.random() * this.allModules.length)];
+                        }
+                    }
+                });
         }
     }
 

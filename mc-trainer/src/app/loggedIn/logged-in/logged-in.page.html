@@ -15,24 +15,24 @@
         <ion-row class="ion-justify-content-center">
             <h2 class="ion-text-center">Welcome Back, <br>Tina!</h2>
         </ion-row>
-        <ion-row class="ion-justify-content-center">
+        <ion-row class="ion-justify-content-center" *ngIf="authService.isLoggedIn">
             <div class="ion-margin-bottom">
                 <h3>Pick up where you left</h3>
 
                 <div class="module" (click)="lessonDetails()">
-                    <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
+                    <img (click)="playLesson(this.moduleService.recentlyPlayed)" src="../../../assets/icons/play-button-orange.svg"
                          alt="arrow pointing right"
                          srcset="../../../assets/icons/play-button-orange.svg">
                     <div class="inner-module-wrapper">
-                        <span class="module-title">Mobile Application Dev</span>
+                        <span class="module-title">{{this.moduleService.recentlyPlayed.name}}</span>
                         <div class="white-box">
                             <div>
-                                <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                <progress-bar [progress]="this.moduleService.recentlyPlayed.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
                                 </progress-bar>
                             </div>
                             <div>
-                                <span class="tags">#{{recommendation.tags[0]}} #{{recommendation.tags[1]}}..
-                                    +{{recommendation.tags.length - 2}} more</span>
+                                <span class="tags">#{{this.moduleService.recentlyPlayed.tags[0]}} #{{this.moduleService.recentlyPlayed.tags[1]}}..
+                                    +{{this.moduleService.recentlyPlayed.tags.length - 2}} more</span>
                             </div>
                         </div>
                     </div>

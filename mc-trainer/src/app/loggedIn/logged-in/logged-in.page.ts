@@ -3,6 +3,7 @@ import {AuthService} from '../../../services/auth.service';
 import {AlertController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {ModuleService} from '../../../services/module.service';
+import {Module} from '../../../services/module.model';
 
 @Component({
     selector: 'app-logged-in',
@@ -34,8 +35,14 @@ export class LoggedInPage implements OnInit {
         }
     }
 
-    playLesson() {
-        console.log('playlesson called');
+    playLesson(module: Module) {
+        if (!this.moduleService.isModuleImported(module)){
+            this.moduleService.importModule(module);
+        }
+        this.moduleService.currLesson = module;
+        console.log(module);
+        this.moduleService.saveRecentlyPlayed();
+        this.router.navigate(['learn-mode']);
     }
 
     lessonDetails() {

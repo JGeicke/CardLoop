@@ -4,18 +4,19 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {User} from './user.model';
 import {Observable} from 'rxjs';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    registerTriggered: boolean = false;
+    registerTriggered = false;
     private user: User;
     isLoggedIn = false;
 
-    constructor(private firebaseAuth: AngularFireAuth, private alertController: AlertController, private firestore: AngularFirestore, private router: Router) {
+    constructor(private firebaseAuth: AngularFireAuth, private alertController: AlertController,
+                private firestore: AngularFirestore, private router: Router) {
     }
 
     async Register(email: string, password: string): Promise<string> {
@@ -66,10 +67,7 @@ export class AuthService {
     checkPassword(password: string): boolean {
         console.log(this.user.password);
         console.log(password);
-        if (this.user.password == password) {
-            return true;
-        }
-        return false;
+        return this.user.password === password;
     }
 
     getUserMail(): string {
@@ -77,9 +75,9 @@ export class AuthService {
     }
 
     changePassword(password: string) {
-        let user = this.firebaseAuth.currentUser.then((user) => {
+        const user = this.firebaseAuth.currentUser.then((user) => {
             user.updatePassword(password).then((err) => {
-                this.showDialog('Your Password was succesful changed!');
+                this.showDialog('Your Password was successfully changed!');
             });
         });
     }
@@ -142,8 +140,8 @@ export class AuthService {
                 this.SignOut();
                 this.showDialog('Your Account was deleted!');
                 this.router.navigate(['login']);
-            })
-        })
+            });
+        });
     }
 
     toggleRegister(): boolean {

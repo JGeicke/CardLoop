@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
 import {IonInput} from '@ionic/angular';
-import {ModuleService} from "../../../services/module.service";
+import {ModuleService} from '../../../services/module.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import {ModuleService} from "../../../services/module.service";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  
+
   private emailInput = '';
   private passwordInput = '';
   private passwordConfirmationInput = '';
@@ -96,9 +96,9 @@ export class LoginPage implements OnInit {
           }
           // successful login
         } else {
-          this.moduleService.getUserModules();
-          // FIXME: `Change to proper routing`
-          this.router.navigate(['logged-in']);
+          this.moduleService.getUserModules().then((r) => {
+            this.router.navigate(['logged-in']);
+          });
         }
       });
     }

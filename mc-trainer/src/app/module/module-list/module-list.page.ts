@@ -34,9 +34,11 @@ export class ModuleListPage implements OnInit {
   ngOnInit() {
   }
 
-    playLesson() {
-        console.log('playlesson called');
-    }
+  playLesson(module) {
+      this.moduleService.currLesson = module;
+      this.moduleService.saveRecentlyPlayed();
+      this.router.navigate(['learn-mode']);
+  }
 
     async popover(ev: any) {
         const popover = await this.popoverController.create({

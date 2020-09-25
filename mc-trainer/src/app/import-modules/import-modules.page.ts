@@ -48,6 +48,7 @@ export class ImportModulesPage implements OnInit {
 
     playClicked(module: Module){
         this.moduleService.currLesson = module;
+        this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
     }
 

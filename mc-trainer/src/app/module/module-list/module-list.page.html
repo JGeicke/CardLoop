@@ -14,7 +14,7 @@
     <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
         <!-- @TODO: On Click to Detail Page -->
         <div class="module">
-            <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
+            <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
             <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
@@ -45,7 +45,7 @@
     <ion-row class="ion-justify-content-center" *ngFor="let module of this.filteredModules">
         <!-- @TODO: On Click to Detail Page -->
         <div class="module">
-            <img (click)="playLesson()" src="../../../assets/icons/play-button-orange.svg"
+            <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
             <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
