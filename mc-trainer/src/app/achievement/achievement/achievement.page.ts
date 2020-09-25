@@ -6,6 +6,8 @@ import {Achievement} from '../../../services/achievement.model';
   templateUrl: './achievement.page.html',
   styleUrls: ['./achievement.page.scss'],
 })
+
+// Achievement Page Front End Logic
 export class AchievementPage implements OnInit {
 
   achievements: Achievement[] = [];
@@ -18,6 +20,7 @@ export class AchievementPage implements OnInit {
     this.sortAchievements();
   }
 
+  // Example Data, maybe change some icons
   makeAchievementSample() {
     this.achievements.push(new Achievement('1', 'CardStreak',
         'Achieve a streak of 6 right answered cards in a row!', 3, 6, 'mountain_with_flag.svg'));
@@ -37,21 +40,25 @@ export class AchievementPage implements OnInit {
         'Create a CardLoop Account!', 1, 1, 'mountain_with_flag.svg'));
   }
 
+  // Function for inspecting an achievement
   inspectAchievement(achievement: Achievement) {
     this.detailAchievement = !this.detailAchievement;
     this.currAchievement = achievement;
-    console.log('detailAchievement is ' + this.detailAchievement);
   }
 
+  // returns if an achievement is a "success" (100%) achievement
   isSuccessAchievement(achievement: Achievement) {
     return achievement.currentNumber / achievement.maxNumber === 1;
   }
 
+  // sorts the achievement array
   sortAchievements() {
     this.achievements.sort((a, b) => (a.currentNumber / a.maxNumber) > (b.currentNumber / b.maxNumber) ? -1 : 1);
   }
 
-  isLoggedInSimulation() {
+  // only for testing while "login" is not implemented yet. turn false for "not being logged in"
+  // Later implement here the check, if a User is logged in
+  isLoggedIn() {
     return false;
   }
 
