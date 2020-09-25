@@ -81,19 +81,21 @@ export class ModuleService {
     }
 
     // loads all Modules that are currently stored in the Database
-    getAllModules() {
+    async getAllModules() {
         const moduleIds = [];
         this.allModules = [];
-        this.firestore.collection('modules').get().toPromise().then((res) => {
+        await this.firestore.collection('modules').get().toPromise().then((res) => {
             res.forEach(a => {
                 moduleIds.push(a.id);
             });
-        }).then(() => {
-            return Promise.all(moduleIds.map(i => this.getModule(i)));
-            /*moduleIds.forEach((i) => {
-              await this.getModule(i);
-            });*/
         });
+        for (const uid of moduleIds){
+            await this.getModule(uid);
+        }
+        for (const module of this.allModules){
+            await this.getModuleQuestions(module);
+            console.log(module);
+        }
     }
 
     // Accesses questions of module in firebase & recreates it locally
@@ -108,14 +110,8 @@ export class ModuleService {
 
 
     private getModule(uid: string) {
-        this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
+        return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
             this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
-        }).then(() => {
-            this.allModules.map((i) => {
-                this.getModuleQuestions(i);
-            });
-        }).then(() => {
-            console.log(this.allModules[this.allModules.length - 1]);
         });
     }
 
