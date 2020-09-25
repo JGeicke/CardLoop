@@ -141,7 +141,7 @@ export class ModuleService {
         return filteredModules;
     }
 
-    // checks if the given module is already importted by the user that is logged in
+    // checks if the given module is already imported by the user that is logged in
         isModuleImported(module: Module): boolean{
             for (const m of this.userModules) {
                 if (m.uid === module.uid) {
@@ -164,7 +164,7 @@ export class ModuleService {
             }
         }
 
-        // Stores progress of question in cloud firestore
+    // Stores progress of question in cloud firestore
     private setQuestionProgress(question: Question){
             const uid = this.authService.GetUID();
             if (uid !== '') {
@@ -174,34 +174,45 @@ export class ModuleService {
             }
         }
 
-        // Increment progress of question after right answer
-        async incrementQuestionProgress(question: Question){
-            const uid = this.authService.GetUID();
-            if (uid !== '') {
-                question.incrementProgress();
-                await this.setQuestionProgress(question);
-                this.recalcModuleProgess();
-            }
+    // Increment progress of question after right answer
+    async incrementQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            question.incrementProgress();
+            await this.setQuestionProgress(question);
+            this.recalcModuleProgess();
         }
+    }
 
-        // Reset progress of question after wrong answer to 0
-        async resetQuestionProgress(question: Question){
-            const uid = this.authService.GetUID();
-            if (uid !== '') {
-                question.resetProgress();
-                await this.setQuestionProgress(question);
-                this.recalcModuleProgess();
-            }
+    // Reset progress of question after wrong answer to 0
+    async resetQuestionProgress(question: Question){
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            question.resetProgress();
+            await this.setQuestionProgress(question);
+            this.recalcModuleProgess();
         }
+    }
 
-        // Calculates module progress again after changes to question progress
+    // Calculates module progress again after changes to question progress
     private recalcModuleProgess(){
-            for (const module of this.userModules){
-                module.calcProgress();
-            }
+        for (const module of this.userModules){
+            module.calcProgress();
         }
-    deleteLesson(currLesson) {
-        console.log(currLesson);
+    }
+
+    // Deletes module of user
+    async deleteLesson(currLesson: Module) {
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            const idx = this.userModules.indexOf(currLesson);
+            this.userModules.splice(idx, 1);
+            const resultArray = [];
+            this.userModules.forEach(module => resultArray.push(module.uid));
+            await this.firestore.collection('userModules').doc(uid).set({
+               modules: resultArray
+            });
+        }
     }
 
     importModule(module: Module){
