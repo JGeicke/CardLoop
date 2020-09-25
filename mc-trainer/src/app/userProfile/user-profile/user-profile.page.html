@@ -1,9 +1,66 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>userProfile</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-list class="list">
+        <ion-row>
+            <div class="picParent" (click)="startEdit()">
+                <img src="../../../assets/icons/boy.svg" class="boy" alt="ProfilePicture"
+                     srcset="../../../assets/icons/boy.svg">
+                <img src="../../../assets/icons/pencil(1).svg" class="edit" alt="editPencil"
+                     srcset="../../../assets/icons/pencil(1).svg" *ngIf="!editMode">
+                <img src="../../../assets/icons/save.svg" class="edit" alt="saveChanges"
+                     srcset="../../../assets/icons/save.svg" *ngIf="editMode">
+            </div>
+        </ion-row>
+        <div *ngIf="!loggedIn">
+            <ion-list-header class="item-text-wrap">
+                <ion-label class="list-header">It seems like, you don't have an account?</ion-label>
+            </ion-list-header>
+            <div class="dist-div">
+                <ion-label class="sign-up-link">
+                    If you want to get an account to save your progress, <a (click)="redirectToRegister()">click here</a>
+                </ion-label>
+            </div>
+        </div>
+        <div class="input-div">
+            <ion-item class="item" lines="none" *ngIf="hasWarning || hasAlert">
+                <ion-label class="alert">
+                    <div *ngIf="hasWarning">
+                        <ion-icon class="warning" name="warning"></ion-icon>
+                        <ion-text class="warning">{{warningText}}</ion-text>
+                    </div>
+                </ion-label>
+            </ion-item>
+            <div *ngIf="loggedIn && !editMode" >
+                <ion-item class="item item-form" lines="none">
+                    <ion-label position="floating" class="label">E-Mail</ion-label>
+                    <ion-input [(ngModel)]="userMail" name="email" type="text" class="form" disabled="true"></ion-input>
+                </ion-item>
+                <ion-item class="item item-form" lines="none">
+                    <ion-label position="floating" class="label">Password</ion-label>
+                    <ion-input [(ngModel)]="userPasswortDummy" name="password" type="password" class="form"
+                               [disabled]="true"></ion-input>
+                </ion-item>
+                <ion-label class="sign-up-link">
+                    Want do delete your Account? <a (click)="deleteAccount()">Click here</a>
+                </ion-label>
+            </div>
+            <div *ngIf="loggedIn && editMode">
+                <ion-item class="item item-form" lines="none">
+                    <ion-label position="floating" class="label">Old Password</ion-label>
+                    <ion-input [(ngModel)]="userOldPW" name="password" type="password" class="form"></ion-input>
+                </ion-item>
+                <ion-item class="item item-form" lines="none">
+                    <ion-label position="floating" class="label">New Password</ion-label>
+                    <ion-input [(ngModel)]="userPW" name="password" type="password" class="form"></ion-input>
+                </ion-item>
+                <ion-item class="item item-form" lines="none">
+                    <ion-label position="floating" class="label">Confirm Password</ion-label>
+                    <ion-input [(ngModel)]="userPW2" name="password" type="password" class="form"></ion-input>
+                </ion-item>
+            </div>
+        </div>
+    </ion-list>
 </ion-content>
+<app-navbar></app-navbar>
