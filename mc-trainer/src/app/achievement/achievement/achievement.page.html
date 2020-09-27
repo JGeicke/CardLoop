@@ -20,8 +20,8 @@
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col>
-                    <ion-item-divider></ion-item-divider>
+                <ion-col id="ach_item_divider_col" class="">
+                    <ion-item class="ach_item_divider ion-align-self-center"></ion-item>
                 </ion-col>
             </ion-row>
         </div>
@@ -30,7 +30,7 @@
         <div class="flexbox-container">
             <div class="flexbox-item" *ngFor="let achievement of this.achievements"
                  [ngStyle]="{'filter': this.currAchievement!=this.achievement && this.detailAchievement ? 'blur(2px)' : ''}">
-                <div *ngIf="this.isLoggedInSimulation() || this.isSuccessAchievement(this.achievement)">
+                <div *ngIf="this.isLoggedIn() || this.isSuccessAchievement(this.achievement)">
                     <a [routerLink]="" class="achievement" (click)="inspectAchievement(this.achievement)">
                         <div class="achievement_image">
                             <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="achievement achievement_locked"
-                     *ngIf="!this.isLoggedInSimulation() && !this.isSuccessAchievement(this.achievement)">
+                     *ngIf="!this.isLoggedIn() && !this.isSuccessAchievement(this.achievement)">
                     <div class="achievement_lock_icon">
                         <ion-img src="../../assets/ach_lock.svg"
                                  alt="a lock icon"></ion-img>
@@ -69,3 +69,5 @@
         </div>
     </div>
 </ion-content>
+
+<app-navbar></app-navbar>
