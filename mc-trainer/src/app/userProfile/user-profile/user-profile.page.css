@@ -1,0 +1,113 @@
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+.form, .item, .list, .button {
+  --ion-background-color: transparent;
+}
+
+.form {
+  border: 0;
+  color: white;
+}
+
+.list-header {
+  text-align: center;
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.25rem;
+  margin-bottom: 0.3rem;
+}
+
+.delete-acc-text {
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sign-up-link {
+  color: white;
+  font-size: 1.25rem;
+}
+.sign-up-link :link :hover :active :visited {
+  color: white;
+}
+
+a {
+  color: #cce6f4;
+  text-decoration: underline;
+}
+
+.list {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.warning {
+  color: red;
+}
+
+.dist-div {
+  margin-top: 2rem;
+}
+
+.success {
+  color: #8fe431;
+}
+
+.alert {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.boy {
+  height: 20rem;
+  position: absolute;
+  display: block;
+  display: flex;
+}
+
+.edit {
+  height: 5rem;
+  position: relative;
+  margin-top: 15.5rem;
+  margin-right: 1.5rem;
+  margin-left: 10rem;
+}
+
+.picParent {
+  margin-top: 1rem;
+  position: relative;
+  bottom: -2;
+  right: -2;
+}
+
+.item-form {
+  border-bottom: 1px solid white;
+  margin-bottom: 0.8rem;
+  color: white;
+  font-size: 1.6rem;
+}
+
+ion-item.item-has-focus > .label {
+  color: white;
+}
+
+.label {
+  text-align: center;
+}
+
+.input-div {
+  margin-top: 1rem;
+}
+
+/*# sourceMappingURL=user-profile.page.css.map */
