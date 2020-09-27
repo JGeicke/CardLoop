@@ -76,3 +76,20 @@ img{
   color: #CF5D5D !important;
   font-size: 2rem !important;
 }
+
+.center-chart{
+  position: relative;
+  bottom: 45%;
+}
+
+.center-chart > p {
+  font-size: 4rem;
+}
+
+.center-chart > p > span {
+  display: block;
+}
+
+.loop-row {
+  margin-top: -150px;
+}

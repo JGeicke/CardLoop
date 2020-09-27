@@ -8,7 +8,7 @@ import { single } from './data';
 })
 export class FeedbackPage implements OnInit {
   single: any[];
-  view: any[] = [700, 400];
+  view: any[] = [300, 300];
 
   // options
   gradient: boolean = false;
