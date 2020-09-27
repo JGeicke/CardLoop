@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {ImportModulesPageModule} from './import-modules/import-modules-page.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'logged-in',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -35,6 +36,26 @@ const routes: Routes = [
     path: 'achievement',
     loadChildren: () => import('./achievement/achievement/achievement.module').then( m => m.AchievementPageModule)
   },
+  {
+    path: 'navbar',
+    loadChildren: () => import('./navbar/navbar.module').then( m => m.NavbarPageModule)
+  },
+
+  {
+    path: 'import-modules',
+    loadChildren: () => import('./import-modules/import-modules-page.module').then( m => ImportModulesPageModule)
+  },
+  {
+    path: 'popover',
+    loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
+  },  {
+    path: 'feedback',
+    loadChildren: () => import('./feedback/feedback.module').then( m => m.FeedbackPageModule)
+  },
+
+
+
+
 ];
 
 @NgModule({

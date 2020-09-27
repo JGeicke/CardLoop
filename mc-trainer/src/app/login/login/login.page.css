@@ -1,0 +1,110 @@
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+.form, .item, .list, .button {
+  --ion-background-color: transparent;
+}
+
+.form {
+  border: 0;
+  color: white;
+}
+
+.list-header {
+  text-align: center;
+  color: #cce6f4;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.3rem;
+}
+
+.sign-up-text, .return-text {
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sign-up-link {
+  color: white;
+}
+.sign-up-link :link :hover :active :visited {
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+#forgot-password {
+  text-align: right;
+  color: white;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 0.3rem;
+  margin-left: 50%;
+  font-size: 0.7rem;
+  text-decoration: underline;
+}
+
+.list {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.warning {
+  color: red;
+}
+
+.success {
+  color: #8fe431;
+}
+
+.alert {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  height: 6.4rem;
+  position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.item-form {
+  border-bottom: 1px solid white;
+  margin-bottom: 0.8rem;
+}
+
+.label {
+  color: white;
+  text-align: center;
+}
+
+ion-item.item-has-focus > .label {
+  color: white;
+}
+
+.button {
+  margin-top: 2rem;
+  height: 2.4rem;
+  margin-bottom: 0.6rem;
+}
+
+/*# sourceMappingURL=login.page.css.map */

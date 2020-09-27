@@ -1,9 +1,70 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>moduleList</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar showCancelButton="never" [(ngModel)]="searchQuery" (ionCancel)="searchBool = false" (ionChange)="searchModules()"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding" [hidden]="searchQuery">
+
+    <ion-row class="ion-justify-content-center">
+        <h2 class="ion-text-center">Your Lessons</h2>
+    </ion-row>
+
+
+    <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
+        <!-- @TODO: On Click to Detail Page -->
+        <div class="module">
+            <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
+                 alt="arrow pointing right"
+                 srcset="../../../assets/icons/play-button-orange.svg">
+            <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
+                <span class="module-title">{{module.name}}</span>
+                <div class="white-box">
+                    <div>
+                        <progress-bar [progress]="module.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                        </progress-bar>
+                    </div>
+                    <div>
+                                <span class="tags">#{{module.tags[0]}} #{{module.tags[1]}}..
+                                    +{{module.tags.length - 2}} more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-row>
+
 
 </ion-content>
+<ion-content class="ion-padding" [hidden]="!searchQuery">
+
+    <ion-row class="ion-justify-content-center">
+        <h2 class="ion-text-center">{{filteredModules.length}} Lessons found</h2>
+    </ion-row>
+
+
+    <ion-row class="ion-justify-content-center" *ngFor="let module of this.filteredModules">
+        <!-- @TODO: On Click to Detail Page -->
+        <div class="module">
+            <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
+                 alt="arrow pointing right"
+                 srcset="../../../assets/icons/play-button-orange.svg">
+            <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
+                <span class="module-title">{{module.name}}</span>
+                <div class="white-box">
+                    <div>
+                        <progress-bar [progress]="module.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                        </progress-bar>
+                    </div>
+                    <div>
+                                <span class="tags">#{{module.tags[0]}} #{{module.tags[1]}}..
+                                    +{{module.tags.length - 2}} more</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-row>
+
+
+</ion-content>
+
+<app-navbar></app-navbar>

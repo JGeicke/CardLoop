@@ -1,0 +1,163 @@
+/**
+  General Overhead
+ */
+ion-content {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+/**
+  HEADERS
+ */
+ion-header {
+  --ion-background-color: #4ba3c3;
+}
+
+ion-toolbar {
+  --background: #4ba3c3;
+}
+
+ion-header > div {
+  background: #4ba3c3;
+  border: none;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0 0 0 0;
+}
+
+ion-icon[name=search-outline] {
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  --ionicon-stroke-width: 64px;
+  cursor: pointer;
+  padding-right: 2rem;
+}
+
+ion-searchbar {
+  padding: 3rem 1rem 2rem 1rem;
+  --background: #FFFFFF;
+  --border-radius: 12px;
+  opacity: 0.6;
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  font-variant: small-caps;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+h2 > span {
+  text-decoration: underline;
+}
+
+ion-icon[name=search-outline] {
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  --ionicon-stroke-width: 64px;
+  padding-left: 0.7rem;
+}
+
+/**
+  CONTENT
+ */
+/**
+  CATEGORY STYLING
+ */
+.category {
+  background-color: grey;
+  margin: 1rem;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1rem;
+  font-size: 0.9rem;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.category > img {
+  height: 4rem;
+}
+
+.cat1 {
+  background: #8D779D;
+}
+
+.cat2 {
+  background: #BA6363;
+}
+
+.cat3 {
+  background: #8EB6CC;
+}
+
+.cat4 {
+  background: #97BF78;
+}
+
+.cat5 {
+  background: #D1B963;
+}
+
+.cat6 {
+  background: #C29157;
+}
+
+/**
+  Recommendations Styling
+ */
+.recommendation {
+  background: #97BF78;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  color: #FFFFFF;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  width: 90%;
+  margin-bottom: 3rem;
+}
+
+.recommendation-title {
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.cards {
+  height: 1rem;
+  float: right;
+  padding-left: 0.3rem;
+}
+
+.tags {
+  font-size: 0.9rem;
+  display: inline-block;
+  padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+}
+
+.tag-row {
+  margin-top: -3rem;
+  border-top: 1px solid #FFFFFF;
+}
+
+.cloud-box {
+  padding: 1rem;
+  cursor: pointer;
+  float: right;
+  position: relative;
+  top: -3rem;
+  right: -1rem;
+}
+
+.cloud-down {
+  height: 3rem;
+  color: white;
+  float: right;
+  position: relative;
+}
+
+/*# sourceMappingURL=import-modules.page.css.map */

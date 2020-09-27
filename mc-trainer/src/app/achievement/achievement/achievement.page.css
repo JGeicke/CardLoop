@@ -1,0 +1,75 @@
+ion-content {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+.ach_item_divider {
+  align-self: flex-start;
+}
+
+.achievement_headline {
+  margin: 20px 0;
+}
+
+.content-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
+  max-width: 800px;
+}
+
+.flexbox-item {
+  position: relative;
+  max-height: 450px;
+  max-width: 300px;
+  min-height: 200px;
+  min-width: 150px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.achievement_image {
+  position: absolute;
+  z-index: 1;
+  max-height: 100px;
+  max-width: 100px;
+  min-height: 50px;
+  min-width: 50px;
+  bottom: 23%;
+  margin: 0 15%;
+}
+
+.achievement_lock_icon {
+  position: absolute;
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+}
+
+round-progress {
+  background-color: white;
+  border-radius: 100%;
+}
+
+.achievement_text {
+  font-size: 1.5em;
+  font-variant: small-caps;
+  padding: 0 10px;
+}
+
+.ach_num_div {
+  margin-top: 0.5em;
+}
+
+.achievement_locked {
+  filter: grayscale(50%);
+}
+
+/*# sourceMappingURL=achievement.page.css.map */

@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { LearnModePageRoutingModule } from './learn-mode-routing.module';
 
 import { LearnModePage } from './learn-mode.page';
+import {ProgressBarModule} from 'angular-progress-bar';
+import {NavbarPageModule} from '../../navbar/navbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LearnModePageRoutingModule
+    LearnModePageRoutingModule,
+    ProgressBarModule,
+    NavbarPageModule
   ],
   declarations: [LearnModePage]
 })
