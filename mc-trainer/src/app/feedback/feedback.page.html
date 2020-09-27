@@ -21,7 +21,31 @@
 
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
-            <ion-row class="ion-justify-content-around">
+            <ion-row class="ion-justify-content-center">
+                <div>
+                    <ngx-charts-pie-chart
+                            [view]="view"
+                            [scheme]="colorScheme"
+                            [results]="single"
+                            [gradient]="gradient"
+                            [legend]="showLegend"
+                            [legendPosition]="legendPosition"
+                            [labels]="showLabels"
+                            [doughnut]="isDoughnut"
+                            (select)="onSelect($event)"
+                            (activate)="onActivate($event)"
+                            (deactivate)="onDeactivate($event)"
+                    >
+                    </ngx-charts-pie-chart>
+                    <div class="center-chart">
+                        <p>15
+                            <span>Questions</span>
+                        </p>
+
+                    </div>
+                </div>
+            </ion-row>
+            <ion-row class="ion-justify-content-around loop-row">
                 <div>
                     <div class="loop-count">
                         <span class="green">5</span>

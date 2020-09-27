@@ -12,19 +12,23 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import {ProgressBarModule} from 'angular-progress-bar';
 import {NavbarPageModule} from './navbar/navbar.module';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
         AngularFireAuthModule,
         ProgressBarModule,
-        NavbarPageModule
+        NavbarPageModule,
+        NgxChartsModule
     ],
     providers: [
         StatusBar,

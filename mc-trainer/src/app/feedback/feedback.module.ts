@@ -9,6 +9,8 @@ import { FeedbackPageRoutingModule } from './feedback-routing.module';
 import { FeedbackPage } from './feedback.page';
 import {NavbarPageModule} from "../navbar/navbar.module";
 import {ProgressBarModule} from "angular-progress-bar";
+import {PieChartModule} from "@swimlane/ngx-charts";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
     imports: [
@@ -17,7 +19,9 @@ import {ProgressBarModule} from "angular-progress-bar";
         IonicModule,
         FeedbackPageRoutingModule,
         NavbarPageModule,
-        ProgressBarModule
+        ProgressBarModule,
+        PieChartModule,
+        NgxChartsModule,
     ],
   declarations: [FeedbackPage]
 })
