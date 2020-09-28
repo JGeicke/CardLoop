@@ -115,7 +115,7 @@ export class ModuleService {
         });
     }
 
-        // Accesses module with uid in firebase & recreates it locally
+    // Accesses module with uid in firebase & recreates it locally
     private getUserModule(uid: string) {
         return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
             this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
