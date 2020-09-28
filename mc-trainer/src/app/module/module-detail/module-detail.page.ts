@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModuleService} from "../../../services/module.service";
 
 @Component({
   selector: 'app-module-detail',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModuleDetailPage implements OnInit {
 
-  constructor() { }
+  private picked = 'questions';
+  questions_arr = [1, 2, 3, 4, 5, 6];
+
+  constructor(private moduleService: ModuleService) { }
 
   ngOnInit() {
   }
 
+  segmentChanged($event: any) {
+    console.log('segment changed triggered');
+  }
+
+  playLesson(module: any) {
+    console.log('playlesson called')
+  }
 }

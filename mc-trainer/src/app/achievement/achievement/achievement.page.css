@@ -1,9 +1,13 @@
-ion-content {
+ion-content:not(.ach_item_divider) {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
 .ach_item_divider {
-  align-self: flex-start;
+  margin: 0 20px;
+  --ion-item-background: white;
+  --ion-border-color: white;
+  height: 6%;
+  opacity: 10%;
 }
 
 .achievement_headline {
@@ -23,6 +27,7 @@ ion-content {
   align-items: flex-start;
   align-content: flex-start;
   max-width: 800px;
+  padding: 10px;
 }
 
 .flexbox-item {
@@ -49,8 +54,8 @@ ion-content {
 .achievement_lock_icon {
   position: absolute;
   z-index: 1;
-  align-self: center;
-  justify-self: center;
+  top: 11.5%;
+  left: 14%;
 }
 
 round-progress {
