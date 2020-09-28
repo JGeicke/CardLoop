@@ -1,18 +1,13 @@
 <ion-header>
     <ion-toolbar>
-        <ion-searchbar #search [hidden]="!searchBool" showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()" (ionChange)="searchModules()"></ion-searchbar>
+        <ion-searchbar #search showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()" (ionChange)="searchModules()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" [hidden]="this.searchBool">
 
     <ion-row class="ion-justify-content-center">
-        <h2><span (click)="focusButton()">Search
+        <h2><span (click)="focusButton()">Find a Lesson
                 <ion-icon name="search-outline"></ion-icon></span>
-        <br>
-        or
-
-        <br>
-        pick a topic
         </h2>
 
     </ion-row>
@@ -26,8 +21,8 @@
                     </div>
                     <div class="cloud-box">
                         <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)" (click)="importClicked(lesson)"
-                             src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
-                             srcset="../../assets/icons/cloud-download.svg">
+                             src="../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
+                             srcset="../../assets/icons/cloud-download-white-bg.svg">
                         <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)" (click)="playClicked(lesson)"
                              src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
                              srcset="../../assets/icons/play-button-orange.svg">
@@ -113,7 +108,7 @@
 <ion-content class="ion-padding" [hidden]="!this.searchBool">
 
     <ion-row class="ion-justify-content-center">
-        <h2>{{filteredModule.length}} Lessons found
+        <h2>{{filteredModule.length}} Lesson(s) found
         </h2>
     </ion-row>
 
@@ -126,8 +121,8 @@
                     </div>
                     <div class="cloud-box">
                         <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)" (click)="importClicked(lesson)"
-                             src="../../assets/icons/cloud-download.svg" alt="cloud with downarrow"
-                             srcset="../../assets/icons/cloud-download.svg">
+                             src="../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
+                             srcset="../../assets/icons/cloud-download-white-bg.svg">
                         <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)" (click)="playClicked(lesson)"
                              src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
                              srcset="../../assets/icons/play-button-orange.svg">

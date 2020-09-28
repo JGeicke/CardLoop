@@ -6,38 +6,43 @@
                  srcset="../../../assets/icons/register.svg">
         </a>
     </ion-row>
-    <ion-grid>
+    <ion-grid style="display: flex; flex-flow: column;">
         <ion-row class="ion-justify-content-center">
             <img class="logo" src="../../../assets/img/logo-simple-ring.svg"
                  alt="logo: 4 cards with a loop around"
                  srcset="../../../assets/img/logo-simple-ring.svg">
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <h2 class="ion-text-center">Welcome Back, <br>Tina!</h2>
+            <h2 class="ion-text-center">Welcome Back!</h2>
         </ion-row>
-        <ion-row class="ion-justify-content-center" *ngIf="authService.isLoggedIn">
-            <div class="ion-margin-bottom">
-                <h3>Pick up where you left</h3>
+        <ion-row style="flex-grow: 1;" class="ion-justify-content-center" *ngIf="authService.isLoggedIn">
+            <ion-col>
+                <div class="ion-margin-bottom">
+                    <h3>Pick up where you left</h3>
 
-                <div class="module" (click)="lessonDetails()">
-                    <img (click)="playLesson(this.moduleService.recentlyPlayed)" src="../../../assets/icons/play-button-orange.svg"
-                         alt="arrow pointing right"
-                         srcset="../../../assets/icons/play-button-orange.svg">
-                    <div class="inner-module-wrapper">
-                        <span class="module-title">{{this.moduleService.recentlyPlayed.name}}</span>
-                        <div class="white-box">
-                            <div>
-                                <progress-bar [progress]="this.moduleService.recentlyPlayed.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
-                                </progress-bar>
-                            </div>
-                            <div>
-                                <span class="tags">#{{this.moduleService.recentlyPlayed.tags[0]}} #{{this.moduleService.recentlyPlayed.tags[1]}}..
+                    <div class="module" (click)="lessonDetails()">
+                        <img (click)="playLesson(this.moduleService.recentlyPlayed)"
+                             src="../../../assets/icons/play-button-orange.svg"
+                             alt="arrow pointing right"
+                             srcset="../../../assets/icons/play-button-orange.svg">
+                        <div class="inner-module-wrapper">
+                            <p class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
+                            <div class="white-box">
+                                <div>
+                                    <progress-bar [progress]="this.moduleService.recentlyPlayed.progress"
+                                                  [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                    </progress-bar>
+                                </div>
+                                <div>
+                                <span class="tags">#{{this.moduleService.recentlyPlayed.tags[0]}}
+                                    #{{this.moduleService.recentlyPlayed.tags[1]}}..
                                     +{{this.moduleService.recentlyPlayed.tags.length - 2}} more</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
             <div class="ion-margin-bottom">

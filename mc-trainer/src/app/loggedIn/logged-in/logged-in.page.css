@@ -69,11 +69,16 @@ progress-bar {
   border-radius: 18px;
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  width: 100%;
 }
 
 .recommendation .ion-justify-content-between {
   border-bottom: 1px solid #FFFFFF;
   padding-bottom: 0.5rem;
+}
+
+.recommendation-title {
+  cursor: pointer;
 }
 
 .recommendation img {

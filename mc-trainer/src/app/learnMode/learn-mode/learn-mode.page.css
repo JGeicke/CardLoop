@@ -10,6 +10,7 @@ ion-content {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   width: 100%;
+  cursor: pointer;
 }
 
 .question-box p {
@@ -79,6 +80,7 @@ ion-button {
 
 img {
   height: 1.8rem;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=learn-mode.page.css.map */
