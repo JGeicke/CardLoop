@@ -2,10 +2,14 @@
 </ion-header>
 
 <ion-content>
+    <ion-row class="ion-justify-content-end">
+        <img class="logout" (click)="this.authService.SignOut()" src="../../../assets/icons/logout.svg" alt="ProfilePicture"
+             srcset="../../../assets/icons/logout.svg">
+    </ion-row>
     <ion-list class="list">
         <ion-row>
             <div class="picParent" (click)="startEdit()">
-                <img src="../../../assets/icons/boy.svg" class="boy" alt="ProfilePicture"
+                <img src="../../../assets/icons/boy.svg" class="boy" alt="Logout Button"
                      srcset="../../../assets/icons/boy.svg">
                 <img src="../../../assets/icons/pencil(1).svg" class="edit" alt="editPencil"
                      srcset="../../../assets/icons/pencil(1).svg" *ngIf="!editMode">

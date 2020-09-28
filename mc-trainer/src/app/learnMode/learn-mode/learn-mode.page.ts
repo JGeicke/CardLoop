@@ -23,6 +23,8 @@ export class LearnModePage implements OnInit {
     private multipleChoise = false;
     private selectedAnswers: boolean [] = [false, false, false, false, false, false, false];
     private rightAnswers: boolean[] = [false, false, false, false, false, false, false];
+    private chosenAnswer: number;
+    private answered = false;
     private progress;
     private growth;
 
@@ -123,6 +125,7 @@ export class LearnModePage implements OnInit {
     }
 
     confirm() {
+        this.answered = !this.answered;
         if (this.correctAnswers() && !this.confiremd){
             // selected answers were correct
             this.statistic.session.addCorrectlyAnsweredQuestion(this.question);

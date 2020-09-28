@@ -6,6 +6,12 @@
   --ion-background-color: transparent;
 }
 
+.logout {
+  height: 2.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
 .form {
   border: 0;
   color: white;

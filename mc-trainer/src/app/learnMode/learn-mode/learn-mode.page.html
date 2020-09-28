@@ -11,16 +11,26 @@
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
             <ion-row class="ion-justify-content-center" *ngFor="let answer of this.question.answers; trackBy: track; let i=index">
-                    <div class="answer-box" [class.chosen-box]="selectedAnswers[i]" [class.wrong]="!rightAnswers[i] && confiremd" [class.right]="rightAnswers[i] && confiremd" (click)="choose(i)" [style.background-color]="answer.BackgroundColour">
+                    <div class="answer-box"
+                         [class.chosen-box]="selectedAnswers[i]"
+                         [class.wrong]="!rightAnswers[i] && confiremd"
+                         [class.right]="rightAnswers[i] && confiremd"
+                         (click)="selectedAnswers[i] = !selectedAnswers[i]">
                         <span>{{answer}}</span>
                     </div>
             </ion-row>
 
         </div>
     </ion-row>
-    <ion-row *ngIf="multipleChoise">
-        <div class="confirm" (click)="confirm()" >
+    <ion-row >
+        <div *ngIf="multipleChoise && !answered" class="confirm" (click)="confirm()" >
             <span>Confirm</span>
+        </div>
+        <div *ngIf="!multipleChoise && !answered" class="confirm" (click)="choose(chosenAnswer)" >
+            <span>Confirm</span>
+        </div>
+        <div *ngIf="answered" class="confirm" (click)="initNextQuestion()" >
+            <span>Next</span>
         </div>
     </ion-row>
 </ion-content>
