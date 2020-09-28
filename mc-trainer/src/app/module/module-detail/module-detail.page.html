@@ -76,7 +76,20 @@
             </ion-row>
         </div>
         <div *ngSwitchCase="'questions'">
-            <p>QUESTIONS SECTION</p>
+            <ion-row class="ion-justify-content-center">
+                <div class="questions-content">
+                    <h4>Questions</h4>
+                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing" *ngFor="let question of questions_arr; let i=index">
+                        <div class="answer-box">
+                            <span>Was ist die Hauptstadt von Kamerun?</span>
+<!--                            <span>{{question}}</span>-->
+                        </div>
+                        <div class="question-loops" [ngClass]="{'red': i < 3, 'yellow': i > 2 && i < 5, 'green': i > 4}">
+                            <span>{{i}}/6</span>
+                        </div>
+                    </ion-row>
+                </div>
+            </ion-row>
         </div>
     </div>
 </ion-content>

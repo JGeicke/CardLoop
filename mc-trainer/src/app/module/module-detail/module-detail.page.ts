@@ -8,7 +8,8 @@ import {ModuleService} from "../../../services/module.service";
 })
 export class ModuleDetailPage implements OnInit {
 
-  private picked = 'general';
+  private picked = 'questions';
+  questions_arr = [1, 2, 3, 4, 5, 6];
 
   constructor(private moduleService: ModuleService) { }
 
