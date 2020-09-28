@@ -5,15 +5,15 @@
 
     <div class="module">
         <div class="inner-module-wrapper">
-            <span class="module-title">Mobile Application Dev</span>
+            <span class="module-title">{{moduleService.currLesson.name}}</span>
             <div class="white-box">
                 <div>
-                    <progress-bar [progress]="0" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                    <progress-bar [progress]="moduleService.currLesson.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
                     </progress-bar>
                 </div>
                 <div>
-                                <span class="tags">#sometag #sometag..
-                                    +2 more</span>
+                                <span class="tags">#{{moduleService.currLesson.tags[0]}} #{{moduleService.currLesson.tags[1]}}..
+                                    +{{this.moduleService.currLesson.tags.length - 2}} more</span>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                     <ngx-charts-pie-chart
                             [view]="view"
                             [scheme]="colorScheme"
-                            [results]="single"
+                            [results]="data"
                             [gradient]="gradient"
                             [legend]="showLegend"
                             [legendPosition]="legendPosition"
@@ -38,7 +38,7 @@
                     >
                     </ngx-charts-pie-chart>
                     <div class="center-chart">
-                        <p>15
+                        <p>{{questionsInSession}}
                             <span>Questions</span>
                         </p>
 
@@ -48,19 +48,19 @@
             <ion-row class="ion-justify-content-around loop-row">
                 <div>
                     <div class="loop-count">
-                        <span class="green">5</span>
+                        <span class="green">{{learnedQuestions}}</span>
                     </div>
                     <span>Learned</span>
                 </div>
                 <div>
                     <div class="loop-count">
-                        <span class="yellow">5</span>
+                        <span class="yellow">{{halfwayQuestions}}</span>
                     </div>
                     <span>Halfway</span>
                 </div>
                 <div>
                     <div class="loop-count">
-                        <span class="red">5</span>
+                        <span class="red">{{unsureQuestions}}</span>
                     </div>
                     <span>Unsure</span>
                 </div>
@@ -71,7 +71,7 @@
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
             <ion-row class="ion-justify-content-around">
-                <div>
+                <div (click)="this.router.navigate(['module-list'])">
                     <div>
                         <img src="../../assets/icons/lessons.svg" alt="little book"
                              srcset="../../assets/icons/lessons.svg">

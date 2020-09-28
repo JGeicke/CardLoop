@@ -19,8 +19,15 @@ export class Session {
         this.rightQuestions.push(question);
     }
 
+    /** Returns an array [unsure questions, halfway questions, learned questions] of this session
+     * @return: number[]
+     */
     generateSessionStats(): number[]{
         const res = new Array<number>(3);
+        // init array
+        for (let i = 0; i < res.length; i++){
+            res[i] = 0;
+        }
         // iterate correctly answered questions
         for (const question of this.rightQuestions){
             if (question.progress <= this.unsureThreshold){
@@ -33,6 +40,15 @@ export class Session {
                 res[2]++;
             }
         }
+
+        // iterate wrongly answered questions
+        for (const question of this.wrongQuestions){
+            res[0]++;
+        }
         return res;
+    }
+
+    getQuestionCount(): number{
+        return this.rightQuestions.length + this.wrongQuestions.length;
     }
 }

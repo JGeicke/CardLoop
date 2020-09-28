@@ -17,7 +17,6 @@ export class ModuleService {
     allModules: Module[] = [];
     public recentlyPlayed: Module;
     public currLesson: Module;
-    public lessons = [];
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
@@ -130,7 +129,7 @@ export class ModuleService {
             if (module.name.toLowerCase().includes(lowerCaseQuery)){
                 filteredModules.push(module);
             } else {
-                const tags = module.tags.filter(tag => tag.includes(lowerCaseQuery));
+                const tags = module.tags.filter(tag => tag.toLowerCase().includes(lowerCaseQuery));
                 if (tags.length > 0){
                     filteredModules.push(module);
                 }
