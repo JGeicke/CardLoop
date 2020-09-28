@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ModuleService} from '../../services/module.service';
+import {Router} from '@angular/router';
 import { single } from './data';
 
 @Component({
@@ -29,12 +31,17 @@ export class FeedbackPage implements OnInit {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
+  constructor(private moduleService: ModuleService, private router: Router) { }
   onActivate(data): void {
     console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  restartLesson(){
+    this.router.navigate(['learn-mode']);
   }
 
   ngOnInit(): void {
