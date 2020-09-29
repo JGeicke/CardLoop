@@ -77,11 +77,11 @@
             <ion-row class="ion-justify-content-center">
                 <div class="questions-content">
                     <h4>Questions</h4>
-                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing" *ngFor="let question of this.moduleService.currLesson.questions; let i=index">
+                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing" *ngFor="let question of this.moduleService.currLesson.questions">
                         <div class="answer-box">
                             <span>{{question.question}}</span>
                         </div>
-                        <div class="question-loops" [ngClass]="{'red': i < 3, 'yellow': i > 2 && i < 5, 'green': i > 4}">
+                        <div class="question-loops" [ngClass]="{'red': question.progress < 3, 'yellow': question.progress > 2 && question.progress < 5, 'green': question.progress > 4}">
                             <span>{{question.progress}}/6</span>
                         </div>
                     </ion-row>
