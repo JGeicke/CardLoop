@@ -20,7 +20,7 @@
                 <div class="ion-margin-bottom">
                     <h3>Pick up where you left</h3>
 
-                    <div class="module" (click)="lessonDetails()">
+                    <div class="module" (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)">
                         <img (click)="playLesson(this.moduleService.recentlyPlayed)"
                              src="../../../assets/icons/play-button-orange.svg"
                              alt="arrow pointing right"

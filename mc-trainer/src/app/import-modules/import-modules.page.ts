@@ -52,9 +52,4 @@ export class ImportModulesPage implements OnInit {
         this.router.navigate(['learn-mode']);
     }
 
-    moduleDetailClicked(module: Module){
-        console.log('lesson deatil clicked');
-        // TODO: redirect to lesson Deatil page
-    }
-
 }

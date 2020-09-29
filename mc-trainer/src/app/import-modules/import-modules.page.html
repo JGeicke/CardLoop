@@ -16,7 +16,7 @@
         <ion-col>
             <div class="recommendation">
                 <ion-row class="ion-justify-content-between">
-                    <div class="recommendation-title" (click)="moduleDetailClicked(lesson)">
+                    <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">
                         <span>{{lesson.name}}</span>
                     </div>
                     <div class="cloud-box">
@@ -33,7 +33,7 @@
                             {{lesson.tags.length - 1}} more
                         </span>
                     <span class="tags">
-                    {{lesson.cards}}
+                    {{lesson.tags.length}}
                         <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
                              srcset="../../assets/icons/sd-card-solid.svg">
                 </span>
@@ -116,7 +116,7 @@
         <ion-col>
             <div class="recommendation">
                 <ion-row class="ion-justify-content-between">
-                    <div class="recommendation-title" (click)="moduleDetailClicked(lesson)">
+                    <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">
                         <span>{{lesson.name}}</span>
                     </div>
                     <div class="cloud-box">
@@ -133,7 +133,7 @@
                             {{lesson.tags.length - 1}} more
                         </span>
                     <span class="tags">
-                    {{lesson.cards}}
+                    {{lesson.tags.length}}
                         <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
                              srcset="../../assets/icons/sd-card-solid.svg">
                 </span>

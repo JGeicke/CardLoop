@@ -12,12 +12,11 @@
 
 
     <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
-        <!-- @TODO: On Click to Detail Page -->
         <div class="module">
             <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
-            <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
+            <div class="inner-module-wrapper" (click)="popover($event, module); this.moduleService.currLesson = module">
                 <span class="module-title">{{module.name}}</span>
                 <div class="white-box">
                     <div>
@@ -48,7 +47,7 @@
             <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
-            <div class="inner-module-wrapper" (click)="popover($event); this.moduleService.currLesson = module">
+            <div class="inner-module-wrapper" (click)="popover($event, module); this.moduleService.currLesson = module">
                 <span class="module-title">{{module.name}}</span>
                 <div class="white-box">
                     <div>

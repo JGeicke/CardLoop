@@ -40,12 +40,13 @@ export class ModuleListPage implements OnInit {
       this.router.navigate(['learn-mode']);
   }
 
-    async popover(ev: any) {
+    async popover(ev: any, module: Module) {
         const popover = await this.popoverController.create({
             component: PopoverPage,
             cssClass: 'my-custom-class',
             event: ev,
-            translucent: true
+            translucent: true,
+            componentProps: module
         });
         return await popover.present();
     }
