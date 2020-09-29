@@ -69,6 +69,7 @@ export class LearnModePage implements OnInit {
 
     initNextQuestion() {
         if (this.nextQuestion !== this.maxQuestion) {
+            this.answered = false;
             this.changeProgress();
             this.selectedAnswers = [false, false, false, false, false, false, false];
             this.rightAnswers = [false, false, false, false, false, false, false];

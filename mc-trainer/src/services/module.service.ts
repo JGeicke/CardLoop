@@ -121,6 +121,12 @@ export class ModuleService {
         });
     }
 
+    getModuleDetails(module: Module) {
+        this.currLesson = module;
+        localStorage.setItem('currLesson', JSON.stringify(this.currLesson));
+        this.router.navigate(['module-detail']);
+    }
+
 
     searchModules(modules: Module[], query: string): Module[]{
         const filteredModules = [];
@@ -149,7 +155,7 @@ export class ModuleService {
         }
 
     // Access progress of questions in firebase to display in view
-    private getQuestionProgress(question: Question){
+    getQuestionProgress(question: Question){
             const uid = this.authService.GetUID();
             if (uid !== '') {
                 return this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).get().toPromise()
