@@ -47,7 +47,7 @@
                             </div>
                             <div class="yellow">
                                 <div class="loop-count">
-                                    <span>{{this.unsure}}</span>
+                                    <span>{{this.halfway}}</span>
                                 </div>
                                 <span>Halfway</span>
                             </div>
@@ -63,7 +63,7 @@
             </ion-row>
             <ion-row class="ion-justify-content-center">
                 <div class="incitement-box">
-                    <img (click)="playLesson(this.moduleService.currLesson)"
+                    <img (click)="this.resetModuleProgress()"
                          src="../../../assets/icons/restart-lesson.svg"
                          alt="arrow pointing right"
                          srcset="../../../assets/icons/restart-lesson.svg">

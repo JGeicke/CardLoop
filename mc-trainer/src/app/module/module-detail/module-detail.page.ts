@@ -12,23 +12,35 @@ export class ModuleDetailPage implements OnInit {
   private picked = 'general';
   questions_arr = [1, 2, 3, 4, 5, 6];
   private currLessonJSON: any;
-  private unsure = 0;
-  private halfway = 0;
-  private learned = 0;
+  private unsure: number;
+  private halfway: number;
+  private learned: number;
 
   constructor(private moduleService: ModuleService, private router: Router) { }
 
   ngOnInit() {
-    this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
+    // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
+    this.unsure = 0;
+    this.halfway = 0;
+    this.learned = 0;
     this.calcQuestionsProgress();
+
   }
 
   segmentChanged($event: any) {
     console.log('segment changed triggered');
   }
 
+  resetModuleProgress() {
+    console.log('resetModuleProgress called')
+    for (const question of this.moduleService.currLesson.questions) {
+      this.moduleService.resetQuestionProgress(question).then(r => question);
+    }
+  }
+
   calcQuestionsProgress() {
     for (const question of this.moduleService.currLesson.questions) {
+      console.log(question.progress);
       if (question.progress < 3) {
         this.unsure += question.progress;
       }
