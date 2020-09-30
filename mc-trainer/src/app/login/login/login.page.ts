@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
-import {IonInput} from '@ionic/angular';
+import {IonInput, ViewWillEnter} from '@ionic/angular';
 import {ModuleService} from '../../../services/module.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {ModuleService} from '../../../services/module.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, ViewWillEnter {
 
   private emailInput = '';
   private passwordInput = '';
@@ -35,11 +35,17 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('user')) {
+    if (localStorage.getItem('user') !== 'null') {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.emailInput = this.user.email;
       this.passwordInput = this.user.password;
       this.saveUser = true;
+    }
+  }
+
+  ionViewWillEnter(): void {
+    if (localStorage.getItem('user') === null) {
+      this.saveUser = false;
     }
   }
 
