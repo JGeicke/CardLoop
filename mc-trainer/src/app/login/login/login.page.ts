@@ -20,6 +20,8 @@ export class LoginPage implements OnInit {
   private hasWarning = false;
   private hasAlert = false;
   private alertText: string;
+  private saveUser = false;
+  private user: any;
 
   @ViewChild('loginMail')
   private loginEmailInput: IonInput;
@@ -29,6 +31,15 @@ export class LoginPage implements OnInit {
   constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) {
     if (this.authService.registerTriggered){
       this.toggleLogin();
+    }
+  }
+
+  ngOnInit() {
+    if (localStorage.getItem('user')) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.emailInput = this.user.email;
+      this.passwordInput = this.user.password;
+      this.saveUser = true;
     }
   }
 
@@ -96,6 +107,9 @@ export class LoginPage implements OnInit {
           }
           // successful login
         } else {
+          if (this.saveUser) {
+            this.authService.rememberUser();
+          }
           this.moduleService.getUserModules().then((r) => {
             this.router.navigate(['logged-in']);
           });
@@ -153,8 +167,6 @@ export class LoginPage implements OnInit {
   // Checks if password matches password confirmation
   private matchPassword(): boolean{
     return this.passwordInput === this.passwordConfirmationInput;
-  }
-  ngOnInit() {
   }
 
 }

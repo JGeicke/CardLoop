@@ -61,7 +61,10 @@ export class AuthService {
 
     private SetUser(user, password) {
         this.user = new User(user.uid, user.email, password);
-        console.log(this.user);
+    }
+
+    rememberUser() {
+        localStorage.setItem('user', JSON.stringify(this.user));
     }
 
     checkPassword(password: string): boolean {
