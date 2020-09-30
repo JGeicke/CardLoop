@@ -6,6 +6,12 @@
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 h2 {
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -14,6 +20,11 @@ h2 {
   font-variant: small-caps;
   color: #ffffff;
   margin: 2rem 0;
+}
+
+.gobackarrow {
+  height: 2rem;
+  float: left;
 }
 
  // SEGMENT BUTTON STYLING

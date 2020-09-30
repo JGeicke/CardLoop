@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {ModuleService} from "../../../services/module.service";
 import {Router} from "@angular/router";
-import {ViewWillEnter} from "@ionic/angular";
+import {NavController, ViewWillEnter} from "@ionic/angular";
 
 @Component({
   selector: 'app-module-detail',
@@ -17,7 +17,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
   private halfway: number;
   private learned: number;
 
-  constructor(private moduleService: ModuleService, private router: Router) { }
+  constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController) { }
 
   ngOnInit() {
     // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));

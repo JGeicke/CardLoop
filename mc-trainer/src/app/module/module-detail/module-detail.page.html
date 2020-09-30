@@ -1,5 +1,9 @@
 <ion-content class="ion-padding">
-    <h2 class="ion-text-center">{{this.moduleService.currLesson.name}}</h2>
+        <img (click)="this.navCtrl.pop();" class="gobackarrow"
+             src="../../../assets/icons/goback-arrow-topnav.svg"
+             alt="arrow pointing right"
+                 srcset="../../../assets/icons/goback-arrow-topnav.svg">
+            <h2 class="ion-text-center">{{this.moduleService.currLesson.name}}</h2>
     <ion-row class="ion-justify-content-center">
         <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="picked">
             <ion-segment-button value="general">
@@ -13,13 +17,22 @@
     <div [ngSwitch]="picked">
         <div *ngSwitchCase="'general'">
             <ion-row class="ion-justify-content-center">
-                <div class="incitement-box">
+                <div *ngIf="this.moduleService.isModuleImported(this.moduleService.currLesson)" class="incitement-box">
                     <img (click)="playLesson(this.moduleService.currLesson)"
-                          src="../../../assets/icons/play-button-orange.svg"
-                          alt="arrow pointing right"
-                          srcset="../../../assets/icons/play-button-orange.svg">
+                         src="../../../assets/icons/play-button-orange.svg"
+                         alt="arrow pointing right"
+                         srcset="../../../assets/icons/play-button-orange.svg">
                     <div class="incitement">
                         <p class="incitement-text">Jump right in!</p>
+                    </div>
+                </div>
+                <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson)" class="incitement-box">
+                    <img (click)="playLesson(this.moduleService.currLesson)"
+                         src="../../../assets/icons/cloud-download-orange-circle.svg"
+                         alt="arrow pointing right"
+                         srcset="../../../assets/icons/cloud-download-orange-circle.svg">
+                    <div class="incitement">
+                        <p class="incitement-text">Get it now!</p>
                     </div>
                 </div>
             </ion-row>
@@ -35,7 +48,8 @@
                     <h4>General Progress</h4>
                     <div class="content-box">
                         <div>
-                            <progress-bar [progress]="this.moduleService.currLesson.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                            <progress-bar [progress]="this.moduleService.currLesson.progress"
+                                          [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
                             </progress-bar>
                         </div>
                         <ion-row class="ion-justify-content-around loop-row">
@@ -77,11 +91,13 @@
             <ion-row class="ion-justify-content-center">
                 <div class="questions-content">
                     <h4>Questions</h4>
-                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing" *ngFor="let question of this.moduleService.currLesson.questions">
+                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing"
+                             *ngFor="let question of this.moduleService.currLesson.questions">
                         <div class="answer-box">
                             <span>{{question.question}}</span>
                         </div>
-                        <div class="question-loops" [ngClass]="{'red': question.progress < 3, 'yellow': question.progress > 2 && question.progress < 5, 'green': question.progress > 4}">
+                        <div class="question-loops"
+                             [ngClass]="{'red': question.progress < 3, 'yellow': question.progress > 2 && question.progress < 5, 'green': question.progress > 4}">
                             <span>{{question.progress}}/6</span>
                         </div>
                     </ion-row>
