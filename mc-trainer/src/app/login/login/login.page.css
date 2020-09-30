@@ -115,7 +115,7 @@ ion-checkbox {
 }
 
 ion-label {
-  color: white;
+  --color: white !important;
 }
 
 .button {

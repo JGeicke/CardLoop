@@ -49,6 +49,8 @@ export class AuthService {
     SignOut() {
         this.user = null;
         this.isLoggedIn = false;
+        localStorage.setItem('user', null);
+        this.router.navigate(['login']);
     }
 
     GetUID(): string {
