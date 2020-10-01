@@ -12,35 +12,41 @@ import {PopoverPage} from "../../popover/popover.page";
 })
 export class ModuleDetailPage implements OnInit, ViewWillEnter {
 
-  private picked = 'general';
-  questions_arr = [1, 2, 3, 4, 5, 6];
-  private currLessonJSON: any;
-  private unsure: number;
-  private halfway: number;
-  private learned: number;
+    private picked = 'general';
+    questions_arr = [1, 2, 3, 4, 5, 6];
+    private currLessonJSON: any;
+    private unsure: number;
+    private halfway: number;
+    private learned: number;
 
-  constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController) { }
+    constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController) {
+    }
 
-  ngOnInit() {
-    // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
-    this.calcQuestionsProgress();
-  }
+    ngOnInit() {
+        // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
+        this.calcQuestionsProgress();
+    }
 
-  ionViewWillEnter() {
-    // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
-    this.calcQuestionsProgress();
-  }
+    ionViewWillEnter() {
+        // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
+        this.calcQuestionsProgress();
+    }
 
-  async popover(ev: any, qix: number) {
-    const popover = await this.popoverController.create({
-      component: PopoverPage,
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true,
-      componentProps: {from: 'module-detail', qindex: qix}
-    });
-    return await popover.present();
-  }
+    /**
+     * TODO Comment
+     * @param ev
+     * @param qix
+     */
+    async popover(ev: any, qix: number) {
+        const popover = await this.popoverController.create({
+            component: PopoverPage,
+            cssClass: 'my-custom-class',
+            event: ev,
+            translucent: true,
+            componentProps: {from: 'module-detail', qindex: qix}
+        });
+        return await popover.present();
+    }
 
     /**
      * TODO
@@ -60,25 +66,26 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
         }
         this.calcQuestionsProgress();
     }
-  /**
-   * calculates the progress for all Questions and summs them up
-   */
-  calcQuestionsProgress() {
-    this.unsure = 0;
-    this.halfway = 0;
-    this.learned = 0;
-    for (const question of this.moduleService.currLesson.questions) {
-      if (question.progress < 3) {
-        this.unsure++;
-      }
-      if(question.progress > 2 && question.progress < 5) {
-        this.halfway++;
-      }
-      if (question.progress > 4) {
-        this.learned++;
-      }
+
+    /**
+     * calculates the progress for all Questions and summs them up
+     */
+    calcQuestionsProgress() {
+        this.unsure = 0;
+        this.halfway = 0;
+        this.learned = 0;
+        for (const question of this.moduleService.currLesson.questions) {
+            if (question.progress < 3) {
+                this.unsure++;
+            }
+            if (question.progress > 2 && question.progress < 5) {
+                this.halfway++;
+            }
+            if (question.progress > 4) {
+                this.learned++;
+            }
+        }
     }
-  }
 
     /**
      * redirect to learn-mode to learn a module
