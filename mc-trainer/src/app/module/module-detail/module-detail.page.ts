@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {NavController, PopoverController, ViewWillEnter} from "@ionic/angular";
 import {Module} from "../../../services/module.model";
 import {PopoverPage} from "../../popover/popover.page";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'app-module-detail',
@@ -19,7 +20,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     private halfway: number;
     private learned: number;
 
-    constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController) {
+    constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController, private auth: AuthService) {
     }
 
     ngOnInit() {
@@ -95,5 +96,13 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
         this.moduleService.currLesson = module;
         this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
+    }
+
+    /**
+     * redirect the view to the login page directly to the registration
+     */
+    redirectToRegister() {
+        this.auth.registerTriggered = true;
+        this.router.navigate(['login']);
     }
 }

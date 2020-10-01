@@ -26,8 +26,17 @@
                         <p class="incitement-text">Jump right in!</p>
                     </div>
                 </div>
-                <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson)" class="incitement-box">
+                <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson) && this.auth.isLoggedIn" class="incitement-box">
                     <img (click)="playLesson(this.moduleService.currLesson)"
+                         src="../../../assets/icons/cloud-download-orange-circle.svg"
+                         alt="arrow pointing right"
+                         srcset="../../../assets/icons/cloud-download-orange-circle.svg">
+                    <div class="incitement">
+                        <p class="incitement-text">Get it now!</p>
+                    </div>
+                </div>
+                <div *ngIf="!this.auth.isLoggedIn" class="incitement-box">
+                    <img (click)="this.redirectToRegister()"
                          src="../../../assets/icons/cloud-download-orange-circle.svg"
                          alt="arrow pointing right"
                          srcset="../../../assets/icons/cloud-download-orange-circle.svg">

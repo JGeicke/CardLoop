@@ -12,7 +12,7 @@ export class AchievementService {
   nextAchievement: Achievement;
 
   constructor(private statisticService: StatisticService, private authService: AuthService) {
-
+      this.generateAchievements(0);
   }
 
   generateAchievements(userModulesLength: number){
