@@ -92,8 +92,8 @@
                 <div class="questions-content">
                     <h4>Questions</h4>
                     <ion-row class="ion-justify-content-around ion-align-items-center question-spacing"
-                             *ngFor="let question of this.moduleService.currLesson.questions">
-                        <div class="answer-box">
+                             *ngFor="let question of this.moduleService.currLesson.questions; index as i">
+                        <div class="answer-box" (click)="popover($event, i)">
                             <span>{{question.question}}</span>
                         </div>
                         <div class="question-loops"

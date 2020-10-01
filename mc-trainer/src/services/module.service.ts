@@ -17,6 +17,7 @@ export class ModuleService {
     allModules: Module[] = [];
     public recentlyPlayed: Module;
     public currLesson: Module;
+    public currQuestion = -1;
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,

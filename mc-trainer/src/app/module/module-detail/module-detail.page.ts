@@ -1,7 +1,9 @@
 import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {ModuleService} from "../../../services/module.service";
 import {Router} from "@angular/router";
-import {NavController, ViewWillEnter} from "@ionic/angular";
+import {NavController, PopoverController, ViewWillEnter} from "@ionic/angular";
+import {Module} from "../../../services/module.model";
+import {PopoverPage} from "../../popover/popover.page";
 
 @Component({
   selector: 'app-module-detail',
@@ -17,7 +19,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
   private halfway: number;
   private learned: number;
 
-  constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController) { }
+  constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController) { }
 
   ngOnInit() {
     // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
@@ -27,6 +29,17 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
   ionViewWillEnter() {
     // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
     this.calcQuestionsProgress();
+  }
+
+  async popover(ev: any, qix: number) {
+    const popover = await this.popoverController.create({
+      component: PopoverPage,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+      componentProps: {from: 'module-detail', qindex: qix}
+    });
+    return await popover.present();
   }
 
   segmentChanged($event: any) {
@@ -45,9 +58,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     this.unsure = 0;
     this.halfway = 0;
     this.learned = 0;
-    console.log('calcquestionprogress is called');
     for (const question of this.moduleService.currLesson.questions) {
-      console.log('questionsprogress is: ' + question.progress);
       if (question.progress < 3) {
         this.unsure++;
       }
