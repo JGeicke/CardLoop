@@ -33,24 +33,26 @@ export class LearnModePage implements OnInit {
         this.initNextQuestion();
     }
 
-    ionViewWillEnter(){
+    ionViewWillEnter() {
         // used to restart the lesson
-        if (this.progress >= 100){
+        if (this.progress >= 100) {
             this.initLearnMode();
             this.initNextQuestion();
         }
     }
 
-    initLearnMode(){
-        // Reset & Init
+    /**
+     * inital reset of all fields and loads the needed Data from the Services
+     */
+    initLearnMode() {
         this.currModuleQuestions = [];
         this.nextQuestion = 0;
         this.progress = 0;
 
         this.boxstyle = 'answer-box';
         this.currModule = this.moduleService.currLesson;
-        for (const question of this.currModule.questions){
-            if (question.progress < 6){
+        for (const question of this.currModule.questions) {
+            if (question.progress < 6) {
                 this.currModuleQuestions.push(question);
             }
         }
@@ -63,10 +65,16 @@ export class LearnModePage implements OnInit {
     ngOnInit() {
     }
 
+    /**
+     * adds the progress of 1 answered question to the progress bar
+     */
     private changeProgress() {
         this.progress = this.growth * (this.nextQuestion + 1);
     }
 
+    /**
+     *  loads the next Question or redirects to the feedback view if last Question was reached
+     */
     initNextQuestion() {
         if (this.nextQuestion !== this.maxQuestion) {
             this.answered = false;
@@ -91,10 +99,20 @@ export class LearnModePage implements OnInit {
         }
     }
 
+    /**
+     * cheks if the current question has changed and loads the new Question and Answers into the view
+     *
+     * @param s if changed from previous -> will trigger reload
+     */
     track(s: string): string {
         return s;
     }
 
+    /**
+     * selects the given Answer index if the Question isnt confirmed yet
+     *
+     * @param index the selected Answer
+     */
     choose(index: number) {
         if (this.multipleChoise) {
             if (!this.confiremd) {
@@ -112,10 +130,16 @@ export class LearnModePage implements OnInit {
         }
     }
 
+    /**
+     * loads the next question
+     */
     getNextQuestion() {
         this.initNextQuestion();
     }
 
+    /**
+     * loads the last question again
+     */
     gesLastQuestion() {
         if (this.nextQuestion === 0 || this.nextQuestion === 1) {
             this.nextQuestion = 0;
@@ -125,9 +149,12 @@ export class LearnModePage implements OnInit {
         this.initNextQuestion();
     }
 
+    /**
+     * confirms the selected answers for the current question
+     */
     confirm() {
         this.answered = !this.answered;
-        if (this.correctAnswers() && !this.confiremd){
+        if (this.correctAnswers() && !this.confiremd) {
             // selected answers were correct
             this.statistic.session.addCorrectlyAnsweredQuestion(this.question);
             this.moduleService.incrementQuestionProgress(this.question);
@@ -139,10 +166,13 @@ export class LearnModePage implements OnInit {
         this.confiremd = true;
     }
 
-    private correctAnswers(): boolean{
+    /**
+     * checks if only the right answers were selected
+     */
+    private correctAnswers(): boolean {
         let index = 0;
-        for (const answer of this.selectedAnswers){
-            if (answer !== this.rightAnswers[index]){
+        for (const answer of this.selectedAnswers) {
+            if (answer !== this.rightAnswers[index]) {
                 return false;
             }
             index++;
@@ -150,11 +180,19 @@ export class LearnModePage implements OnInit {
         return true;
     }
 
+    /**
+     * randomises the order of the questions
+     */
     randomQuestion() {
+        console.log('TODO');
         // TODO: welche funktionalität ist gewünscht?
     }
 
+    /**
+     * redirects to the feedback view
+     */
     endSession() {
+        console.log('TODO');
         // TODO: redirekt to stats screen
     }
 

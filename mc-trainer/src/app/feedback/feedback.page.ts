@@ -67,6 +67,9 @@ export class FeedbackPage implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
+  /**
+   * routes the view to the learn-mode page
+   */
   restartLesson(){
     this.router.navigate(['learn-mode']);
   }

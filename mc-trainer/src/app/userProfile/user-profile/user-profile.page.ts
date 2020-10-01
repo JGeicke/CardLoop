@@ -36,11 +36,17 @@ export class UserProfilePage implements OnInit {
         this.loggedIn = this.authService.isLoggedIn;
     }
 
+    /**
+     * redirect the view to the login page directly to the registration
+     */
     redirectToRegister() {
         this.authService.registerTriggered = true;
         this.router.navigate(['login']);
     }
 
+    /**
+     * checks the inputs and calls the auth service for the password change
+     */
     startEdit() {
         if (this.authService.isLoggedIn) {
             if (!this.editMode) {
@@ -76,6 +82,9 @@ export class UserProfilePage implements OnInit {
         }
     }
 
+    /**
+     * starts the delete account prozess
+     */
     deleteAccount() {
         this.authService.startDeleteUser();
     }

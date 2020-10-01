@@ -35,8 +35,13 @@ export class LoggedInPage implements OnInit {
         }
     }
 
+    /**
+     * redirect the view to learn-mode to learn a module
+     *
+     * @param module the module that will be learned
+     */
     playLesson(module: Module) {
-        if (!this.moduleService.isModuleImported(module)){
+        if (!this.moduleService.isModuleImported(module)) {
             this.moduleService.importModule(module);
         }
         this.moduleService.currLesson = module;
@@ -45,10 +50,17 @@ export class LoggedInPage implements OnInit {
         this.router.navigate(['learn-mode']);
     }
 
+    /**
+     * redirect to the lesson detailpage
+     */
     lessonDetails() {
+        // TODO: implement Method
         console.log('lessondetails called');
     }
 
+    /**
+     * displays the not logged in message
+     */
     async loginModal() {
         const alert = await this.alertController.create({
             cssClass: 'my-custom-class',
