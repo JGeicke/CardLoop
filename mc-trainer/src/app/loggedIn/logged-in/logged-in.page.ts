@@ -4,6 +4,7 @@ import {AlertController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {ModuleService} from '../../../services/module.service';
 import {Module} from '../../../services/module.model';
+import {AchievementService} from '../../../services/achievement.service';
 
 @Component({
     selector: 'app-logged-in',
@@ -12,7 +13,7 @@ import {Module} from '../../../services/module.model';
 })
 export class LoggedInPage implements OnInit {
 
-    recommendations: any[] = [];
+    recommendations: Module[] = [];
     recommendation = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
     sliderConfig = {
         spaceBetween: 10,
@@ -23,10 +24,12 @@ export class LoggedInPage implements OnInit {
                 private authService: AuthService,
                 private alertController: AlertController,
                 public modalController: ModalController,
-                private moduleService: ModuleService) {
-        this.recommendations.push(this.recommendation);
-        this.recommendations.push(this.recommendation);
-        this.recommendations.push(this.recommendation);
+                private moduleService: ModuleService,
+                private achievementService: AchievementService) {
+        const sortedArray = this.moduleService.getMostPlayedModules();
+        this.recommendations.push(sortedArray[0]);
+        this.recommendations.push(sortedArray[1]);
+        this.recommendations.push(sortedArray[2]);
     }
 
     ngOnInit() {

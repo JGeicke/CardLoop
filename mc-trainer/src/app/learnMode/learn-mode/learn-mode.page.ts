@@ -50,6 +50,7 @@ export class LearnModePage implements OnInit {
         this.progress = 0;
 
         this.boxstyle = 'answer-box';
+        this.moduleService.incrementModulePlayCount(this.moduleService.currLesson);
         this.currModule = this.moduleService.currLesson;
         for (const question of this.currModule.questions) {
             if (question.progress < 6) {
@@ -94,13 +95,13 @@ export class LearnModePage implements OnInit {
                 this.multipleChoise = false;
             }
         } else {
-            this.router.navigate(['feedback']);
+            this.endSession();
             console.log('last Question reached redirect to stats..');
         }
     }
 
     /**
-     * cheks if the current question has changed and loads the new Question and Answers into the view
+     * checks if the current question has changed and loads the new Question and Answers into the view
      *
      * @param s if changed from previous -> will trigger reload
      */
@@ -192,8 +193,7 @@ export class LearnModePage implements OnInit {
      * redirects to the feedback view
      */
     endSession() {
-        console.log('TODO');
-        // TODO: redirekt to stats screen
+        this.router.navigate(['feedback']);
     }
 
 }

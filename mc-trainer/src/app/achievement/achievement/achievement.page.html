@@ -28,9 +28,9 @@
     </ion-grid>
     <div class="content-box">
         <div class="flexbox-container">
-            <div class="flexbox-item" *ngFor="let achievement of this.achievements"
+            <div class="flexbox-item" *ngFor="let achievement of this.achievementService.achievements"
                  [ngStyle]="{'filter': this.currAchievement!=this.achievement && this.detailAchievement ? 'blur(2px)' : ''}">
-                <div *ngIf="this.isLoggedIn() || this.isSuccessAchievement(this.achievement)">
+                <div *ngIf="this.achievementService.isSuccessAchievement(this.achievement)">
                     <a [routerLink]="" class="achievement" (click)="inspectAchievement(this.achievement)">
                         <div class="achievement_image">
                             <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
@@ -45,12 +45,12 @@
                     </a>
                     <div class="ach_num_div">
                         <ion-text class="achievement_text"
-                                  [ngStyle]="{'color': isSuccessAchievement(achievement)? '#66BF91' : 'white'}">{{this.achievement.currentNumber}}
+                                  [ngStyle]="{'color': achievementService.isSuccessAchievement(achievement)? '#66BF91' : 'white'}">{{this.achievement.currentNumber}}
                             / {{this.achievement.maxNumber}}</ion-text>
                     </div>
                 </div>
                 <div class="achievement achievement_locked"
-                     *ngIf="!this.isLoggedIn() && !this.isSuccessAchievement(this.achievement)">
+                     *ngIf="!this.achievementService.isSuccessAchievement(this.achievement)">
                     <div class="achievement_lock_icon">
                         <ion-img src="../../assets/ach_lock.svg"
                                  alt="a lock icon"></ion-img>

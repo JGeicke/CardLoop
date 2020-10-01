@@ -44,6 +44,8 @@ export class LoginPage implements OnInit, ViewWillEnter {
     }
 
     ionViewWillEnter(): void {
+        this.hasWarning = false;
+        this.hasAlert = false;
         if (localStorage.getItem('user') === null) {
             this.saveUser = false;
         }

@@ -1,14 +1,17 @@
 import {Question} from './question.model';
 
 export class Session {
-    private unsureThreshold = 2;
-    private halfwayThreshold = 4;
+    private static readonly unsureThreshold = 2;
+    private static readonly halfwayThreshold = 4;
     rightQuestions: Question[];
     wrongQuestions: Question[];
+    private startTimestamp: Date;
+    private endTimestamp: Date;
 
     constructor() {
         this.rightQuestions = [];
         this.wrongQuestions = [];
+        this.startTimestamp = new Date();
     }
 
     addWronglyAnsweredQuestion(question: Question){
@@ -23,6 +26,7 @@ export class Session {
      * @return: number[]
      */
     generateSessionStats(): number[]{
+        this.endTimestamp = new Date();
         const res = new Array<number>(3);
         // init array
         for (let i = 0; i < res.length; i++){
@@ -30,10 +34,10 @@ export class Session {
         }
         // iterate correctly answered questions
         for (const question of this.rightQuestions){
-            if (question.progress <= this.unsureThreshold){
+            if (question.progress <= Session.unsureThreshold){
                 // questions tagged as "Unsure"
                 res[0]++;
-            }else if (question.progress <= this.halfwayThreshold){
+            }else if (question.progress <= Session.halfwayThreshold){
                 // questions tagged as "Halfway"
                 res[1]++;
             } else {
@@ -50,5 +54,17 @@ export class Session {
 
     getQuestionCount(): number{
         return this.rightQuestions.length + this.wrongQuestions.length;
+    }
+
+    getCorrectQuestionCount(): number {
+        return this.rightQuestions.length;
+    }
+
+    getEndTimestamp(){
+        return this.endTimestamp;
+    }
+
+    getStartTimestamp(){
+        return this.startTimestamp;
     }
 }

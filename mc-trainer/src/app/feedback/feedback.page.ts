@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ModuleService} from '../../services/module.service';
 import {Router} from '@angular/router';
 import {StatisticService} from '../../services/statistic.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-feedback',
@@ -33,7 +34,8 @@ export class FeedbackPage implements OnInit {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
-  constructor(private moduleService: ModuleService, private router: Router, private statisticService: StatisticService) {
+  constructor(private moduleService: ModuleService, private router: Router,
+              private statisticService: StatisticService, private authService: AuthService) {
   }
 
   ionViewDidEnter(){
@@ -57,6 +59,7 @@ export class FeedbackPage implements OnInit {
     this.unsureQuestions = sessionStats[0];
     this.halfwayQuestions = sessionStats[1];
     this.learnedQuestions = sessionStats[2];
+    this.statisticService.generateUserStats(this.authService.GetUID(), this.statisticService.session);
   }
 
   onActivate(data): void {
