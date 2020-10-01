@@ -5,6 +5,8 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {User} from './user.model';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {StatisticService} from './statistic.service';
+import {ModuleService} from './module.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,20 +18,25 @@ export class AuthService {
     isLoggedIn = false;
 
     constructor(private firebaseAuth: AngularFireAuth, private alertController: AlertController,
-                private firestore: AngularFirestore, private router: Router) {
+                private firestore: AngularFirestore, private router: Router, private statisticService: StatisticService) {
     }
 
     async Register(email: string, password: string): Promise<string> {
         let errorCode: string;
+        let uid: string;
         await this.firebaseAuth.createUserWithEmailAndPassword(email, password)
             .then((result) => {
-                this.SetUser(result.user, password);
+                uid = result.user.uid;
                 // Erzeugt neues UserModules Dokument
                 this.firestore.collection('userModules').doc(result.user.uid).set({modules: []});
                 errorCode = '';
             }).catch((err) => {
                 errorCode = err.code;
             });
+        if (uid !== undefined && errorCode === ''){
+            // inits user document in userStats collection
+            await this.statisticService.initUserStats(uid);
+        }
         return Promise.resolve(errorCode);
     }
 
@@ -120,7 +127,7 @@ export class AuthService {
                     text: 'YES',
                     cssClass: 'secondary',
                     handler: () => {
-                        console.log('delete')
+                        console.log('delete');
                         this.deleteUser();
                         returnBoolean = true;
                     }

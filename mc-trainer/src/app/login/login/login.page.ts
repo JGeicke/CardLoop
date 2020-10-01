@@ -32,6 +32,11 @@ export class LoginPage implements OnInit {
     }
   }
 
+  ionViewWillEnter(){
+    this.hasWarning = false;
+    this.hasAlert = false;
+  }
+
   // Create new Account
   Register() {
     if (this.emailInput.length !== 0 && this.passwordInput.length !== 0 && this.matchPassword()) {

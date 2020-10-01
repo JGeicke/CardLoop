@@ -48,6 +48,7 @@ export class LearnModePage implements OnInit {
         this.progress = 0;
 
         this.boxstyle = 'answer-box';
+        this.moduleService.incrementModulePlayCount(this.moduleService.currLesson);
         this.currModule = this.moduleService.currLesson;
         for (const question of this.currModule.questions){
             if (question.progress < 6){
@@ -85,7 +86,7 @@ export class LearnModePage implements OnInit {
                 this.multipleChoise = false;
             }
         } else {
-            this.router.navigate(['feedback']);
+            this.endSession();
             console.log('last Question reached redirect to stats..');
         }
     }
@@ -154,7 +155,7 @@ export class LearnModePage implements OnInit {
     }
 
     endSession() {
-        // TODO: redirekt to stats screen
+        this.router.navigate(['feedback']);
     }
 
 }

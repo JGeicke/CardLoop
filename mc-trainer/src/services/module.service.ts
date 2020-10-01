@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore, AngularFirestoreCollection, DocumentChangeAction} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {Module} from './module.model';
 import {AlertController} from '@ionic/angular';
-import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {filter, map} from 'rxjs/operators';
 import {Question} from './question.model';
 import {Router} from '@angular/router';
+import {StatisticService} from './statistic.service';
+import * as firebase from 'firebase/app';
+import {AchievementService} from './achievement.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,9 @@ export class ModuleService {
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
                 private alertController: AlertController,
-                private router: Router) {
+                private router: Router,
+                private statisticService: StatisticService,
+                private achievementService: AchievementService) {
         this.getAllModules();
     }
 
@@ -55,6 +58,32 @@ export class ModuleService {
         await alert.present();
     }
 
+    /**
+     * Sorts allModules-array by globalPlayCount and returns sorted array
+     */
+    getMostPlayedModules(){
+        return this.allModules.sort((a, b) => {
+
+            if (a.globalPlayCount > b.globalPlayCount) {
+                return -1;
+            }
+
+            if (a.globalPlayCount < b.globalPlayCount) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    /**
+     * Resets user modules, recentlyPlayed and currLesson - needed for log-out
+     */
+    resetUserModuleData(){
+        this.userModules = [];
+        this.recentlyPlayed = null;
+        this.currLesson = null;
+    }
+
     // loads all Modules that the currently logged in User has already imported
     async getUserModules() {
         this.userModules = [];
@@ -74,6 +103,8 @@ export class ModuleService {
                 }
                 module.calcProgress();
             }
+            await this.statisticService.getUserStats(uid);
+            this.achievementService.generateAchievements(this.userModules.length);
             return this.loadRecentlyPlayed();
         }
 
@@ -97,6 +128,16 @@ export class ModuleService {
         }
     }
 
+    /**
+     * Increments playCount value of a module in firebase
+     * @param module - played module
+     */
+    incrementModulePlayCount(module: Module){
+       firebase.firestore().collection('modules').doc(module.uid).update({
+          playCount: firebase.firestore.FieldValue.increment(1)
+       });
+    }
+
     // Accesses questions of module in firebase & recreates it locally
     private getModuleQuestions(module: Module) {
         return this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
@@ -110,14 +151,14 @@ export class ModuleService {
 
     private getModule(uid: string) {
         return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
+            this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags, res.data().playCount));
         });
     }
 
     // Accesses module with uid in firebase & recreates it locally
     private getUserModule(uid: string) {
         return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags));
+            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags, res.data().playCount));
         });
     }
 
