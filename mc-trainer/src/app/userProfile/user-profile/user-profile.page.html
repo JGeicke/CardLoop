@@ -3,7 +3,7 @@
 
 <ion-content>
     <ion-row class="ion-justify-content-end">
-        <img class="logout" (click)="this.authService.SignOut()" src="../../../assets/icons/logout.svg" alt="ProfilePicture"
+        <img class="logout" *ngIf="this.authService.isLoggedIn" (click)="this.logOut()" src="../../../assets/icons/logout.svg" alt="ProfilePicture"
              srcset="../../../assets/icons/logout.svg">
     </ion-row>
     <ion-list class="list">

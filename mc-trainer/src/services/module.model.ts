@@ -7,14 +7,16 @@ export class Module {
     tags: string[];
     questions: Question[];
     progress: number;
+    globalPlayCount: number;
 
-    constructor(uid: string, description: string, name: string, tags: string[]) {
+    constructor(uid: string, description: string, name: string, tags: string[], globalPlayCount: number) {
         this.uid = uid;
         this.description = description;
         this.name = name;
         this.tags = tags;
         this.questions = [];
         this.progress = 0;
+        this.globalPlayCount = globalPlayCount;
     }
 
     calcProgress() {
