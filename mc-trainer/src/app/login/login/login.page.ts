@@ -35,7 +35,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('user') !== 'null') {
+    if (localStorage.getItem('user') != 'null' && localStorage.getItem('user') != null) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.emailInput = this.user.email;
       this.passwordInput = this.user.password;
