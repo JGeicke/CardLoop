@@ -58,7 +58,7 @@ export class ModuleListPage implements OnInit {
             cssClass: 'my-custom-class',
             event: ev,
             translucent: true,
-            componentProps: module
+            componentProps: {from: 'module-list'}
         });
         return await popover.present();
     }
