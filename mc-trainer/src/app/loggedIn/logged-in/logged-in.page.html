@@ -20,13 +20,14 @@
                 <div class="ion-margin-bottom">
                     <h3>Pick up where you left</h3>
 
-                    <div class="module" (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)">
+                    <div class="module">
                         <img (click)="playLesson(this.moduleService.recentlyPlayed)"
                              src="../../../assets/icons/play-button-orange.svg"
                              alt="arrow pointing right"
                              srcset="../../../assets/icons/play-button-orange.svg">
                         <div class="inner-module-wrapper">
-                            <p class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
+                            <p (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)"
+                               class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
                             <div class="white-box">
                                 <div>
                                     <progress-bar [progress]="this.moduleService.recentlyPlayed.progress"
@@ -45,25 +46,28 @@
             </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <div class="ion-margin-bottom">
-                <h3>Next Achievement</h3>
-                <div class="achievement">
-                    <ion-row class="inner-achievement">
-                        <ion-col size="2">
+            <ion-col>
+                <div class="ion-margin-bottom">
+                    <h3>Next Achievement</h3>
+                    <div class="achievement">
+                        <ion-row class="inner-achievement ion-justify-content-around ion-align-items-center">
+                            <ion-col size="2">
 
-                        </ion-col>
-                        <ion-col size="8">
-                            <span>{{this.achievementService.nextAchievement.achievementText}}</span>
-                        </ion-col>
-                        <ion-col size="2">
-                            <a routerLink="/achievement">
-                                <img src="../../../assets/icons/achievement-right-arrow.svg" alt="arrow pointing right"
-                                     srcset="../../../assets/icons/achievement-right-arrow.svg">
-                            </a>
-                        </ion-col>
-                    </ion-row>
+                            </ion-col>
+                            <ion-col size="8">
+                                <span>{{this.achievementService.nextAchievement.achievementText}}</span>
+                            </ion-col>
+                            <ion-col size="2">
+                                <a routerLink="/achievement">
+                                    <img src="../../../assets/icons/achievement-right-arrow.svg"
+                                         alt="arrow pointing right"
+                                         srcset="../../../assets/icons/achievement-right-arrow.svg">
+                                </a>
+                            </ion-col>
+                        </ion-row>
+                    </div>
                 </div>
-            </div>
+            </ion-col>
         </ion-row>
     </ion-grid>
     <ion-col class="ion-float-left">

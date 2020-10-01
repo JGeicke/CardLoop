@@ -34,14 +34,15 @@ export class LoginPage implements OnInit, ViewWillEnter {
         }
     }
 
-    ngOnInit() {
-        if (localStorage.getItem('user') != 'null' && localStorage.getItem('user') != null) {
-            this.user = JSON.parse(localStorage.getItem('user'));
-            this.emailInput = this.user.email;
-            this.passwordInput = this.user.password;
-            this.saveUser = true;
-        }
+  ngOnInit() {
+      console.log('first');
+    if (localStorage.getItem('user') != null) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.emailInput = this.user.email;
+      this.passwordInput = this.user.password;
+      this.saveUser = true;
     }
+  }
 
     ionViewWillEnter(): void {
         this.hasWarning = false;
@@ -53,7 +54,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
 
 
     /**
-     * handles the registration prozess
+     * handles the registration process
      * @constructor
      */
     Register() {
@@ -90,10 +91,11 @@ export class LoginPage implements OnInit, ViewWillEnter {
 
 
     /**
-     * handles the login prozess
+     * handles the login process
      * @constructor
      */
     Login() {
+        console.log('hello');
         // No email input
         if (this.emailInput.length === 0) {
             this.warningText = 'Email was empty!';
@@ -122,6 +124,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
                     }
                     // successful login
                 } else {
+                    console.log('hello again');
                     if (this.saveUser) {
                         this.authService.rememberUser();
                     }

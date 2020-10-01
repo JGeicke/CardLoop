@@ -4,6 +4,7 @@ import {Module} from '../../../services/module.model';
 import {Question} from '../../../services/question.model';
 import {StatisticService} from '../../../services/statistic.service';
 import {Router} from '@angular/router';
+import {NavController} from "@ionic/angular";
 
 @Component({
     selector: 'app-learn-mode',
@@ -28,7 +29,7 @@ export class LearnModePage implements OnInit {
     private progress;
     private growth;
 
-    constructor(private moduleService: ModuleService, private statistic: StatisticService, private router: Router) {
+    constructor(private moduleService: ModuleService, private statistic: StatisticService, private router: Router, private navCtrl: NavController) {
         this.initLearnMode();
         this.initNextQuestion();
     }
