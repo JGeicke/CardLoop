@@ -15,6 +15,7 @@ export class AuthService {
 
     registerTriggered = false;
     private user: User;
+
     isLoggedIn = false;
 
     constructor(private firebaseAuth: AngularFireAuth, private alertController: AlertController,

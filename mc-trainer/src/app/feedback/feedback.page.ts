@@ -62,14 +62,6 @@ export class FeedbackPage implements OnInit {
     this.statisticService.generateUserStats(this.authService.GetUID(), this.statisticService.session);
   }
 
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
-
   /**
    * routes the view to the learn-mode page
    */
