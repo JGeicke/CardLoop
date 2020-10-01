@@ -56,6 +56,11 @@ progress-bar {
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
 }
 
+.inner-achievement span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .has-tabs-bottom {
   margin-bottom: 100px;
 }
