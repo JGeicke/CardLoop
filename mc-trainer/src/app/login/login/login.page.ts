@@ -97,7 +97,7 @@ export class LoginPage implements OnInit {
           // successful login
         } else {
           this.moduleService.getUserModules().then((r) => {
-            this.router.navigate(['logged-in']);
+            this.router.navigate(['onboarding']);
           });
         }
       });
