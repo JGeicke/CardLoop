@@ -54,8 +54,8 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
      *
      * @param $event that is triggered when the segement of the button switches sides
      */
-    segmentChanged($event: any) {
-        console.log('segment changed triggered');
+    segmentChanged(ev: any) {
+        console.log('Segment changed', ev);
     }
 
     /**

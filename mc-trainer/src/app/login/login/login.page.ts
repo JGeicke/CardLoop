@@ -35,7 +35,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
     }
 
   ngOnInit() {
-      console.log('first');
     if (localStorage.getItem('user') != null) {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.emailInput = this.user.email;
@@ -95,7 +94,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
      * @constructor
      */
     Login() {
-        console.log('hello');
         // No email input
         if (this.emailInput.length === 0) {
             this.warningText = 'Email was empty!';

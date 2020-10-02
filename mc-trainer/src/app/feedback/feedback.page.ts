@@ -10,6 +10,8 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./feedback.page.scss'],
 })
 export class FeedbackPage implements OnInit {
+  private picked;
+
   data = [];
   view: any[] = [300, 300];
 
@@ -26,7 +28,7 @@ export class FeedbackPage implements OnInit {
   halfwayQuestions = 0;
 
   colorScheme = {
-    domain: ['#cf5d5d', '#ffb763', '#66bd92']
+    domain: ['#66bd92', '#cf5d5d']
   };
 
 
@@ -43,16 +45,12 @@ export class FeedbackPage implements OnInit {
     const sessionStats = this.statisticService.session.generateSessionStats();
     this.data = [
       {
-        name: 'Unsure',
-        value: sessionStats[0]
+        name: 'Right',
+        value: this.statisticService.session.rightQuestions.length
       },
       {
-        name: 'Halfway',
-        value: sessionStats[1]
-      },
-      {
-        name: 'Learned',
-        value: sessionStats[2]
+        name: 'Wrong',
+        value: this.statisticService.session.wrongQuestions.length
       },
     ];
     this.questionsInSession = this.statisticService.session.getQuestionCount();
@@ -63,6 +61,15 @@ export class FeedbackPage implements OnInit {
   }
 
   /**
+   *
+   * @param $event that is triggered when the segement of the button switches sides
+   */
+  segmentChanged(ev: any) {
+    console.log(this.picked);
+  }
+
+
+  /**
    * routes the view to the learn-mode page
    */
   restartLesson(){
@@ -70,5 +77,6 @@ export class FeedbackPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.picked = 'results';
   }
 }

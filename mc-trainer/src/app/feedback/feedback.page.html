@@ -8,62 +8,65 @@
             <span class="module-title">{{moduleService.currLesson.name}}</span>
             <div class="white-box">
                 <div>
-                    <progress-bar [progress]="moduleService.currLesson.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                    <progress-bar [progress]="moduleService.currLesson.progress"
+                                  [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
                     </progress-bar>
                 </div>
                 <div>
-                                <span class="tags">#{{moduleService.currLesson.tags[0]}} #{{moduleService.currLesson.tags[1]}}..
+                                <span class="tags">#{{moduleService.currLesson.tags[0]}}
+                                    #{{moduleService.currLesson.tags[1]}}..
                                     +{{this.moduleService.currLesson.tags.length - 2}} more</span>
                 </div>
             </div>
         </div>
     </div>
+    <div>
+        <ion-row class="ion-justify-content-center">
+            <div class="question-box">
+                <ion-row class="ion-justify-content-center">
+                    <div>
+                        <ngx-charts-pie-chart
+                                [view]="view"
+                                [scheme]="colorScheme"
+                                [results]="data"
+                                [gradient]="gradient"
+                                [legend]="showLegend"
+                                [legendPosition]="legendPosition"
+                                [labels]="showLabels"
+                                [doughnut]="isDoughnut"
+                        >
+                        </ngx-charts-pie-chart>
+                        <div class="center-chart">
+                            <p>{{questionsInSession}}
+                                <span>Questions</span>
+                            </p>
 
-    <ion-row class="ion-justify-content-center">
-        <div class="question-box">
-            <ion-row class="ion-justify-content-center">
-                <div>
-                    <ngx-charts-pie-chart
-                            [view]="view"
-                            [scheme]="colorScheme"
-                            [results]="data"
-                            [gradient]="gradient"
-                            [legend]="showLegend"
-                            [legendPosition]="legendPosition"
-                            [labels]="showLabels"
-                            [doughnut]="isDoughnut"
-                    >
-                    </ngx-charts-pie-chart>
-                    <div class="center-chart">
-                        <p>{{questionsInSession}}
-                            <span>Questions</span>
-                        </p>
-
+                        </div>
                     </div>
-                </div>
-            </ion-row>
-            <ion-row class="ion-justify-content-around loop-row">
-                <div>
-                    <div class="loop-count">
-                        <span class="green">{{learnedQuestions}}</span>
+                </ion-row>
+                <ion-row class="ion-justify-content-around loop-row">
+                    <div>
+                        <div class="loop-count">
+                            <span class="green">{{learnedQuestions}}</span>
+                        </div>
+                        <span>Learned</span>
                     </div>
-                    <span>Learned</span>
-                </div>
-                <div>
-                    <div class="loop-count">
-                        <span class="yellow">{{halfwayQuestions}}</span>
+                    <div>
+                        <div class="loop-count">
+                            <span class="yellow">{{halfwayQuestions}}</span>
+                        </div>
+                        <span>Halfway</span>
                     </div>
-                    <span>Halfway</span>
-                </div>
-                <div>
-                    <div class="loop-count">
-                        <span class="red">{{unsureQuestions}}</span>
+                    <div>
+                        <div class="loop-count">
+                            <span class="red">{{unsureQuestions}}</span>
+                        </div>
+                        <span>Unsure</span>
                     </div>
-                    <span>Unsure</span>
-                </div>
-            </ion-row>
-        </div>
-    </ion-row>
+                </ion-row>
+            </div>
+        </ion-row>
+    </div>
 
     <ion-row class="ion-justify-content-center">
         <div class="question-box">

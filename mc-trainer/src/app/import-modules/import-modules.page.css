@@ -48,9 +48,9 @@ h2 {
   font-variant: small-caps;
   color: #ffffff;
   margin-top: 0;
-  margin-bottom: 2.5rem;
   text-align: center;
   cursor: pointer;
+  margin-bottom: -2rem;
 }
 
 h2 > span {
@@ -119,8 +119,7 @@ ion-icon[name=search-outline] {
   border-radius: 18px;
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
-  width: 90%;
-  margin-bottom: 3rem;
+  width: 100%;
 }
 
 .recommendation-title {
@@ -134,14 +133,17 @@ ion-icon[name=search-outline] {
   padding-left: 0.3rem;
 }
 
-.tags {
+.tag-row .tags {
   font-size: 0.9rem;
   display: inline-block;
-  padding: 0.4rem 0.4rem 0.4rem 0.4rem;
+  padding: 0;
+}
+
+.tag-row .tags a {
+  color: white !important;
 }
 
 .tag-row {
-  margin-top: -2.5rem;
   border-top: 1px solid #FFFFFF;
 }
 
@@ -150,8 +152,8 @@ ion-icon[name=search-outline] {
   cursor: pointer;
   float: right;
   position: relative;
-  top: -3rem;
-  right: -2.5rem;
+  bottom: -2rem;
+  right: -8rem;
 }
 
 .cloud-down {

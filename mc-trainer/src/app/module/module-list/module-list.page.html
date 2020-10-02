@@ -1,6 +1,7 @@
 <ion-header>
     <ion-toolbar>
-        <ion-searchbar showCancelButton="never" [(ngModel)]="searchQuery" (ionCancel)="searchBool = false" (ionChange)="searchModules()"></ion-searchbar>
+        <ion-searchbar showCancelButton="never" [(ngModel)]="searchQuery" (ionCancel)="searchBool = false"
+                       (ionChange)="searchModules()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
@@ -13,9 +14,12 @@
 
     <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
         <div class="module">
-            <img (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
+            <img *ngIf="module.progress < 100" (click)="playLesson(module)" src="../../../assets/icons/play-button-orange.svg"
                  alt="arrow pointing right"
                  srcset="../../../assets/icons/play-button-orange.svg">
+            <img *ngIf="module.progress === 100" (click)="this.moduleService.resetModuleProgress(module)" src="../../../assets/icons/restart-lesson.svg"
+                 alt="arrow pointing right"
+                 srcset="../../../assets/icons/restart-lesson.svg">
             <div class="inner-module-wrapper" (click)="popover($event, module); this.moduleService.currLesson = module">
                 <span class="module-title">{{module.name}}</span>
                 <div class="white-box">
@@ -24,8 +28,9 @@
                         </progress-bar>
                     </div>
                     <div>
-                                <span class="tags">#{{module.tags[0]}} #{{module.tags[1]}}..
-                                    +{{module.tags.length - 2}} more</span>
+                        <span class="tags" *ngFor="let tag of this.module.tags; index as i">
+                            <a>#{{tag}}</a>
+                        </span>
                     </div>
                 </div>
             </div>

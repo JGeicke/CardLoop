@@ -92,4 +92,8 @@ progress-bar {
   padding-left: 0.3rem;
 }
 
+.recommendation .tags a {
+  color: white;
+}
+
 /*# sourceMappingURL=logged-in.page.css.map */
