@@ -9,7 +9,7 @@
             <ion-row class="ion-align-items-around">
                 <ion-col size="12" size-sm="6">
                     <div class="ion-text-center">
-                        <img src="../../assets/{{this.currAchievement.achievementSVG}}"
+                        <img src="../../assets/icons/{{this.currAchievement.achievementSVG}}"
                              alt="{{this.currAchievement.achievementSVG}}"
                              height="35%" width="35%">
                     </div>
@@ -33,7 +33,7 @@
                 <div *ngIf="this.achievementService.isSuccessAchievement(this.achievement)">
                     <a [routerLink]="" class="achievement" (click)="inspectAchievement(this.achievement)">
                         <div class="achievement_image">
-                            <ion-img src="../../assets/{{this.achievement.achievementSVG}}"
+                            <ion-img src="../../assets/icons/{{this.achievement.achievementSVG}}"
                                      alt="{{this.achievement.achievementSVG}}"></ion-img>
                         </div>
                         <round-progress

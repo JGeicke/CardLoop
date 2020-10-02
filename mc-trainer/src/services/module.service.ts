@@ -14,9 +14,21 @@ import {AchievementService} from './achievement.service';
 })
 export class ModuleService {
 
+    /**
+     * all modules imported by the user
+     */
     userModules: Module[] = [];
+    /**
+     * all modules stored in cloud firestore
+     */
     allModules: Module[] = [];
+    /**
+     * last played module(lesson) of user
+     */
     public recentlyPlayed: Module;
+    /**
+     * module(lesson) currently played by user
+     */
     public currLesson: Module;
     public currQuestion = -1;
 
@@ -217,7 +229,7 @@ export class ModuleService {
 
     /**
      * checks if the given module is already imported by the user that is logged in
-     * @param module
+     * @param module - module to check if imported
      */
     isModuleImported(module: Module): boolean {
         for (const m of this.userModules) {
@@ -230,7 +242,7 @@ export class ModuleService {
 
     /**
      * Access progress of questions in firebase to display in view
-     * @param question
+     * @param question - question to get progress from in firebase
      */
     getQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -246,7 +258,7 @@ export class ModuleService {
 
     /**
      * Stores progress of question in cloud firestore
-     * @param question
+     * @param question - question to set the progress from in firebase
      */
     private setQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -259,7 +271,7 @@ export class ModuleService {
 
     /**
      * Increment progress of question after right answer
-     * @param question
+     * @param question - question to set the progress from in firebase
      */
     async incrementQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -308,8 +320,8 @@ export class ModuleService {
     }
 
     /**
-     * Reset progress of a question after a wrong answer to 0
-     * @param question
+     * Reset progress of a question after a wrong answer to 0 & recalcs the progress of the module containing it
+     * @param question - question to reset the progress from in firebase
      */
     async resetQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -331,7 +343,7 @@ export class ModuleService {
 
     /**
      * Deletes module of user
-     * @param module
+     * @param module - module to delete
      */
     async deleteLesson(module: Module) {
         const uid = this.authService.GetUID();
@@ -339,7 +351,7 @@ export class ModuleService {
             const idx = this.userModules.indexOf(module);
             this.userModules.splice(idx, 1);
             const resultArray = [];
-            this.userModules.forEach(module => resultArray.push(module.uid));
+            this.userModules.forEach(m => resultArray.push(m.uid));
             await this.firestore.collection('userModules').doc(uid).set({
                 modules: resultArray
             });
@@ -348,7 +360,7 @@ export class ModuleService {
 
     /**
      * imports a Module into the Modules of the currently logged in User
-     * @param module
+     * @param module - module to import
      */
     importModule(module: Module) {
         const userID = this.authService.GetUID();

@@ -9,7 +9,13 @@ import * as firebase from 'firebase/app';
 })
 export class StatisticService {
 
+  /**
+   * current learn session of the user
+   */
   session: Session;
+  /**
+   * total statistics of the user
+   */
   userStats: Statistic;
 
   constructor(private firestore: AngularFirestore) { }
@@ -48,6 +54,11 @@ export class StatisticService {
     });
   }
 
+  /**
+   * Generate the userStats locally & store them in firebase afterwards
+   * @param uid - uid of the user
+   * @param session - current learnMode-session
+   */
   generateUserStats(uid: string, session: Session){
     this.userStats.incrementLessonCount();
     this.userStats.increaseQuestionCount(session.getQuestionCount());
@@ -56,6 +67,10 @@ export class StatisticService {
     this.updateUserStats(uid);
   }
 
+  /**
+   * Store local userStats in uid-document of  firebase collection userStats
+   * @param uid - document uid of user
+   */
   updateUserStats(uid: string){
     return this.firestore.collection('userStats').doc(uid).update({
       averageSessionTime: this.userStats.averageSessionTime,

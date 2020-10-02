@@ -1,15 +1,13 @@
-<ion-header>
-    <ion-toolbar >
+<ion-header [hidden]="!searchBool">
+    <ion-toolbar>
         <ion-searchbar #search showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()" (ionChange)="searchModules()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" [hidden]="this.searchBool">
-
     <ion-row class="ion-justify-content-center">
         <h2><span (click)="focusButton()">Find a Lesson
                 <ion-icon name="search-outline"></ion-icon></span>
         </h2>
-
     </ion-row>
 
     <ion-row *ngFor="let lesson of lessons" class="ion-justify-content-center ion-align-items-center">
@@ -41,69 +39,6 @@
             </div>
         </ion-col>
     </ion-row>
-
-
-    <!--    <ion-grid *ngIf="searchstring.length !== 0">-->
-    <!--        <ion-row>-->
-    <!--            <ion-col>-->
-    <!--                <div class="category cat1">-->
-    <!--                    <img src="../../assets/icons/formula.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/formula.svg">-->
-    <!--                    Programming-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-
-    <!--            <ion-col>-->
-    <!--                <div class="category cat2">-->
-    <!--                    <img src="../../assets/icons/code.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/code.svg">-->
-    <!--                    <span>Mathematics</span>-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-    <!--        </ion-row>-->
-
-    <!--        <ion-row>-->
-    <!--            <ion-col>-->
-    <!--                <div class="category cat3">-->
-    <!--                    <img src="../../assets/icons/england.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/england.svg">-->
-    <!--                    Programming-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-
-    <!--            <ion-col>-->
-    <!--                <div class="category cat4">-->
-    <!--                    <img src="../../assets/icons/code.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/code.svg">-->
-    <!--                    <span>Mathematics</span>-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-    <!--        </ion-row>-->
-
-    <!--        <ion-row>-->
-    <!--            <ion-col>-->
-    <!--                <div class="category cat5">-->
-    <!--                    <img src="../../assets/icons/formula.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/formula.svg">-->
-    <!--                    Programming-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-
-    <!--            <ion-col>-->
-    <!--                <div class="category cat6">-->
-    <!--                    <img src="../../assets/icons/world-financial.svg"-->
-    <!--                         alt="arrow pointing right"-->
-    <!--                         srcset="../../assets/icons/world-financial.svg">-->
-    <!--                    <span>Mathematics</span>-->
-    <!--                </div>-->
-    <!--            </ion-col>-->
-    <!--        </ion-row>-->
-    <!--    </ion-grid>-->
 </ion-content>
 <ion-content class="ion-padding" [hidden]="!this.searchBool">
 
@@ -142,5 +77,4 @@
         </ion-col>
     </ion-row>
 </ion-content>
-
 <app-navbar></app-navbar>
