@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
-import {IonInput} from '@ionic/angular';
+import {IonInput, ViewWillEnter} from '@ionic/angular';
 import {ModuleService} from '../../../services/module.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {ModuleService} from '../../../services/module.service';
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, ViewWillEnter {
 
     private emailInput = '';
     private passwordInput = '';
@@ -20,6 +20,8 @@ export class LoginPage implements OnInit {
     private hasWarning = false;
     private hasAlert = false;
     private alertText: string;
+    private saveUser = false;
+    private user: any;
 
     @ViewChild('loginMail')
     private loginEmailInput: IonInput;
@@ -32,7 +34,28 @@ export class LoginPage implements OnInit {
         }
     }
 
-    // Create new Account
+  ngOnInit() {
+    if (localStorage.getItem('user') != null) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.emailInput = this.user.email;
+      this.passwordInput = this.user.password;
+      this.saveUser = true;
+    }
+  }
+
+    ionViewWillEnter(): void {
+        this.hasWarning = false;
+        this.hasAlert = false;
+        if (localStorage.getItem('user') === null) {
+            this.saveUser = false;
+        }
+    }
+
+
+    /**
+     * handles the registration process
+     * @constructor
+     */
     Register() {
         if (this.emailInput.length !== 0 && this.passwordInput.length !== 0 && this.matchPassword()) {
             this.authService.Register(this.emailInput, this.passwordInput).then((res) => {
@@ -66,7 +89,10 @@ export class LoginPage implements OnInit {
     }
 
 
-    // Log into account
+    /**
+     * handles the login process
+     * @constructor
+     */
     Login() {
         // No email input
         if (this.emailInput.length === 0) {
@@ -96,6 +122,10 @@ export class LoginPage implements OnInit {
                     }
                     // successful login
                 } else {
+                    console.log('hello again');
+                    if (this.saveUser) {
+                        this.authService.rememberUser();
+                    }
                     this.moduleService.getUserModules().then((r) => {
                         this.router.navigate(['logged-in']);
                     });
@@ -105,7 +135,9 @@ export class LoginPage implements OnInit {
         this.ClearInput();
     }
 
-    // Toggles Login-View/Sign-Up View
+    /**
+     * Toggles Login-View/Sign-Up View
+     */
     private toggleLogin() {
         this.authService.registerTriggered = false;
         this.showLogin = !this.showLogin;
@@ -118,7 +150,9 @@ export class LoginPage implements OnInit {
         }, 250);
     }
 
-    // Toggles warning text
+    /**
+     * Toggles warning text
+     */
     private toggleWarning() {
         this.hasWarning = !this.hasWarning;
         if (this.hasWarning && this.hasAlert) {
@@ -126,18 +160,24 @@ export class LoginPage implements OnInit {
         }
     }
 
-    // Toggles alert text
+    /**
+     * Toggles alert text
+     */
     private toggleAlert() {
         this.hasAlert = !this.hasAlert;
         // setTimeout(() => this.hasAlert = false, 5000);
     }
 
-    // Lifecycle handling to enhance UX
+    /**
+     * Lifecycle handling to enhance UX
+     */
     ionViewDidEnter() {
         this.setFocusOnMail();
     }
 
-    // Focus first Input element
+    /**
+     * Focus first Input element
+     */
     private setFocusOnMail() {
         if (this.showLogin) {
             this.loginEmailInput.setFocus();
@@ -146,19 +186,21 @@ export class LoginPage implements OnInit {
         }
     }
 
-    // Clears all input forms
+    /**
+     * Clears all input forms
+     * @constructor
+     */
     private ClearInput() {
         this.emailInput = '';
         this.passwordInput = '';
         this.passwordConfirmationInput = '';
     }
 
-    // Checks if password matches password confirmation
+    /**
+     * Checks if password matches password confirmation
+     */
     private matchPassword(): boolean {
         return this.passwordInput === this.passwordConfirmationInput;
-    }
-
-    ngOnInit() {
     }
 
 }

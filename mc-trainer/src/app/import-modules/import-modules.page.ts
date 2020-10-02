@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ModuleService } from '../../services/module.service';
+import {ModuleService} from '../../services/module.service';
 import {Module} from '../../services/module.model';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -25,6 +25,9 @@ export class ImportModulesPage implements OnInit {
     ngOnInit() {
     }
 
+    /**
+     * TODO: Comment
+     */
     focusButton(): void {
         this.searchBool = true;
         setTimeout(() => {
@@ -32,29 +35,43 @@ export class ImportModulesPage implements OnInit {
         }, 500);
     }
 
-    searchModules(){
+    /**
+     * eventHandler for the searchBar change action
+     *
+     * filters the Module list
+     */
+    searchModules() {
         console.log(this.searchBool);
         this.filteredModule = this.moduleService.searchModules(this.moduleService.allModules, this.searchQuery);
     }
 
-    cancelSearch(){
+    /**
+     * TODO: Comment
+     *
+     */
+    cancelSearch() {
         this.searchBool = false;
         console.log(this.searchBool);
     }
 
-    importClicked(module: Module){
+    /**
+     * imports a Module for the logged in User
+     *
+     * @param module the Module to be imported
+     */
+    importClicked(module: Module) {
         this.moduleService.importModule(module);
     }
 
-    playClicked(module: Module){
+    /**
+     * redirects the view to learn-mode
+     *
+     * @param module the module that will be loaded in the learn view
+     */
+    playClicked(module: Module) {
         this.moduleService.currLesson = module;
         this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
-    }
-
-    moduleDetailClicked(module: Module){
-        console.log('lesson deatil clicked');
-        // TODO: redirect to lesson Deatil page
     }
 
 }

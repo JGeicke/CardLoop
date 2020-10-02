@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from '../../../services/auth.service';
+import {Router} from '@angular/router';
+import {ModuleService} from '../../../services/module.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -9,20 +10,20 @@ import {Router} from "@angular/router";
 })
 export class UserProfilePage implements OnInit {
 
-    private hasWarning: boolean = false;
-    private hasAlert: boolean = false;
-    private warningText: string = "warning text";
-    private alertText: string = "alert Text";
-    private loggedIn: boolean = true;
-    private userMail: string = 'mail'
-    private userPasswortDummy: string = '*************';
-    private editMode: boolean = false;
-    private userPW: string = '';
-    private userPW2: string = '';
-    private userOldPW: string = '';
+    private hasWarning = false;
+    private hasAlert = false;
+    private warningText = 'warning text';
+    private alertText = 'alert Text';
+    private loggedIn = true;
+    private userMail = 'mail';
+    private userPasswortDummy = '*************';
+    private editMode = false;
+    private userPW = '';
+    private userPW2 = '';
+    private userOldPW = '';
 
 
-    constructor(private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) {
         this.loggedIn = this.authService.isLoggedIn;
         if (this.loggedIn) {
             this.userMail = this.authService.getUserMail();
@@ -36,28 +37,40 @@ export class UserProfilePage implements OnInit {
         this.loggedIn = this.authService.isLoggedIn;
     }
 
+    /**
+     * redirect the view to the login page directly to the registration
+     */
     redirectToRegister() {
         this.authService.registerTriggered = true;
         this.router.navigate(['login']);
     }
 
+    logOut(){
+        this.moduleService.resetUserModuleData();
+        this.authService.SignOut();
+        this.router.navigate(['login']);
+    }
+
+    /**
+     * checks the inputs and calls the auth service for the password change
+     */
     startEdit() {
         if (this.authService.isLoggedIn) {
             if (!this.editMode) {
                 this.editMode = true;
             } else {
                 // check if all fields are filled
-                if (this.userPW == '' || this.userPW2 == '' || this.userOldPW == '') {
+                if (this.userPW === '' || this.userPW2 === '' || this.userOldPW === '') {
                     this.warningText = 'Please fill all fields.';
                     this.hasWarning = true;
                 } else {
                     // check if new passwords are identical
-                    if (this.userPW != this.userPW2) {
+                    if (this.userPW !== this.userPW2) {
                         this.warningText = 'Passwords don´t match!';
                         this.hasWarning = true;
                     } else {
                         if (this.userPW.length < 6) {
-                            this.warningText = 'Password must be at leat 6 characters long!'
+                            this.warningText = 'Password must be at leat 6 characters long!';
                             this.hasWarning = true;
                         } else {
                             // check if old password is correct
@@ -76,6 +89,9 @@ export class UserProfilePage implements OnInit {
         }
     }
 
+    /**
+     * starts the delete account prozess
+     */
     deleteAccount() {
         this.authService.startDeleteUser();
     }

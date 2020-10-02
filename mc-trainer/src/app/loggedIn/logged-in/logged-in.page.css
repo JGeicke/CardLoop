@@ -56,6 +56,11 @@ progress-bar {
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
 }
 
+.inner-achievement span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
 .has-tabs-bottom {
   margin-bottom: 100px;
 }
@@ -69,6 +74,7 @@ progress-bar {
   border-radius: 18px;
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  width: 100%;
 }
 
 .recommendation .ion-justify-content-between {
@@ -76,10 +82,18 @@ progress-bar {
   padding-bottom: 0.5rem;
 }
 
+.recommendation-title {
+  cursor: pointer;
+}
+
 .recommendation img {
   height: 1rem;
   float: right;
   padding-left: 0.3rem;
+}
+
+.recommendation .tags a {
+  color: white;
 }
 
 /*# sourceMappingURL=logged-in.page.css.map */

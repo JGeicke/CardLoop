@@ -112,6 +112,24 @@
     color: white;
   }
 
+  ion-checkbox {
+    --background: #ffffff;
+    --size: 1.2rem;
+    --background-checked: #ffffff;
+    --checkmark-color: black;
+    --checkmark-width: 3px;
+    margin-right: 0.5rem;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+  }
+
+  ion-label {
+    --color: white !important;
+  }
+
   // Login/Register Button styling
   .button{
     margin-top: 2rem;

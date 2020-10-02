@@ -1,31 +1,59 @@
 <ion-content class="ion-padding">
-    <div>
+    <img *ngIf="this.moduleService.currQuestion !== -1" (click)="this.navCtrl.pop();" class="gobackarrow"
+         src="../../../assets/icons/goback-arrow-topnav.svg"
+         alt="arrow pointing right"
+         srcset="../../../assets/icons/goback-arrow-topnav.svg">
+    <div *ngIf="this.moduleService.currQuestion === -1">
         <progress-bar [progress]="this.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
         </progress-bar>
     </div>
-    <ion-row class="ion-justify-content-center">
+    <ion-row *ngIf="this.moduleService.currQuestion === -1" class="ion-justify-content-center">
         <div class="question-box">
             <p>{{this.question.question}}</p>
         </div>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
+    <ion-row *ngIf="this.moduleService.currQuestion !== -1" class="ion-justify-content-center">
+        <div class="question-box">
+            <p>{{this.moduleService.currLesson.questions[this.moduleService.currQuestion].question}}</p>
+        </div>
+    </ion-row>
+    <ion-row *ngIf="this.moduleService.currQuestion === -1" class="ion-justify-content-center">
         <div class="question-box">
             <ion-row class="ion-justify-content-center" *ngFor="let answer of this.question.answers; trackBy: track; let i=index">
-                    <div class="answer-box" [class.chosen-box]="selectedAnswers[i]" [class.wrong]="!rightAnswers[i] && confiremd" [class.right]="rightAnswers[i] && confiremd" (click)="choose(i)" [style.background-color]="answer.BackgroundColour">
+                    <div class="answer-box"
+                         [class.chosen-box]="selectedAnswers[i]"
+                         [class.wrong]="!rightAnswers[i] && confiremd"
+                         [class.right]="rightAnswers[i] && confiremd"
+                         (click)="selectedAnswers[i] = !selectedAnswers[i]">
                         <span>{{answer}}</span>
                     </div>
             </ion-row>
 
         </div>
     </ion-row>
-    <ion-row *ngIf="multipleChoise">
-        <div class="confirm" (click)="confirm()" >
+    <ion-row *ngIf="this.moduleService.currQuestion !== -1" class="ion-justify-content-center">
+        <div class="question-box">
+            <ion-row class="ion-justify-content-center" *ngFor="let answer of this.moduleService.currLesson.questions[this.moduleService.currQuestion].answers; trackBy: track; let i=index">
+                <div class="answer-box">
+                    <span>{{answer}}</span>
+                </div>
+            </ion-row>
+        </div>
+    </ion-row>
+    <ion-row *ngIf="this.moduleService.currQuestion === -1">
+        <div *ngIf="multipleChoise && !answered" class="confirm" (click)="confirm()" >
             <span>Confirm</span>
+        </div>
+        <div *ngIf="!multipleChoise && !answered" class="confirm" (click)="choose(chosenAnswer)" >
+            <span>Confirm</span>
+        </div>
+        <div *ngIf="answered" class="confirm" (click)="initNextQuestion()" >
+            <span>Next</span>
         </div>
     </ion-row>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="this.moduleService.currQuestion === -1">
     <ion-toolbar>
         <ion-row class="ion-justify-content-around" (click)="randomQuestion()">
             <ion-button size="small" color="none">
@@ -33,8 +61,8 @@
                      srcset="../../../assets/icons/random-solid.svg">
             </ion-button>
             <ion-button size="small" color="none" (click)="gesLastQuestion()">
-                <img src="../../../assets/icons/trophy-solid.svg" alt="little trophy cup"
-                     srcset="../../../assets/icons/trophy-solid.svg">
+                <img src="../../../assets/icons/testmodus-backward.svg" alt="little trophy cup"
+                     srcset="../../../assets/icons/testmodus-backward.svg">
             </ion-button>
             <ion-button size="small" color="none" (click)="getNextQuestion()">
                 <img src="../../../assets/icons/testmodus-forward.svg" alt="little cloud with downward arrow"

@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Achievement} from '../../../services/achievement.model';
+import {StatisticService} from '../../../services/statistic.service';
+import {AuthService} from '../../../services/auth.service';
+import {ModuleService} from '../../../services/module.service';
+import {AchievementService} from '../../../services/achievement.service';
 
 @Component({
   selector: 'app-achievement',
@@ -10,59 +14,72 @@ import {Achievement} from '../../../services/achievement.model';
 // Achievement Page Front End Logic
 export class AchievementPage implements OnInit {
 
-  achievements: Achievement[] = [];
+  // statistics variables
+  picked: string;
   detailAchievement: boolean;
   currAchievement: Achievement;
+  avgsessiontime: number;
+  correctQuestCount: number;
+  wrongQuestCount: number;
+  lessonCount: number;
+  questCount: number;
+  regDate: string;
 
-  constructor() {
+  data = [];
+  view: any[] = [300, 300];
+
+  // piechart variables
+
+  gradient = false;
+  showLegend = false;
+  showLabels = false;
+  isDoughnut = false;
+  legendPosition = 'below';
+
+  colorScheme = {
+    domain: ['#66bd92', '#cf5d5d']
+  };
+
+  constructor(private statisticService: StatisticService, private authService: AuthService,
+              private moduleService: ModuleService, private achievementService: AchievementService) {
+  }
+
+  ionViewWillEnter(){
+    this.data = [
+      {
+        name: 'Correct',
+        value: this.correctQuestCount
+      },
+      {
+        name: 'Wrong',
+        value: this.wrongQuestCount
+      },
+    ];
+    console.log(typeof this.correctQuestCount);
+    console.log(typeof this.questCount);
+    this.picked = 'statistics';
     this.detailAchievement = false;
-    this.makeAchievementSample();
-    this.sortAchievements();
+    this.achievementService.generateAchievements(this.moduleService.userModules.length);
+    this.achievementService.sortAchievements();
   }
 
-  // Example Data, maybe change some icons
-  makeAchievementSample() {
-    this.achievements.push(new Achievement('1', 'CardStreak',
-        'Achieve a streak of 6 right answered cards in a row!', 3, 6, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('2', 'LessonStreak',
-        'Finish 3 Lessons!', 1, 2, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('3', 'FinishLesson',
-        'Finish your first Lesson!', 1, 1, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('4', 'AchieveAchievements',
-        'Achieve 3 Achievements!', 1, 3, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('5', 'ImportLesson',
-        'Import your first Lesson!', 1, 1, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('6', 'ImportLessonStreak',
-        'Import 5 Lessons!', 2, 5, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('7', 'EditProfile',
-        'Change your Password atleast one time!', 0, 1, 'mountain_with_flag.svg'));
-    this.achievements.push(new Achievement('8', 'CardLoopAcc',
-        'Create a CardLoop Account!', 1, 1, 'mountain_with_flag.svg'));
-  }
-
-  // Function for inspecting an achievement
-  inspectAchievement(achievement: Achievement) {
-    this.detailAchievement = !this.detailAchievement;
-    this.currAchievement = achievement;
-  }
-
-  // returns if an achievement is a "success" (100%) achievement
-  isSuccessAchievement(achievement: Achievement) {
-    return achievement.currentNumber / achievement.maxNumber === 1;
-  }
-
-  // sorts the achievement array
-  sortAchievements() {
-    this.achievements.sort((a, b) => (a.currentNumber / a.maxNumber) > (b.currentNumber / b.maxNumber) ? -1 : 1);
-  }
-
-  // only for testing while "login" is not implemented yet. turn false for "not being logged in"
-  // Later implement here the check, if a User is logged in
-  isLoggedIn() {
-    return false;
-  }
+    /**
+     * Function for inspecting an achievement
+     *
+     * @param achievement the achievment that will be viewed in detail
+     */
+    inspectAchievement(achievement: Achievement) {
+        this.detailAchievement = !this.detailAchievement;
+        this.currAchievement = achievement;
+    }
 
   ngOnInit() {
+    this.avgsessiontime = 10.4736;
+    this.correctQuestCount = 7;
+    this.questCount = 12;
+    this.lessonCount = 10;
+    this.wrongQuestCount = this.questCount - this.correctQuestCount ;
+    this.regDate = '29.07.2020';
   }
 
 }

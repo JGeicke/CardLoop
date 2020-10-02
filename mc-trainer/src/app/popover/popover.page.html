@@ -2,16 +2,25 @@
     <div>
         <p>Pick an action</p>
     </div>
-    <div>
-        <p>
-            <a (click)="this.moduleService.lessonDetails(this.moduleService.currLesson)">
-                See Details
-            </a>
-        </p>
-        <p>
-            <a (click)="this.moduleService.delDialog()">
-                Delete
-            </a>
-        </p>
+    <div [ngSwitch]="calledfrom">
+        <div *ngSwitchCase="'module-list'">
+            <p>
+                <a (click)="this.getModuleDetails()">
+                    See Details
+                </a>
+            </p>
+            <p>
+                <a (click)="this.startDelete()">
+                    Delete
+                </a>
+            </p>
+        </div>
+        <div *ngSwitchCase="'module-detail'">
+            <p>
+                <a (click)="this.getQuestionDetails()">
+                    See Details
+                </a>
+            </p>
+        </div>
     </div>
 </div>

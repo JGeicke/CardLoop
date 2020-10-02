@@ -9,6 +9,7 @@ import {AchievementPageRoutingModule} from './achievement-routing.module';
 import {AchievementPage} from './achievement.page';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import {NavbarPageModule} from "../../navbar/navbar.module";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {NavbarPageModule} from "../../navbar/navbar.module";
         IonicModule,
         AchievementPageRoutingModule,
         RoundProgressModule,
-        NavbarPageModule
+        NavbarPageModule,
+        NgxChartsModule
     ],
     declarations: [AchievementPage]
 })

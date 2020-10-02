@@ -10,6 +10,7 @@ ion-content {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   width: 100%;
+  cursor: pointer;
 }
 
 .question-box p {
@@ -56,6 +57,7 @@ ion-content {
   width: 100%;
   margin-bottom: 2rem;
   padding: 0.7rem;
+  cursor: pointer;
 }
 
 .right {
@@ -75,10 +77,12 @@ ion-toolbar {
 
 ion-button {
   background-color: transparent;
+  --box-shadow: none;
 }
 
 img {
   height: 1.8rem;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=learn-mode.page.css.map */

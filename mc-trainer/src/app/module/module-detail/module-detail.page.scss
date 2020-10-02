@@ -1,0 +1,392 @@
+/**
+  General Overhead
+ */
+
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  font-variant: small-caps;
+  color: #ffffff;
+  margin: 2rem 0;
+}
+
+.gobackarrow {
+  height: 2rem;
+  float: left;
+}
+
+ // SEGMENT BUTTON STYLING
+
+ion-segment {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  width: 75%;
+  font-size: 2rem;
+}
+
+ion-segment-button {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1rem;
+  --color: #ffffff;
+  --color-checked: #5B5D6E;
+  --background-checked: #ffffff;
+  --indicator-color: #ffffff;
+  --border-color: none;
+  --border-radius: 18px;
+  --indicator-height: 0;
+}
+
+// BOX STYLING
+
+.incitement {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.incitement-text {
+  opacity: 1;
+  color: white;
+  font-size: 1.2rem;
+  font-variant: small-caps;
+  text-align: center;
+  margin: 0.3rem 3.3rem 0.3rem 0.3rem !important;
+  padding: 0.7rem 0 0.7rem 3rem;
+}
+
+.incitement-box {
+  width: 100%;
+}
+
+.incitement-box img {
+  height: 3rem;
+  float: right;
+  position: relative;
+  right: -0.3rem;
+  top: 0.4rem
+}
+
+h4 {
+  color: #ffffff;
+  font-variant: small-caps;
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.content-box p, .content-box span {
+  opacity: 1;
+  color: white;
+  font-size: 1rem;
+}
+
+.content-box p {
+  font-style: italic;
+}
+
+.content-box img {
+  height: 2rem;
+}
+
+
+.center-chart{
+  position: relative;
+  bottom: 45%;
+}
+
+.center-chart > p {
+  font-size: 4rem;
+  font-style: normal;
+}
+
+.center-chart > p > span {
+  display: block;
+}
+
+.loop-count span {
+  opacity: 1;
+  color: white;
+  font-size: 1.2rem;
+  display: table;
+  margin: auto;
+}
+
+.red, .green, .yellow {
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.5rem;
+  color: #E9E9E9;
+}
+
+.red {
+  background: rgba(207,93,93,1);
+}
+
+.yellow {
+  background: rgba(255,183,99,1);
+}
+
+.green {
+  background: rgba(102,190,144,1);
+}
+
+
+// QUESTIONS TAB STYLE
+
+.questions-content {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.question-spacing {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.answer-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 0.8rem;
+  width: 70%;
+}
+
+.answer-box span {
+  opacity: 1;
+  color: white;
+  font-size: 1rem;
+  display: table;
+  text-align: center;
+}
+
+.question-loops {
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.question-loops span{
+  display: inline-block;
+  height: 100%;
+  font-size: 1.8rem;
+  padding: 0.3rem;
+  font-weight: bold;
+}
+/**
+  General Overhead
+ */
+
+* {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  font-variant: small-caps;
+  color: #ffffff;
+  margin: 2rem 0;
+}
+
+ // SEGMENT BUTTON STYLING
+
+ion-segment {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  width: 75%;
+  font-size: 2rem;
+}
+
+ion-segment-button {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1rem;
+  //background-color: rgba(255, 255, 255, 0.25);
+  --color: #ffffff;
+  --color-checked: #5B5D6E;
+  --background-checked: #ffffff;
+  --indicator-color: #ffffff;
+  --border-color: none;
+  --border-radius: 18px;
+}
+
+// BOX STYLING
+
+.incitement {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.incitement-text {
+  opacity: 1;
+  color: white;
+  font-size: 1.2rem;
+  font-variant: small-caps;
+  text-align: center;
+  margin: 0.3rem 3.3rem 0.3rem 0.3rem !important;
+  padding: 0.7rem 0 0.7rem 3rem;
+}
+
+.incitement-box {
+  width: 100%;
+}
+
+.incitement-box img {
+  height: 3rem;
+  float: right;
+  position: relative;
+  right: -0.3rem;
+  top: 0.4rem
+}
+
+h4 {
+  margin: 0rem;
+  color: #ffffff;
+  font-variant: small-caps;
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.content-box p, .content-box span {
+  opacity: 1;
+  color: white;
+  font-size: 1rem;
+}
+
+.content-box p {
+  font-style: italic;
+}
+
+.content-box img {
+  height: 2rem;
+}
+
+
+.center-chart{
+  position: relative;
+  bottom: 45%;
+}
+
+.center-chart > p {
+  font-size: 4rem;
+  font-style: normal;
+}
+
+.center-chart > p > span {
+  display: block;
+}
+
+.loop-count span {
+  opacity: 1;
+  color: white;
+  font-size: 1.2rem;
+  display: table;
+  margin: auto;
+}
+
+.red, .green, .yellow {
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.5rem;
+  color: #E9E9E9;
+}
+
+.red {
+  background: rgba(207,93,93,1);
+}
+
+.yellow {
+  background: rgba(255,183,99,1);
+}
+
+.green {
+  background: rgba(102,190,144,1);
+}
+
+
+// QUESTIONS TAB STYLE
+
+.questions-content {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.question-spacing {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.answer-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 0.8rem;
+  width: 70%;
+}
+
+.answer-box span {
+  opacity: 1;
+  color: white;
+  font-size: 1rem;
+  display: table;
+  text-align: center;
+}
+
+.question-loops {
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.question-loops span{
+  display: inline-block;
+  height: 100%;
+  font-size: 1.8rem;
+  padding: 0.3rem;
+  font-weight: bold;
+}

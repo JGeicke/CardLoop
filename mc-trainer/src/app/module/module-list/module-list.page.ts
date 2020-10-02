@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModuleService} from '../../../services/module.service';
 import {PopoverController} from '@ionic/angular';
 import {PopoverPage} from '../../popover/popover.page';
@@ -25,27 +25,40 @@ export class ModuleListPage implements OnInit {
                 private modalController: ModalController) {
     }
 
-    searchModules(){
+    /**
+     * event Handler ofr the change action on the search field
+     */
+    searchModules() {
         this.searchBool = true;
         this.filteredModules = this.moduleService.searchModules(this.moduleService.userModules, this.searchQuery);
         this.filteredModules.forEach(module => console.log(module));
     }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  playLesson(module) {
-      this.moduleService.currLesson = module;
-      this.moduleService.saveRecentlyPlayed();
-      this.router.navigate(['learn-mode']);
-  }
+    /**
+     * redirect to learn-mode to learn a module
+     * @param module the module which will be learned
+     */
+    playLesson(module) {
+        this.moduleService.currLesson = module;
+        this.moduleService.saveRecentlyPlayed();
+        this.router.navigate(['learn-mode']);
+    }
 
-    async popover(ev: any) {
+    /**
+     * presents the popover to see lesson Details or delete the lessons from the user
+     * @param ev the lcick event
+     * @param module    the clicked module
+     */
+    async popover(ev: any, module: Module) {
         const popover = await this.popoverController.create({
             component: PopoverPage,
             cssClass: 'my-custom-class',
             event: ev,
-            translucent: true
+            translucent: true,
+            componentProps: {from: 'module-list'}
         });
         return await popover.present();
     }

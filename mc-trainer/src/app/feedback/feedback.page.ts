@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { single } from './data';
+import {ModuleService} from '../../services/module.service';
+import {Router} from '@angular/router';
+import {StatisticService} from '../../services/statistic.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-feedback',
@@ -7,36 +10,73 @@ import { single } from './data';
   styleUrls: ['./feedback.page.scss'],
 })
 export class FeedbackPage implements OnInit {
-  single: any[];
+  private picked;
+
+  data = [];
   view: any[] = [300, 300];
 
   // options
-  gradient: boolean = false;
-  showLegend: boolean = false;
-  showLabels: boolean = false;
-  isDoughnut: boolean = true;
-  legendPosition: string = 'below';
+  gradient = false;
+  showLegend = false;
+  showLabels = false;
+  isDoughnut = true;
+  legendPosition = 'below';
+
+  questionsInSession = 0;
+  learnedQuestions = 0;
+  unsureQuestions = 0;
+  halfwayQuestions = 0;
 
   colorScheme = {
-    domain: ['#66bd92', '#cf5d5d', '#ffb763']
+    domain: ['#66bd92', '#cf5d5d']
   };
 
-  constructor() {
-    Object.assign(this, { single });
-  }
 
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
-  onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  constructor(private moduleService: ModuleService, private router: Router,
+              private statisticService: StatisticService, private authService: AuthService) {
   }
 
-  onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  ionViewDidEnter(){
+    // returns array [unsure questions, halfway questions, learned questions] of session
+    const sessionStats = this.statisticService.session.generateSessionStats();
+    this.data = [
+      {
+        name: 'Right',
+        value: this.statisticService.session.rightQuestions.length
+      },
+      {
+        name: 'Wrong',
+        value: this.statisticService.session.wrongQuestions.length
+      },
+    ];
+    this.questionsInSession = this.statisticService.session.getQuestionCount();
+    this.unsureQuestions = sessionStats[0];
+    this.halfwayQuestions = sessionStats[1];
+    this.learnedQuestions = sessionStats[2];
+    this.statisticService.generateUserStats(this.authService.GetUID(), this.statisticService.session);
+  }
+
+  /**
+   *
+   * @param $event that is triggered when the segement of the button switches sides
+   */
+  segmentChanged(ev: any) {
+    console.log(this.picked);
+  }
+
+
+  /**
+   * routes the view to the learn-mode page
+   */
+  restartLesson(){
+    this.router.navigate(['learn-mode']);
   }
 
   ngOnInit(): void {
+    this.picked = 'results';
   }
 }
