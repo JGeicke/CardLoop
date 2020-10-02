@@ -38,22 +38,25 @@ const routes: Routes = [
   },
   {
     path: 'navbar',
-    loadChildren: () => import('./navbar/navbar.module').then( m => m.NavbarPageModule)
+    loadChildren: () => import('./navbar/navbar.module').then(m => m.NavbarPageModule)
   },
 
   {
     path: 'import-modules',
-    loadChildren: () => import('./import-modules/import-modules-page.module').then( m => ImportModulesPageModule)
+    loadChildren: () => import('./import-modules/import-modules-page.module').then(m => ImportModulesPageModule)
   },
   {
     path: 'popover',
-    loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
-  },  {
-    path: 'feedback',
-    loadChildren: () => import('./feedback/feedback.module').then( m => m.FeedbackPageModule)
+    loadChildren: () => import('./popover/popover.module').then(m => m.PopoverPageModule)
   },
-
-
+  {
+    path: 'feedback',
+    loadChildren: () => import('./feedback/feedback.module').then(m => m.FeedbackPageModule)
+  },
+  {
+    path: 'onboarding',
+    loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule)
+  },
 
 
 ];

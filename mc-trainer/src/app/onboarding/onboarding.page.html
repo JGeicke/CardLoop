@@ -1,0 +1,232 @@
+<!--
+TODO: Resize Pagination Bullets
+-->
+<ion-content>
+    <ion-slides pager="true">
+        <ion-slide id="onboarding_slide1">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col size="8">
+                        <ion-text class="onboarding_text_2">Welcome new Student</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-img id="slide1_confetti" src="../../assets/icons/confetti.svg"
+                             alt="a confetti image"></ion-img>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col size="8">
+                        <ion-text class="onboarding_text_3">This is your first time in CardLoop!</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col size="8">
+                        <ion-text class="onboarding_text_1">Don't worry, we will show you everything you need!
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide id="onboarding_slide2">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">First, you need to find a lesson you are interested in
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center  onboarding_toolbar">
+                    <ion-col>
+                        <img class="custom_svg" src="../../assets/icons/navbar_cloud_active.svg"
+                             alt="navigation bar with active cloud icon">
+                    </ion-col>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img src="../../assets/icons/arrow_down_white.svg" alt="white arrow facing down">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-row>
+                        <ion-text class="onboarding_text_3">
+                            Find
+                            <ion-icon class="onboard_icon" name="search-outline"></ion-icon>
+                            <br>
+                            or<br>
+                            Pick a Topic
+                        </ion-text>
+                    </ion-row>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img src="../../assets/icons/import_lesson_categorie.svg" alt="white arrow facing down"
+                             class="round_svg">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide id="onboarding_slide3">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">Import that lesson and start your journey
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img class="custom_svg" src="../../assets/icons/download_lesson.svg" alt="lesson download">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img class="custom_svg" src="../../assets/icons/navbar_book_active.svg"
+                             alt="the navigation bar with the book as active">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img class="custom_svg" src="../../assets/icons/play_lesson_overview_with_arrow.svg"
+                             alt="play lesson with the overview and play button">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide id="onboarding_slide4">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">After you finished, you get a little feedback of your round
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img class="round_svg" src="../../assets/icons/question_round_example.svg"
+                             alt="a round circle with 3 colors that represent the percentage of right answered questions">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_0 slide4_color" color="success">GREEN
+                        </ion-text>
+                    </ion-col>
+                    <ion-col size="8" class="ion-text-left">
+                        <ion-text class="onboarding_text_0 explain_text">indicates, that you learned a card.
+                            If it is “learned”, it will no longer
+                            show up in your next test.
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_0 slide4_color" color="warning">YELLOW
+                        </ion-text>
+                    </ion-col>
+                    <ion-col size="8" class="ion-text-left">
+                        <ion-text class="onboarding_text_0 explain_text">indicates, at how many cards you
+                            are getting better in answering.
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center question_red">
+                    <ion-col>
+                        <ion-text class="onboarding_text_0 slide4_color" color="danger">RED
+                        </ion-text>
+                    </ion-col>
+                    <ion-col size="8" class="ion-text-left">
+                        <ion-text class="onboarding_text_0 explain_text">indicates, that you need to learn
+                            that card more often!
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide id="onboarding_slide5">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">If you answered all cards of a lesson correct 6 times in a
+                            row,
+                            the
+                            lesson will be completed!
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img
+                                src="../../assets/icons/play_lesson_show_progressbar.svg"
+                                alt="a lesson overview that shows a progress bar">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_1">And you also get Achievements for it.</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <img src="../../assets/icons/achievement_example.svg"
+                             alt="a example image of an achievement">
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_1">Can you find them all?</ion-text>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+        <ion-slide id="onboarding_slide6">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">That was it!</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">If you have any more questions, please email us.</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-button color="none" class="custom_svg" [routerLink]="['/aboutpage']">
+                            <img src="../../assets/icons/email_button.svg" alt="an icon that represents a mail button">
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_2">And now have fun with cardloop!</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-col>
+                        <ion-text class="onboarding_text_1">Tip: If you hold a lesson pressed in your lessonlist, you
+                            will
+                            get more options!
+                        </ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-end ion-justify-content-center">
+                    <ion-col>
+                        <ion-button color="success" class="onboarding_text_1" [routerLink]="['/logged-in']">
+                            Click here to start
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-slide>
+    </ion-slides>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-button color="none" routerLink="/logged-in" class="skip_button">
+                <ion-text class="onboarding_skip">No, Thanks.</ion-text>
+            </ion-button>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
