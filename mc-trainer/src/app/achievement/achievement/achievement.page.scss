@@ -2,6 +2,34 @@ ion-content:not(.ach_item_divider) {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
+// Header Section and Ion-Segment
+
+// SEGMENT BUTTON STYLING
+
+ion-segment {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  width: 90%;
+  font-size: 2rem;
+}
+
+ion-segment-button {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1rem;
+  //background-color: rgba(255, 255, 255, 0.25);
+  --color: #ffffff;
+  --color-checked: #5B5D6E;
+  --background-checked: #ffffff;
+  --indicator-color: #ffffff;
+  --border-color: none;
+  --border-radius: 18px;
+  --indicator-height: 0;
+}
+
+
+//First Switch Section
+
 .ach_item_divider {
   margin: 0 20px;
   --ion-item-background: white;
@@ -76,4 +104,36 @@ round-progress {
 
 .achievement_locked {
   filter: grayscale(50%);
+}
+
+// Second Switch Section
+
+ion-list {
+  padding: 0;
+  margin-top: 1.5rem;
+  background: none;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+ion-item {
+  --background: #92c1d3;
+  color: white;
+}
+
+ion-label p {
+  color: white;
+  font-size: 1.2rem;
+}
+
+h2 {
+  color: white;
+  text-align: center;
+  font-variant: small-caps;
+  margin-top: 1rem;
+}
+
+.wronglabel, .rightlabel {
+  color: white;
+  font-size: 1.2rem;
 }

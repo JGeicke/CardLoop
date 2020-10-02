@@ -141,7 +141,7 @@ ion-icon[name=search-outline] {
 }
 
 .tag-row {
-  margin-top: -3rem;
+  margin-top: -2.5rem;
   border-top: 1px solid #FFFFFF;
 }
 
@@ -151,7 +151,7 @@ ion-icon[name=search-outline] {
   float: right;
   position: relative;
   top: -3rem;
-  right: -1rem;
+  right: -2.5rem;
 }
 
 .cloud-down {

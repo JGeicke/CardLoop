@@ -34,9 +34,10 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     }
 
     /**
-     * TODO Comment
-     * @param ev
-     * @param qix
+     *
+     * @param $event by clicking on the question this popover is triggered to present
+     * the user with further options to interact with the question
+     * @param qix is the index of the question that is passed to the popover
      */
     async popover(ev: any, qix: number) {
         const popover = await this.popoverController.create({
@@ -50,8 +51,8 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     }
 
     /**
-     * TODO
-     * @param $event
+     *
+     * @param $event that is triggered when the segement of the button switches sides
      */
     segmentChanged($event: any) {
         console.log('segment changed triggered');
