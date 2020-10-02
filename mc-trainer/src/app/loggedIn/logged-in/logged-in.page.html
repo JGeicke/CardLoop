@@ -35,9 +35,9 @@
                                     </progress-bar>
                                 </div>
                                 <div>
-                                <span class="tags">#{{this.moduleService.recentlyPlayed.tags[0]}}
-                                    #{{this.moduleService.recentlyPlayed.tags[1]}}..
-                                    +{{this.moduleService.recentlyPlayed.tags.length - 2}} more</span>
+                                    <span class="tags" *ngFor="let tag of this.moduleService.recentlyPlayed.tags; index as i">
+                                        <a>#{{tag}}</a>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
         <h3>Recommendations</h3>
         <ion-slides [options]="sliderConfig">
             <ion-slide *ngFor="let recommendation of recommendations">
-                <div class="recommendation" (click)="lessonDetails()">
+                <div class="recommendation" (click)="this.moduleService.getModuleDetails(recommendation)">
                     <ion-row class="ion-justify-content-between">
                         <span class="recommendation-title">{{recommendation.name}}</span>
                         <span>{{recommendation.questions.length}}
@@ -83,8 +83,11 @@
                             </span>
                     </ion-row>
                     <ion-row>
-                        <span class="tags">#{{recommendation.tags[0]}}.. +
-                            {{recommendation.tags.length - 1}} more</span>
+                        <span class="tags">
+                            <a>#{{recommendation.tags[0]}}</a>
+                            <a *ngIf="recommendation.tags[0].length + recommendation.tags[1].length < 21; else elseBlock">#{{recommendation.tags[1]}}</a>
+                            <ng-template #elseBlock><a> + {{recommendation.tags.length - 1}} more</a></ng-template>
+                        </span>
                     </ion-row>
                 </div>
             </ion-slide>

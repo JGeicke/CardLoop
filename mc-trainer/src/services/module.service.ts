@@ -321,6 +321,19 @@ export class ModuleService {
     }
 
     /**
+     * Reset progress of a module on button click in frontEnd
+     * @param module is passed to the function to be reset
+     */
+    resetModuleProgress(module: Module) {
+        const uid = this.authService.GetUID();
+        if (uid !== '') {
+            for (const question of module.questions) {
+                this.resetQuestionProgress(question);
+            }
+        }
+    }
+
+    /**
      * Calculates module progress again after changes to question progress
      */
     private recalcModuleProgess() {

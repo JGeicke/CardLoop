@@ -78,9 +78,10 @@ ion-toolbar {
 
 ion-button {
   background-color: transparent;
+  --box-shadow: none;
 }
-
 img{
   height: 1.8rem;
   cursor: pointer;
 }
+

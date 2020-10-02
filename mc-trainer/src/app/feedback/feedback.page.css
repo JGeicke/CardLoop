@@ -47,6 +47,26 @@ h3 {
   text-align: center;
 }
 
+ion-segment {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  width: 75%;
+  font-size: 2rem;
+}
+
+ion-segment-button {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1rem;
+  --color: #ffffff;
+  --color-checked: #5B5D6E;
+  --background-checked: #ffffff;
+  --indicator-color: #ffffff;
+  --border-color: none;
+  --border-radius: 18px;
+  --indicator-height: 0;
+}
+
 img {
   height: 1.8rem;
   display: table;

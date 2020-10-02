@@ -38,6 +38,15 @@ export class LoggedInPage implements OnInit {
         }
     }
 
+    sumuptags(tag_arr: string[], tagIndex: number) {
+        let sumtag: string = '';
+        for (let i = 0; i < tagIndex; i++) {
+            sumtag += tag_arr[i];
+        }
+
+        return sumtag.length;
+    }
+
     /**
      * redirect the view to learn-mode to learn a module
      *
@@ -54,23 +63,13 @@ export class LoggedInPage implements OnInit {
     }
 
     /**
-     * redirect to the lesson detailpage
-     */
-    lessonDetails() {
-        // TODO: implement Method
-        console.log('lessondetails called');
-    }
-
-    /**
      * displays the not logged in message
      */
     async loginModal() {
         const alert = await this.alertController.create({
             cssClass: 'my-custom-class',
             header: 'Didn\'t sign into an account yet?',
-            message: 'Play around, have fun and whenever you' +
-                ' feel like it or when you want to save all ' +
-                'your progress. You can sign up by clicking ' +
+            message: 'You can sign up by clicking ' +
                 'the button above!',
             buttons: [
                 {
