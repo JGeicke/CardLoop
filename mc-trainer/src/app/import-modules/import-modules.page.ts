@@ -15,7 +15,7 @@ export class ImportModulesPage implements OnInit {
     private searchQuery: string;
     private searchBool;
     private filteredModule: Module[];
-    private lessons: any[] = [];
+    private lessons: Module[] = [];
 
     constructor(private moduleService: ModuleService, private router: Router) {
         this.lessons = this.moduleService.allModules;

@@ -3,7 +3,7 @@
     <h2 class="ion-text-center">Congratulations!</h2>
     <h3 class="ion-text-center">lesson loop completed</h3>
 
-    <div class="module">
+    <div class="module" [style.background-color]="moduleService.currLesson.color">
         <div class="inner-module-wrapper">
             <span class="module-title">{{moduleService.currLesson.name}}</span>
             <div class="white-box">

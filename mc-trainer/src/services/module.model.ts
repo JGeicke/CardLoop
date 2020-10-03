@@ -30,8 +30,16 @@ export class Module {
      * global playcount of the module used for recommendations
      */
     globalPlayCount: number;
+    /**
+     * chosen color of module
+     */
+    color: string;
+    /**
+     * UID of the creator/owner
+     */
+    ownerUID: string;
 
-    constructor(uid: string, description: string, name: string, tags: string[], globalPlayCount: number) {
+    constructor(uid: string, description: string, name: string, tags: string[], globalPlayCount: number, color: string, ownerUID: string) {
         this.uid = uid;
         this.description = description;
         this.name = name;
@@ -39,6 +47,8 @@ export class Module {
         this.questions = [];
         this.progress = 0;
         this.globalPlayCount = globalPlayCount;
+        this.color = color;
+        this.ownerUID = ownerUID;
     }
 
     /**

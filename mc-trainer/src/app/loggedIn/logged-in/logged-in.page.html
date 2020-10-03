@@ -20,7 +20,7 @@
                 <div class="ion-margin-bottom">
                     <h3>Pick up where you left</h3>
 
-                    <div class="module" (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)">
+                    <div class="module" [style.background-color]="this.moduleService.recentlyPlayed.color" (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)">
                         <img (click)="playLesson(this.moduleService.recentlyPlayed)"
                              src="../../../assets/icons/play-button-orange.svg"
                              alt="arrow pointing right"
@@ -87,5 +87,4 @@
         </ion-slides>
     </ion-col>
 </ion-content>
-
 <app-navbar></app-navbar>
