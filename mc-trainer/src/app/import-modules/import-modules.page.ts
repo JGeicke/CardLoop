@@ -15,7 +15,7 @@ export class ImportModulesPage implements OnInit {
     private searchQuery: string;
     private searchBool;
     private filteredModule: Module[];
-    private lessons: any[] = [];
+    private lessons: Module[] = [];
 
     constructor(private moduleService: ModuleService, private router: Router) {
         this.lessons = this.moduleService.allModules;
@@ -26,7 +26,7 @@ export class ImportModulesPage implements OnInit {
     }
 
     /**
-     * TODO: Comment
+     * Toggles search mode for all modules and sets the focus onto the searchbar
      */
     focusButton(): void {
         this.searchBool = true;
@@ -46,7 +46,7 @@ export class ImportModulesPage implements OnInit {
     }
 
     /**
-     * TODO: Comment
+     * Turns search mode of imported modules off - all modules are displayed again
      *
      */
     cancelSearch() {

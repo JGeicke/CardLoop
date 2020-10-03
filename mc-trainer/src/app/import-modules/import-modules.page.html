@@ -1,11 +1,9 @@
-<ion-header>
+<ion-header [hidden]="!searchBool">
     <ion-toolbar>
-        <ion-searchbar #search showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()"
-                       (ionChange)="searchModules()"></ion-searchbar>
+        <ion-searchbar #search showCancelButton="never" [(ngModel)]="searchQuery" (ionClear)="cancelSearch()" (ionChange)="searchModules()"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" [hidden]="this.searchBool">
-
     <ion-row class="ion-justify-content-center">
         <h2><span (click)="focusButton()">Find a Lesson
                 <ion-icon name="search-outline"></ion-icon></span>
@@ -64,7 +62,7 @@
                 </ion-col>
                 <ion-col size="2">
                         <span class="tags" style="float: right">
-                            {{lesson.tags.length}}
+                            {{lesson.questions.length}}
                             <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
                                  srcset="../../assets/icons/sd-card-solid.svg">
                         </span>
@@ -105,14 +103,13 @@
                         <span class="tags">#{{lesson.tags[0]}}.. +
                             {{lesson.tags.length - 1}} more
                         </span>
-                <span class="tags">
-                    {{lesson.tags.length}}
-                    <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
-                         srcset="../../assets/icons/sd-card-solid.svg">
+                    <span class="tags">
+                    {{lesson.questions.length}}
+                        <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                             srcset="../../assets/icons/sd-card-solid.svg">
                 </span>
             </ion-row>
         </div>
     </ion-row>
 </ion-content>
-
 <app-navbar></app-navbar>

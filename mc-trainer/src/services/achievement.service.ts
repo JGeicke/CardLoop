@@ -8,13 +8,24 @@ import {AuthService} from './auth.service';
 })
 export class AchievementService {
 
+  /**
+   * list of all achievements
+   */
   achievements: Achievement[] = [];
+
+  /**
+   * achievement of user with the most progress but not yet completed
+   */
   nextAchievement: Achievement;
 
   constructor(private statisticService: StatisticService, private authService: AuthService) {
       this.generateAchievements(0);
   }
 
+  /**
+   * generates achievements of user based on user stats
+   * @param userModulesLength - number of modules imported by user (typically userModules.length)
+   */
   generateAchievements(userModulesLength: number){
     this.achievements = [];
     let correctQuestionCount = 0;
@@ -29,34 +40,34 @@ export class AchievementService {
     }
 
     this.achievements.push(new Achievement('1', 'CorrectQuestions',
-        'Answer a Question correctly!', correctQuestionCount > 1 ? 1 : correctQuestionCount , 1, 'mountain_with_flag.svg'));
+        'Answer a Question correctly!', correctQuestionCount > 1 ? 1 : correctQuestionCount , 1, 'achievement.svg'));
 
     this.achievements.push(new Achievement('2', 'CorrectQuestions2',
-        'Answer 42 Questions correctly!', correctQuestionCount > 42 ? 42 : correctQuestionCount , 42, 'mountain_with_flag.svg'));
+        'Answer 42 Questions correctly!', correctQuestionCount > 42 ? 42 : correctQuestionCount , 42, 'achievement.svg'));
 
     this.achievements.push(new Achievement('3', 'CorrectQuestions3',
-        'Answer 250 Question correctly!', correctQuestionCount > 250 ? 250 : correctQuestionCount , 250, 'mountain_with_flag.svg'));
+        'Answer 250 Question correctly!', correctQuestionCount > 250 ? 250 : correctQuestionCount , 250, 'achievement.svg'));
 
     this.achievements.push(new Achievement('4', 'LessonStreak1',
-        'Finish 10 Lessons!', lessonCount > 10 ? 10 : lessonCount , 10, 'mountain_with_flag.svg'));
+        'Finish 10 Lessons!', lessonCount > 10 ? 10 : lessonCount , 10, 'playing-cards.svg'));
 
     this.achievements.push(new Achievement('5', 'LessonStreak2',
-        'Finish 50 Lessons!', lessonCount > 50 ? 50 : lessonCount , 50, 'mountain_with_flag.svg'));
+        'Finish 50 Lessons!', lessonCount > 50 ? 50 : lessonCount , 50, 'playing-cards.svg'));
 
     this.achievements.push(new Achievement('6', 'LessonStreak3',
-        'U got 99 problems but lessons ain\'t one!', lessonCount > 99 ? 99 : lessonCount , 99, 'mountain_with_flag.svg'));
+        'U got 99 problems but lessons ain\'t one!', lessonCount > 99 ? 99 : lessonCount , 99, 'playing-cards.svg'));
 
     this.achievements.push(new Achievement('7', 'FinishLesson',
-        'Finish your first Lesson!', lessonCount > 1 ? 1 : lessonCount, 1, 'mountain_with_flag.svg'));
+        'Finish your first Lesson!', lessonCount > 1 ? 1 : lessonCount, 1, 'playing-cards.svg'));
 
     this.achievements.push(new Achievement('10', 'ImportLesson',
-        'Import your first Lesson!', imported > 1 ? 1 : imported, 1, 'mountain_with_flag.svg'));
+        'Import your first Lesson!', imported > 1 ? 1 : imported, 1, 'apple.svg'));
 
     this.achievements.push(new Achievement('11', 'ImportLessonStreak',
-        'Import 5 Lessons!', imported > 5 ? 5 : imported, 5, 'mountain_with_flag.svg'));
+        'Import 5 Lessons!', imported > 5 ? 5 : imported, 5, 'apple.svg'));
 
     this.achievements.push(new Achievement('12', 'ImportLessonStreak2',
-        'Import 50 Lessons!', imported > 50 ? 50 : imported, 50, 'mountain_with_flag.svg'));
+        'Import 50 Lessons!', imported > 50 ? 50 : imported, 50, 'apple.svg'));
 
     this.achievements.push(new Achievement('13', 'CardLoopAcc',
         'Create a CardLoop Account!', this.authService.isLoggedIn ? 1 : 0, 1, 'mountain_with_flag.svg'));
@@ -86,18 +97,23 @@ export class AchievementService {
     this.getNextAchievement();
   }
 
-  // returns if an achievement is a "success" (100%) achievement
+  /**
+   * checks if achievement is completed
+   * @param achievement - achievement to check
+   */
   isSuccessAchievement(achievement: Achievement) {
     return achievement.currentNumber === achievement.maxNumber;
   }
 
-  // sorts the achievement array
+  /**
+   * sorting achievement array based on user progress of achievements
+   */
   sortAchievements() {
     this.achievements.sort((a, b) => (a.currentNumber / a.maxNumber) > (b.currentNumber / b.maxNumber) ? -1 : 1);
   }
 
   /**
-   * Check recently added Achievement if it is completed. Used for "x achievements unlocked"-achievements
+   * Check the recently added Achievement if it is completed. Used for "x achievements unlocked"-type of achievements
    */
   private checkRecentlyAddedAchievement(){
     if (this.isSuccessAchievement(this.achievements[this.achievements.length - 1])){
@@ -106,6 +122,9 @@ export class AchievementService {
     return 0;
   }
 
+  /**
+   * sets nextAchievement to the uncompleted achievement with the highest progress
+   */
   getNextAchievement(){
     // Find all uncompleted achievements
     const achievementsInProgress = [];

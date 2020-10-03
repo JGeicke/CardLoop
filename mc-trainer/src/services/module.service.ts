@@ -14,9 +14,21 @@ import {AchievementService} from './achievement.service';
 })
 export class ModuleService {
 
+    /**
+     * all modules imported by the user
+     */
     userModules: Module[] = [];
+    /**
+     * all modules stored in cloud firestore
+     */
     allModules: Module[] = [];
+    /**
+     * last played module(lesson) of user
+     */
     public recentlyPlayed: Module;
+    /**
+     * module(lesson) currently played by user
+     */
     public currLesson: Module;
     public currQuestion = -1;
 
@@ -169,7 +181,8 @@ export class ModuleService {
      */
     private getModule(uid: string) {
         return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags, res.data().playCount));
+            this.allModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags,
+                res.data().playCount, res.data().color, res.data().ownerUID));
         });
     }
 
@@ -179,7 +192,8 @@ export class ModuleService {
      */
     private getUserModule(uid: string) {
         return this.firestore.collection('modules').doc(uid).get().toPromise().then((res) => {
-            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags, res.data().playCount));
+            this.userModules.push(new Module(uid, res.data().description, res.data().name, res.data().tags,
+                res.data().playCount, res.data().color, res.data().ownerUID));
         });
     }
 
@@ -217,7 +231,7 @@ export class ModuleService {
 
     /**
      * checks if the given module is already imported by the user that is logged in
-     * @param module
+     * @param module - module to check if imported
      */
     isModuleImported(module: Module): boolean {
         for (const m of this.userModules) {
@@ -230,7 +244,7 @@ export class ModuleService {
 
     /**
      * Access progress of questions in firebase to display in view
-     * @param question
+     * @param question - question to get progress from in firebase
      */
     getQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -246,7 +260,7 @@ export class ModuleService {
 
     /**
      * Stores progress of question in cloud firestore
-     * @param question
+     * @param question - question to set the progress from in firebase
      */
     private setQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -259,7 +273,7 @@ export class ModuleService {
 
     /**
      * Increment progress of question after right answer
-     * @param question
+     * @param question - question to set the progress from in firebase
      */
     async incrementQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -308,8 +322,8 @@ export class ModuleService {
     }
 
     /**
-     * Reset progress of a question after a wrong answer to 0
-     * @param question
+     * Reset progress of a question after a wrong answer to 0 & recalcs the progress of the module containing it
+     * @param question - question to reset the progress from in firebase
      */
     async resetQuestionProgress(question: Question) {
         const uid = this.authService.GetUID();
@@ -344,7 +358,7 @@ export class ModuleService {
 
     /**
      * Deletes module of user
-     * @param module
+     * @param module - module to delete
      */
     async deleteLesson(module: Module) {
         const uid = this.authService.GetUID();
@@ -352,16 +366,21 @@ export class ModuleService {
             const idx = this.userModules.indexOf(module);
             this.userModules.splice(idx, 1);
             const resultArray = [];
-            this.userModules.forEach(module => resultArray.push(module.uid));
+            this.userModules.forEach(m => resultArray.push(m.uid));
             await this.firestore.collection('userModules').doc(uid).set({
                 modules: resultArray
             });
+
+            // delete question progress
+            for (const question of module.questions){
+                await this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).delete();
+            }
         }
     }
 
     /**
      * imports a Module into the Modules of the currently logged in User
-     * @param module
+     * @param module - module to import
      */
     importModule(module: Module) {
         const userID = this.authService.GetUID();
@@ -409,6 +428,174 @@ export class ModuleService {
         });
 
         await alert.present();
+    }
+
+    /**
+     * Checks if current user is module owner
+     * @param module - module to check the owner from
+     * @return: boolean
+     */
+    isModuleOwner(module: Module): boolean{
+        return module.ownerUID === this.authService.GetUID();
+    }
+
+    /**
+     * Creates a new module in firestore, adds it locally to allModules & imports it
+     * @param name - name of module
+     * @param description - description of module
+     * @param color - display color of module
+     * @param tags - searchable tags of module
+     * @param questions - question to add to new module
+     */
+    async createModule(name: string, description: string, color: string, tags: string[], questions: Question[]){
+        const userID = this.authService.GetUID();
+        // check if any user is logged in
+        if (userID !== '') {
+            const res = await this.firestore.collection('modules').add({
+                color,
+                description,
+                name,
+                tags,
+                playCount: 0,
+                ownerID: userID
+            });
+            const moduleUID = res.id;
+            // Add each questions as a document to the question collection of new module
+            for (const question of questions){
+                const result = await this.addQuestionToModule(moduleUID, question);
+                // Sets uid of local question to uid of added document in firebase
+                question.uid = result.id;
+            }
+            // Create new local module
+            const module = new Module(moduleUID, description, name, tags, 0, color, userID);
+            // Add module to all modules
+            this.allModules.push(module);
+            this.importModule(module);
+        }
+    }
+
+    /**
+     * Adds question to module
+     * @param moduleUID - module where the question will be added
+     * @param question - question to add
+     */
+    addQuestionToModule(moduleUID: string, question: Question){
+        return this.firestore.collection('modules').doc(moduleUID).collection('questions').add({
+            answers: question.answers,
+            question: question.question,
+            solutions: question.solutions
+        });
+    }
+
+    /**
+     * deletes module in firestore, updates allModules, updates userModules and recentlyPlayed
+     * @param module - module to delete
+     */
+    async deleteModule(module: Module){
+        const userID = this.authService.GetUID();
+        // check if any user is logged in
+        if (userID !== '' && this.isModuleOwner(module)) {
+            // delete every document of subcollection questions
+             for (const question of module.questions){
+                await this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).delete();
+            }
+             // delete document of module
+             await this.firestore.collection('modules').doc(module.uid).delete();
+             // update allModules
+             this.getAllModules();
+             // update local userModules
+             this.deleteLesson(module);
+             // update all modules of userModules collection
+             this.updateUserModules(module);
+             // update recently played
+             await this.loadRecentlyPlayed();
+        }
+    }
+
+    /**
+     * Updates all documents of userModules collection that imported the now deleted module
+     * removes the module from userModules, removes questionProgress of question from the module
+     * and resets recentlyPlayed if the user recently played the deleted module
+     * @param module - imported module that was deleted
+     */
+    private async updateUserModules(module: Module){
+        // get documents that contain the module id
+        const result = await this.firestore.firestore.collection('userModules').where('modules', 'array-contains', module.uid).get();
+        if (!result.empty){
+            let modules = [];
+            // iterate the documents
+            for (const doc of result.docs){
+                const recentlyPlayedModule = doc.data().recentlyPlayed;
+                // check if recentlyPlayed uid matches deleted module uid
+                if (recentlyPlayedModule === module.uid){
+                    // reset if match
+                    await this.firestore.collection('userModules').doc(doc.id).update({
+                        recentlyPlayed: ''
+                    });
+                }
+                // get all modules of current document
+                modules = doc.data().modules;
+                // check if modules contain deleted module uid
+                const idx = modules.indexOf(module.uid);
+                // user imported the module - delete possible question progress
+                if (idx !== -1){
+                    for (const question of module.questions){
+                        await this.firestore.collection('userModules').doc(doc.id).collection('questionProgress')
+                            .doc(question.uid).delete();
+                    }
+                }
+                // remove deleted module uid & store in firebase
+                modules.splice(idx, 1);
+                await this.firestore.collection('userModules').doc(doc.id).update({
+                    modules
+                });
+            }
+        }
+    }
+
+    /**
+     * Edit an existing module in firebase & change the local userModule accordingly.
+     * !When adding a new question, it is important to initialize the uid of the question with '-1'.!
+     * The local uid is getting replaced by the generated firestore uid after adding the question to the questions-collection of the module.
+     * @param module - module to be edited
+     * @param name - name of module
+     * @param description - description of module
+     * @param color - displayed color of module
+     * @param tags - searchable tags of module
+     * @param questions - questions of module
+     */
+    async editModule(module: Module, name: string, description: string, color: string, tags: string[], questions: Question[]){
+        // edit module in firebase
+        this.firestore.collection('modules').doc(module.uid).update({
+            name,
+            description,
+            color,
+            tags
+        });
+        // edit questions of module in firebase
+        for (const question of questions){
+            // check if question already got id
+            if (question.uid !== '-1' ){
+                this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).update({
+                    answers: question.answers,
+                    question: question.question,
+                    solutions: question.solutions
+                });
+            } else {
+                // newly created question & set generated id
+                const res = await this.addQuestionToModule(module.uid, question);
+                question.uid = res.id;
+            }
+        }
+        // edit module locally in userModule
+        module.name = name;
+        module.description = description;
+        module.color = color;
+        module.tags = tags;
+        module.questions = questions;
+
+        // update all modules
+        await this.getAllModules();
     }
 }
 
