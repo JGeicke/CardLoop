@@ -1,0 +1,91 @@
+ion-content {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+/**
+  HEADERS
+ */
+ion-header {
+  --ion-background-color: #4ba3c3;
+}
+
+ion-toolbar {
+  --background: #4ba3c3;
+}
+
+p {
+  color: white;
+}
+
+.question-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+.answer-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  width: 90%;
+  display: flex;
+}
+
+.confirm {
+  background: #66BE90;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0.7rem;
+  cursor: pointer;
+}
+
+.right {
+  background: #66be90;
+}
+
+.add-icon {
+  height: 3rem;
+  width: 3rem;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  background: #ff4b05;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+}
+
+.confirm {
+  background: #66BE90;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0.7rem;
+  cursor: pointer;
+}
+
+ion-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+ion-textarea {
+  color: white;
+}
+
+/*# sourceMappingURL=answer-modal.page.css.map */
