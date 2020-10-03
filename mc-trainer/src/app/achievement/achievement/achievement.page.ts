@@ -18,7 +18,7 @@ export class AchievementPage implements OnInit {
   picked: string;
   detailAchievement: boolean;
   currAchievement: Achievement;
-  avgsessiontime: number;
+  avgsessiontime: string;
   correctQuestCount: number;
   wrongQuestCount: number;
   lessonCount: number;
@@ -45,6 +45,15 @@ export class AchievementPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    const userStats = this.statisticService.userStats;
+    this.questCount = userStats.questionCount;
+    this.correctQuestCount = userStats.correctQuestionCount;
+    this.wrongQuestCount = this.questCount - this.correctQuestCount;
+    this.lessonCount = userStats.lessonCount;
+    this.avgsessiontime = userStats.averageSessionTime.toFixed(2);
+
+    const userRegDate = userStats.registrationDate;
+    this.regDate = userRegDate.getDate() + '.' + (userRegDate.getMonth() + 1) + '.' + userRegDate.getFullYear();
     this.data = [
       {
         name: 'Correct',
@@ -55,8 +64,6 @@ export class AchievementPage implements OnInit {
         value: this.wrongQuestCount
       },
     ];
-    console.log(typeof this.correctQuestCount);
-    console.log(typeof this.questCount);
     this.picked = 'statistics';
     this.detailAchievement = false;
     this.achievementService.generateAchievements(this.moduleService.userModules.length);
@@ -74,12 +81,12 @@ export class AchievementPage implements OnInit {
     }
 
   ngOnInit() {
-    this.avgsessiontime = 10.4736;
-    this.correctQuestCount = 7;
-    this.questCount = 12;
-    this.lessonCount = 10;
-    this.wrongQuestCount = this.questCount - this.correctQuestCount ;
-    this.regDate = '29.07.2020';
+    this.questCount = 0;
+    this.correctQuestCount = 0;
+    this.wrongQuestCount = 0;
+    this.lessonCount = 0;
+    this.avgsessiontime = '0';
+    this.regDate = '00.00.0000';
   }
 
 }
