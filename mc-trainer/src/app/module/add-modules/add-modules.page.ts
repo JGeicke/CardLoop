@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModuleService} from "../../../services/module.service";
+import {Question} from "../../../services/question.model";
 
 @Component({
   selector: 'app-add-modules',
@@ -8,7 +9,8 @@ import {ModuleService} from "../../../services/module.service";
 })
 export class AddModulesPage implements OnInit {
 
-  private picked = 'general';
+  // module variables
+  private picked = 'questions';
   private moduleTitle = 'Your Title';
   private moduleTags = '#yourtag';
   private moduleDesc = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr,' +
@@ -16,9 +18,20 @@ export class AddModulesPage implements OnInit {
   private moduleColor = '#cf5d5d';
   private color_arr= ['#BA6363', '#97BF78', '#8D779D', '#C29157', '#D1B963', '#466078', '#428F81', '#BB769B'];
 
-  constructor(private moduleService: ModuleService) { }
+  // quesiton variables
+  private quest_arr: Question[] = [];
+  private question = 'Was ist die Hauptstadt von Kamerun?';
+  private answer = ['Jaunde', 'Maunde', 'Kalaunde', 'Schmaunde', 'Banaunde'];
+  private solutions = [1];
+
+  constructor(private moduleService: ModuleService) {
+    this.quest_arr.push(new Question('1', 'Was ist die Hauptstadt von Kamerun?', this.answer, this.solutions));
+    this.quest_arr.push(new Question('1', 'Was ist die Hauptstadt von Kamerun?', this.answer, this.solutions));
+    this.quest_arr.push(new Question('1', 'Was ist die Hauptstadt von Kamerun?', this.answer, this.solutions));
+  }
 
   ngOnInit() {
+
   }
 
   submit() {

@@ -60,6 +60,10 @@ const routes: Routes = [
     path: 'add-modules',
     loadChildren: () => import('./module/add-modules/add-modules.module').then( m => m.AddModulesPageModule)
   },
+  {
+    path: 'answer-modal',
+    loadChildren: () => import('./module/answer-modal/answer-modal.module').then( m => m.AnswerModalPageModule)
+  },
 
 
 

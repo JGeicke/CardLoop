@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+<!--    <ion-row>-->
+<!--        <p>To select the right answer to a question, click the check button</p>-->
+<!--    </ion-row>-->
+    <ion-row class="ion-justify-content-center">
+        <div class="question-box">
+            <ion-textarea [(ngModel)]="this.question"></ion-textarea>
+        </div>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <div class="question-box">
+
+            <ion-row *ngFor="let answer of answers; let i = index; trackBy: trackByIndex;"
+                     class="ion-justify-content-center ion-align-items-center">
+                <ion-col size="9">
+                    <div class="answer-box" [class.right]="this.solutions[i]">
+                        <ion-textarea [(ngModel)]="answers[i]"></ion-textarea>
+                    </div>
+                </ion-col>
+                <ion-col size="3">
+                    <div class="answer-box ion-align-items-center ion-justify-content-center">
+                        <ion-icon name="trash" (click)="this.answers.splice(i, 1); showAnswers_arr()"></ion-icon>
+                    </div>
+                    <div class="answer-box ion-align-items-center ion-justify-content-center">
+                        <ion-icon name="checkmark-circle-outline"
+                                  (click)="this.solutions[i] = !this.solutions[i]; showSolutions_arr()"
+                                  [ngClass]="this.solutions[i] ? 'success' : 'danger'">
+                        </ion-icon>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+
+            <ion-row class="ion-justify-content-center" *ngIf="answers.length < 6">
+                <ion-item class="add-icon" (click)="addAnswer(); showAnswers_arr()">
+                    <ion-icon name="add" color="white"></ion-icon>
+                </ion-item>
+            </ion-row>
+
+        </div>
+    </ion-row>
+    <ion-row>
+        <div class="confirm" (click)="save()">
+            <span>Save and Go Back</span>
+        </div>
+    </ion-row>
+</ion-content>
