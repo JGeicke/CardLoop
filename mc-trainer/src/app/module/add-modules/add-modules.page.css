@@ -1,0 +1,130 @@
+/**
+  General Overhead
+ */
+ion-content {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+h2 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  font-variant: small-caps;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+}
+
+h3 {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin: 0 1rem 3px 0;
+}
+
+/**
+  HEADERS
+ */
+ion-header {
+  --ion-background-color: #4ba3c3;
+}
+
+ion-toolbar {
+  --background: #4ba3c3;
+}
+
+.gobackarrow {
+  height: 2rem;
+  float: left;
+}
+
+ion-segment {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  width: 75%;
+  font-size: 2rem;
+}
+
+ion-segment-button {
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 1rem;
+  --color: #ffffff;
+  --color-checked: #5B5D6E;
+  --background-checked: #ffffff;
+  --indicator-color: #ffffff;
+  --border-color: none;
+  --border-radius: 18px;
+  --indicator-height: 0;
+}
+
+.module {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.content-box p, .content-box span {
+  opacity: 1;
+  color: white;
+  font-size: 1rem;
+}
+
+.content-box p {
+  font-style: italic;
+}
+
+.content-box img {
+  height: 2rem;
+}
+
+ion-item {
+  --background: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+  margin-bottom: 0.5rem;
+}
+
+ion-input, ion-textarea {
+  color: white;
+}
+
+ion-label:focus {
+  color: #e0ac08;
+}
+
+.color-drop {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+}
+
+.color-row {
+  margin-bottom: 1rem;
+}
+
+.confirm {
+  background: #66BE90;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  padding: 0.7rem;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=add-modules.page.css.map */

@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-row class="ion-justify-content-center">
+        <h2 class="ion-text-center">Create your Lesson</h2>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+        <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="picked">
+            <ion-segment-button value="general">
+                <ion-label>GENERAL</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="questions">
+                <ion-label>QUESTIONS</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-row>
+    <div [ngSwitch]="picked">
+        <div *ngSwitchCase="'general'">
+            <ion-row class="ion-justify-content-center">
+                <div class="module" [ngStyle]="{'background-color': this.moduleColor}">
+                    <div class="inner-module-wrapper">
+                        <span class="module-title">{{moduleTitle}}</span>
+                        <div class="white-box">
+                            <div>
+                                <progress-bar [progress]="0"
+                                              [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                </progress-bar>
+                            </div>
+                            <div>
+                                <span class="tags">{{moduleTags}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+                <div class="content-box">
+                    <form (ngSubmit)="submit()"></form>
+                    <h3>Title</h3>
+                    <ion-item>
+                        <ion-input [(ngModel)]="moduleTitle"></ion-input>
+                    </ion-item>
+                    <h3>Tags</h3>
+                    <ion-item>
+                        <ion-input [(ngModel)]="moduleTags"></ion-input>
+                    </ion-item>
+                    <h3>Color</h3>
+                    <ion-row class="ion-justify-content-around color-row">
+                        <div (click)="this.moduleColor = color"
+                             class="color-drop"
+                             [ngStyle]="{'background-color': color}"
+                             *ngFor="let color of color_arr">
+                        </div>
+                    </ion-row>
+                    <h3>Description</h3>
+                    <ion-item>
+                        <ion-textarea [(ngModel)]="moduleDesc"></ion-textarea>
+                    </ion-item>
+                </div>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+                <div class="confirm" (click)="submit()">
+                    <span>Save Changes</span>
+                </div>
+            </ion-row>
+        </div>
+        <div *ngSwitchCase="'questions'">
+            <ion-row class="ion-justify-content-center">
+                <div class="questions-content">
+                    <h4>Questions</h4>
+                    <ion-row class="ion-justify-content-around ion-align-items-center question-spacing">
+                        <div class="answer-box">
+                            <span></span>
+                        </div>
+                        <div class="question-loops">
+                            <span></span>
+                        </div>
+                    </ion-row>
+                </div>
+            </ion-row>
+        </div>
+    </div>
+</ion-content>

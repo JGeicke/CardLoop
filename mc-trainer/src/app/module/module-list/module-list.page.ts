@@ -26,7 +26,7 @@ export class ModuleListPage implements OnInit {
     }
 
     /**
-     * event Handler ofr the change action on the search field
+     * event handler for the change action on the search field
      */
     searchModules() {
         this.searchBool = true;
@@ -48,8 +48,8 @@ export class ModuleListPage implements OnInit {
     }
 
     /**
-     * presents the popover to see lesson Details or delete the lessons from the user
-     * @param ev the lcick event
+     * presents the popover to see lesson details or delete the lessons of the user
+     * @param ev the click event
      * @param module    the clicked module
      */
     async popover(ev: any, module: Module) {

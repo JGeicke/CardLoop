@@ -1,0 +1,114 @@
+ion-content {
+  --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+}
+
+/* Custom Slide Padding */
+#onboarding_slide1 > ion-grid {
+  --ion-grid-column-padding: 32px;
+}
+
+#onboarding_slide2 > ion-grid {
+  --ion-grid-column-padding: 23px;
+}
+
+#onboarding_slide3 > ion-grid {
+  --ion-grid-column-padding: 30px;
+}
+
+#onboarding_slide4 > ion-grid {
+  --ion-grid-column-padding: 15px;
+}
+
+.question_red {
+  padding-bottom: 20px;
+}
+
+#onboarding_slide5 > ion-grid {
+  --ion-grid-column-padding: 15px;
+}
+
+#onboarding_slide6 > ion-grid {
+  --ion-grid-column-padding: 20px;
+}
+
+/* --------------- */
+ion-slides {
+  --bullet-background-active: white;
+  --bullet-background: #BBCDD6;
+}
+
+ion-text {
+  font-variant: small-caps;
+}
+
+#slide1_confetti {
+  height: 7rem;
+  width: 7rem;
+}
+
+/* different text sizes */
+.onboarding_text_0 {
+  font-size: medium;
+}
+
+.onboarding_text_1 {
+  font-size: large;
+}
+
+.onboarding_text_2 {
+  font-size: x-large;
+}
+
+.onboarding_text_3 {
+  font-size: xx-large;
+}
+
+/* ------- */
+.onboarding_skip {
+  color: #CCE6F4;
+  font-size: medium;
+  text-decoration: underline;
+}
+
+ion-footer {
+  background-color: #175676;
+  --ion-border-box-shadow: none;
+}
+
+.skip_button {
+  background-color: #175676;
+}
+
+.onboard_icon {
+  height: 2rem;
+  width: 2rem;
+}
+
+.onboarding_toolbar {
+  --ion-background-color: #1B5777;
+}
+
+ion-button {
+  --box-shadow: none;
+}
+
+.custom_svg {
+  width: 16rem;
+  height: auto;
+}
+
+/*Custom CSS Slide 1*/
+/* Custom CSS Slide 4 */
+.slide4_color[color] {
+  --ion-color-success: #66BE90;
+  --ion-color-warning: #FFB763;
+  --ion-color-danger: #CF5D5D;
+  float: right;
+}
+
+.round_svg {
+  height: 10rem;
+  width: 10rem;
+}
+
+/*# sourceMappingURL=onboarding.page.css.map */
