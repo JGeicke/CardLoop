@@ -56,15 +56,19 @@ const routes: Routes = [
   {
     path: 'onboarding',
     loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule)
-  },  {
+  },
+  {
     path: 'add-modules',
-    loadChildren: () => import('./module/add-modules/add-modules.module').then( m => m.AddModulesPageModule)
+    loadChildren: () => import('./module/add-modules/add-modules.module').then(m => m.AddModulesPageModule)
   },
   {
     path: 'answer-modal',
-    loadChildren: () => import('./module/answer-modal/answer-modal.module').then( m => m.AnswerModalPageModule)
+    loadChildren: () => import('./module/answer-modal/answer-modal.module').then(m => m.AnswerModalPageModule)
   },
-
+  {
+    path: 'aboutpage',
+    loadChildren: () => import('./aboutpage/aboutpage.module').then(m => m.AboutpagePageModule)
+  },
 
 
 ];
