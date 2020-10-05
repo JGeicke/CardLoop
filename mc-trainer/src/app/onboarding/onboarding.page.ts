@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class OnboardingPage implements OnInit {
 
   constructor(private router: Router) {
-    if (!!localStorage.getItem('newUser')) {
+    if (JSON.stringify(localStorage.getItem('newUser')) == null) {
       this.router.navigate(['login']);
     }
   }
