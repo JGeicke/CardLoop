@@ -32,22 +32,40 @@ export class LoginPage implements OnInit, ViewWillEnter {
         if (this.authService.registerTriggered) {
             this.toggleLogin();
         }
+        console.log(JSON.parse(localStorage.getItem('saveUser')))
+        if (JSON.parse(localStorage.getItem('saveUser')) === true) {
+            if (localStorage.getItem('user') != null) {
+
+                this.saveUser =true;
+                this.user = JSON.parse(localStorage.getItem('user'));
+                this.emailInput = this.user.email;
+                this.passwordInput = this.user.password;
+                this.Login();
+            }
+        }
+        ;
     }
 
-  ngOnInit() {
-    if (localStorage.getItem('user') != null) {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.emailInput = this.user.email;
-      this.passwordInput = this.user.password;
-      this.saveUser = true;
+    ngOnInit() {
+        if (localStorage.getItem('user') != null) {
+            this.user = JSON.parse(localStorage.getItem('user'));
+            this.emailInput = this.user.email;
+            this.passwordInput = this.user.password;
+            this.saveUser = true;
+        }
     }
-  }
 
     ionViewWillEnter(): void {
         this.hasWarning = false;
         this.hasAlert = false;
-        if (localStorage.getItem('user') === null) {
+        if (localStorage.getItem('saveUser') === null) {
             this.saveUser = false;
+        }   else {
+            this.saveUser = true;
+            this.user = JSON.parse(localStorage.getItem('user'));
+            this.emailInput = this.user.email;
+            this.passwordInput = this.user.password;
+            this.Login();
         }
     }
 
@@ -124,6 +142,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
                 } else {
                     console.log('hello again');
                     if (this.saveUser) {
+                        localStorage.setItem('saveUser', JSON.parse('true'));
                         this.authService.rememberUser();
                     }
                     this.moduleService.getUserModules().then((r) => {
