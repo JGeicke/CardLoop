@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-onboarding',
@@ -7,8 +8,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class OnboardingPage implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
+    if (!!localStorage.getItem('newUser')) {
+      this.router.navigate(['login']);
+    }
+  }
 
+  onboardingFinish() {
+    localStorage.setItem('newUser', 'false');
   }
 
   ngOnInit() {

@@ -213,7 +213,8 @@ TODO: Resize Pagination Bullets
                 </ion-row>
                 <ion-row class="ion-align-items-end ion-justify-content-center">
                     <ion-col>
-                        <ion-button color="success" class="onboarding_text_1" [routerLink]="['/logged-in']">
+                        <ion-button color="success" class="onboarding_text_1" (click)="onboardingFinish()"
+                                    [routerLink]="['/logged-in']">
                             Click here to start
                         </ion-button>
                     </ion-col>
@@ -223,7 +224,7 @@ TODO: Resize Pagination Bullets
     </ion-slides>
     <ion-grid>
         <ion-row class="ion-justify-content-center">
-            <ion-button color="none" routerLink="/logged-in" class="skip_button">
+            <ion-button color="none" (click)="onboardingFinish()" routerLink="/logged-in" class="skip_button">
                 <ion-text class="onboarding_skip">No, Thanks.</ion-text>
             </ion-button>
         </ion-row>
