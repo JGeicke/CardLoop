@@ -24,7 +24,7 @@
                          [class.chosen-box]="selectedAnswers[i]"
                          [class.wrong]="!rightAnswers[i] && confiremd"
                          [class.right]="rightAnswers[i] && confiremd"
-                         (click)="selectedAnswers[i] = !selectedAnswers[i]">
+                         (click)="choose(i)">
                         <span>{{answer}}</span>
                     </div>
             </ion-row>

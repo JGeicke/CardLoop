@@ -118,7 +118,7 @@ export class ModuleService {
                 await this.getUserModule(module);
             }
             for (const module of this.userModules) {
-                await this.getModuleQuestions(module);
+                await this. getModuleQuestions(module);
                 for (const question of module.questions) {
                     await this.getQuestionProgress(question);
                 }
@@ -167,6 +167,7 @@ export class ModuleService {
      */
     private getModuleQuestions(module: Module) {
         return this.firestore.collection('modules').doc(module.uid).collection('questions').get().toPromise().then((res) => {
+            module.questions = [];
             res.forEach(doc => {
                 const data = doc.data();
                 module.questions.push(new Question(doc.id, data.question, data.answers, data.solutions));

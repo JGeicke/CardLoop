@@ -37,17 +37,18 @@ export class LearnModePage implements OnInit {
     }
 
     ionViewWillEnter() {
-        // used to restart the lesson
-        //if (this.progress >= 100) {
-            this.initLearnMode();
-            this.initNextQuestion();
-        //}
+
+
+        this.initLearnMode();
+        this.initNextQuestion();
+
     }
 
     /**
      * inital reset of all fields and loads the needed Data from the Services
      */
     initLearnMode() {
+        console.log('init learn')
         this.randomized = false;
         this.currModuleQuestions = [];
         this.nextQuestion = 0;
@@ -56,11 +57,13 @@ export class LearnModePage implements OnInit {
         this.boxstyle = 'answer-box';
         this.moduleService.incrementModulePlayCount(this.moduleService.currLesson);
         this.currModule = this.moduleService.currLesson;
+        console.log(this.currModuleQuestions);
         for (const question of this.currModule.questions) {
             if (question.progress < 6) {
                 this.currModuleQuestions.push(question);
             }
         }
+        console.log(this.currModuleQuestions);
         this.maxQuestion = this.currModuleQuestions.length;
         this.question = this.currModuleQuestions[0];
         this.growth = 100 / this.currModuleQuestions.length;
@@ -158,7 +161,7 @@ export class LearnModePage implements OnInit {
      * confirms the selected answers for the current question
      */
     confirm() {
-        this.answered = !this.answered;
+        this.answered = true;
         if (this.correctAnswers() && !this.confiremd) {
             // selected answers were correct
             this.statistic.session.addCorrectlyAnsweredQuestion(this.question);
