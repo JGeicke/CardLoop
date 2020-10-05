@@ -47,7 +47,7 @@
         <div *ngIf="!multipleChoise && !answered" class="confirm" (click)="choose(chosenAnswer)" >
             <span>Confirm</span>
         </div>
-        <div *ngIf="answered" class="confirm" (click)="initNextQuestion()" >
+        <div *ngIf="answered" class="confirm" (click)="initNextQuestion()">
             <span>Next</span>
         </div>
     </ion-row>
@@ -55,14 +55,18 @@
 
 <ion-footer *ngIf="this.moduleService.currQuestion === -1">
     <ion-toolbar>
-        <ion-row class="ion-justify-content-around" (click)="randomQuestion()">
-            <ion-button size="small" color="none">
+        <ion-row class="ion-justify-content-around" >
+            <ion-button size="small" color="none" (click)="randomQuestion()" *ngIf="!randomized">
                 <img src="../../../assets/icons/random-solid.svg" alt="little house"
-                     srcset="../../../assets/icons/random-solid.svg">
+                     srcset="../../../assets/icons/random-solid.svg" >
+            </ion-button>
+            <ion-button size="small" color="none"  *ngIf="randomized" disabled="true">
+                <img src="../../../assets/icons/random-solid.svg" alt="little house"
+                     srcset="../../../assets/icons/random-solid.svg" fill="#585858">
             </ion-button>
             <ion-button size="small" color="none" (click)="gesLastQuestion()">
                 <img src="../../../assets/icons/testmodus-backward.svg" alt="little trophy cup"
-                     srcset="../../../assets/icons/testmodus-backward.svg">
+                     srcset="../../../assets/icons/testmodus-backward.svg" >
             </ion-button>
             <ion-button size="small" color="none" (click)="getNextQuestion()">
                 <img src="../../../assets/icons/testmodus-forward.svg" alt="little cloud with downward arrow"

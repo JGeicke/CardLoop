@@ -5,6 +5,7 @@ import {Question} from '../../../services/question.model';
 import {StatisticService} from '../../../services/statistic.service';
 import {Router} from '@angular/router';
 import {NavController} from "@ionic/angular";
+import {addRouteDeclarationToModule} from "@ionic/angular-toolkit/schematics/util/ast-util";
 
 @Component({
     selector: 'app-learn-mode',
@@ -28,6 +29,7 @@ export class LearnModePage implements OnInit {
     private answered = false;
     private progress;
     private growth;
+    private randomized: boolean = false;
 
     constructor(private moduleService: ModuleService, private statistic: StatisticService, private router: Router, private navCtrl: NavController) {
         this.initLearnMode();
@@ -36,16 +38,17 @@ export class LearnModePage implements OnInit {
 
     ionViewWillEnter() {
         // used to restart the lesson
-        if (this.progress >= 100) {
+        //if (this.progress >= 100) {
             this.initLearnMode();
             this.initNextQuestion();
-        }
+        //}
     }
 
     /**
      * inital reset of all fields and loads the needed Data from the Services
      */
     initLearnMode() {
+        this.randomized = false;
         this.currModuleQuestions = [];
         this.nextQuestion = 0;
         this.progress = 0;
@@ -71,7 +74,7 @@ export class LearnModePage implements OnInit {
      * adds the progress of 1 answered question to the progress bar
      */
     private changeProgress() {
-        this.progress = this.growth * (this.nextQuestion + 1);
+        this.progress = this.growth * (this.nextQuestion);
     }
 
     /**
@@ -186,8 +189,29 @@ export class LearnModePage implements OnInit {
      * randomises the order of the questions
      */
     randomQuestion() {
-        console.log('TODO');
-        // TODO: welche funktionalität ist gewünscht?
+        let randomizedQuestions: Question[] = [];
+        let tempQuestions: Question[] = [];
+        for (let i = 0; i < this.currModuleQuestions.length; i++) {
+            if (i < this.nextQuestion) {
+                randomizedQuestions.push(this.currModuleQuestions[i]);
+            } else {
+                tempQuestions.push(this.currModuleQuestions[i]);
+            }
+        }
+        let max = tempQuestions.length;
+        for (let i = 0; i < max; i++) {
+            let rdm = this.getRandomInt(0, tempQuestions.length);
+            randomizedQuestions.push(tempQuestions[rdm]);
+            tempQuestions.splice(rdm, 1);
+        }
+        this.currModuleQuestions = randomizedQuestions;
+        this.randomized = true;
+    }
+
+    private getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
     }
 
     /**
