@@ -35,6 +35,9 @@ export class UserProfilePage implements OnInit {
 
     ionViewWillEnter() {
         this.loggedIn = this.authService.isLoggedIn;
+        if (this.loggedIn){
+            this.userMail = this.authService.getUserMail();
+        }
     }
 
     /**
@@ -49,6 +52,12 @@ export class UserProfilePage implements OnInit {
         this.moduleService.resetUserModuleData();
         this.authService.SignOut();
         this.router.navigate(['login']);
+    }
+
+    cancelEdit(){
+        this.editMode = false;
+        this.hasWarning = false;
+        this.hasAlert = false;
     }
 
     /**
