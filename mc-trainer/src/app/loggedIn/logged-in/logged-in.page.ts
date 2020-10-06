@@ -14,8 +14,6 @@ import {Question} from '../../../services/question.model';
 })
 export class LoggedInPage implements OnInit {
 
-    recommendations: Module[] = [];
-    recommendation = {name: 'Compilerbau', cards: 42, tags: ['Programming', 'Computer Science', 'Something more']};
     sliderConfig = {
         spaceBetween: 10,
         slidesPerView: 1.4
@@ -27,10 +25,10 @@ export class LoggedInPage implements OnInit {
                 public modalController: ModalController,
                 private moduleService: ModuleService,
                 private achievementService: AchievementService) {
-        const sortedArray = this.moduleService.getMostPlayedModules();
-        this.recommendations.push(sortedArray[0]);
-        this.recommendations.push(sortedArray[1]);
-        this.recommendations.push(sortedArray[2]);
+    }
+
+    ionViewWillEnter(){
+        this.achievementService.generateAchievements(this.moduleService.userModules.length);
     }
 
     ngOnInit() {
@@ -40,7 +38,7 @@ export class LoggedInPage implements OnInit {
     }
 
     sumuptags(tag_arr: string[], tagIndex: number) {
-        let sumtag: string = '';
+        let sumtag = '';
         for (let i = 0; i < tagIndex; i++) {
             sumtag += tag_arr[i];
         }
@@ -58,7 +56,7 @@ export class LoggedInPage implements OnInit {
             this.moduleService.importModule(module);
         }
         this.moduleService.currLesson = module;
-        console.log(module);
+        this.moduleService.recentlyPlayed = module;
         this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
     }
@@ -90,5 +88,11 @@ export class LoggedInPage implements OnInit {
         });
 
         await alert.present();
+    }
+
+    inspectNextAchievement(){
+        this.achievementService.currAchievement = this.achievementService.nextAchievement;
+        this.achievementService.detailAchievement = true;
+        this.router.navigate(['achievement']);
     }
 }

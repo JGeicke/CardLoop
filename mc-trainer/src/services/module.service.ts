@@ -40,6 +40,10 @@ export class ModuleService {
      */
     private runningGetAllModules: boolean = false;
 
+    /**
+     * recommendations for the user based on globalPlayCount
+     */
+    public recommendations: Module[] = [];
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
                 private alertController: AlertController,
@@ -88,7 +92,7 @@ export class ModuleService {
     /**
      * Sorts allModules-array by globalPlayCount and returns sorted array
      */
-    getMostPlayedModules() {
+    private getMostPlayedModules(){
         return this.allModules.sort((a, b) => {
 
             if (a.globalPlayCount > b.globalPlayCount) {
@@ -107,7 +111,8 @@ export class ModuleService {
      */
     resetUserModuleData() {
         this.userModules = [];
-        this.recentlyPlayed = null;
+        this.getRecommendations();
+        this.recentlyPlayed = new Module('', '', '', [], 0, '#000000', '');
         this.currLesson = null;
     }
 
@@ -115,7 +120,6 @@ export class ModuleService {
      * loads all Modules that the currently logged in User has already imported
      */
     async getUserModules() {
-
         if (!this.runningGetUserModules) {
             this.runningGetUserModules = true;
             let moduleIds = [];
@@ -137,8 +141,9 @@ export class ModuleService {
                     module.calcProgress();
                 }
                 await this.statisticService.getUserStats(uid);
-                this.achievementService.generateAchievements(this.userModules.length);
+                // this.achievementService.generateAchievements(this.userModules.length);
                 this.runningGetUserModules = false;
+                this.getRecommendations();
                 return this.loadRecentlyPlayed();
             }
         }
@@ -165,6 +170,7 @@ export class ModuleService {
                 await this.getModuleQuestions(module);
                 console.log(module);
             }
+            this.getRecommendations();
             this.runningGetAllModules = false;
         }
     }
@@ -299,7 +305,6 @@ export class ModuleService {
         if (uid !== '') {
             question.incrementProgress();
             await this.setQuestionProgress(question);
-            this.recalcModuleProgess();
         }
     }
 
@@ -349,7 +354,6 @@ export class ModuleService {
         if (uid !== '') {
             question.resetProgress();
             await this.setQuestionProgress(question);
-            this.recalcModuleProgess();
         }
     }
 
@@ -363,14 +367,7 @@ export class ModuleService {
             for (const question of module.questions) {
                 this.resetQuestionProgress(question);
             }
-        }
-    }
-
-    /**
-     * Calculates module progress again after changes to question progress
-     */
-    private recalcModuleProgess() {
-        for (const module of this.userModules) {
+            // calculate progress of module again
             module.calcProgress();
         }
     }
@@ -386,6 +383,12 @@ export class ModuleService {
             this.userModules.splice(idx, 1);
             const resultArray = [];
             this.userModules.forEach(m => resultArray.push(m.uid));
+            // update recommendations
+            this.getRecommendations();
+            // check if deleted module was recently played
+            if (module.uid === this.recentlyPlayed.uid){
+                this.resetModuleProgress(this.recentlyPlayed);
+            }
             await this.firestore.collection('userModules').doc(uid).set({
                 modules: resultArray
             });
@@ -410,8 +413,11 @@ export class ModuleService {
                 uModuleIDs.push(m.uid);
             }
             uModuleIDs.push(module.uid);
+            // update recommendations
+            this.getRecommendations();
             this.firestore.collection('userModules').doc(userID).update({modules: uModuleIDs}).then(() => {
-                this.getUserModules();
+                // add module to userModules
+                this.userModules.push(module);
             });
         } else {
             // if noone is logged in
@@ -476,7 +482,7 @@ export class ModuleService {
                 name,
                 tags,
                 playCount: 0,
-                ownerID: userID
+                ownerUID: userID
             });
             const moduleUID = res.id;
             // Add each questions as a document to the question collection of new module
@@ -487,6 +493,8 @@ export class ModuleService {
             }
             // Create new local module
             const module = new Module(moduleUID, description, name, tags, 0, color, userID);
+            // add questions to module
+            module.questions = questions;
             // Add module to all modules
             this.allModules.push(module);
             this.importModule(module);
@@ -518,16 +526,17 @@ export class ModuleService {
             for (const question of module.questions) {
                 await this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).delete();
             }
-            // delete document of module
-            await this.firestore.collection('modules').doc(module.uid).delete();
-            // update allModules
-            this.getAllModules();
-            // update local userModules
-            this.deleteLesson(module);
-            // update all modules of userModules collection
-            this.updateUserModules(module);
-            // update recently played
-            await this.loadRecentlyPlayed();
+             // delete document of module
+             await this.firestore.collection('modules').doc(module.uid).delete();
+             // update allModules
+             this.getAllModules();
+             // update local userModules
+             this.deleteLesson(module);
+             // update all modules of userModules collection
+             this.updateUserModules(module);
+             // update recently played
+             await this.loadRecentlyPlayed();
+             this.router.navigate(['module-list']);
         }
     }
 
@@ -615,6 +624,56 @@ export class ModuleService {
 
         // update all modules
         await this.getAllModules();
+    }
+
+    /**
+     * Generates recommendations array based on playCount & if the user already imported the module
+     */
+    getRecommendations(){
+        // reset recommendations
+        this.recommendations = [];
+        const sortedArray = this.getMostPlayedModules();
+
+        // add module to recommendation if not imported yet
+        for (const module of sortedArray){
+            // break if recommendations contains 3 modules
+            if (this.recommendations.length === 3){
+               break;
+            }
+            if (!this.isModuleImported(module)){
+                this.recommendations.push(module);
+            }
+        }
+
+        // fill recommendations with not already included modules
+        if (this.recommendations.length !== 3){
+            for (const module of sortedArray){
+                // break if recommendations contains 3 modules
+                if (this.recommendations.length === 3){
+                    break;
+                }
+                if (!this.containsModule(module, this.recommendations)){
+                    this.recommendations.push(module);
+                }
+            }
+        }
+        console.log(this.recommendations);
+    }
+
+    /**
+     * Checks if the module array contains the module
+     * @param module - module to check if it is contained
+     * @param modules - module array to check if it contains the module
+     */
+    private containsModule(module: Module, modules: Module[]): boolean{
+        let found = false;
+        for (const m of modules){
+            if (m.uid === module.uid){
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 }
 

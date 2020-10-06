@@ -18,8 +18,24 @@ export class AchievementService {
    */
   nextAchievement: Achievement;
 
+  /**
+   * number of achievements completed by the user
+   */
+  achievementsCompleted: number;
+
+  /**
+   * achievement to inspect
+   */
+  currAchievement: Achievement;
+
+  /**
+   * toggle of currAchievement details on achievementPage
+   */
+  detailAchievement: boolean;
+
   constructor(private statisticService: StatisticService, private authService: AuthService) {
-      this.generateAchievements(0);
+    this.achievementsCompleted = 0;
+    this.generateAchievements(0);
   }
 
   /**
@@ -28,6 +44,7 @@ export class AchievementService {
    */
   generateAchievements(userModulesLength: number){
     this.achievements = [];
+    this.achievementsCompleted = 0;
     let correctQuestionCount = 0;
     let lessonCount = 0;
     let imported = 0;
@@ -73,26 +90,25 @@ export class AchievementService {
         'Create a CardLoop Account!', this.authService.isLoggedIn ? 1 : 0, 1, 'mountain_with_flag.svg'));
 
     // Check how many achievements the user completed
-    let completed = 0;
     for (const achievement of this.achievements){
       if (this.isSuccessAchievement(achievement)){
-        completed++;
+        this.achievementsCompleted++;
       }
     }
 
     this.achievements.push(new Achievement('8', 'AchieveAchievements',
-        'Achieve 3 Achievements!', completed > 3 ? 3 : completed, 3, 'mountain_with_flag.svg'));
+        'Achieve 3 Achievements!', this.achievementsCompleted > 3 ? 3 : this.achievementsCompleted, 3, 'mountain_with_flag.svg'));
 
-    completed += this.checkRecentlyAddedAchievement();
+    this.achievementsCompleted += this.checkRecentlyAddedAchievement();
 
     this.achievements.push(new Achievement('9', 'AchieveAchievements2',
-        'Achieve 7 Achievements!', completed > 7 ? 7 : completed, 7, 'mountain_with_flag.svg'));
+        'Achieve 7 Achievements!', this.achievementsCompleted > 7 ? 7 : this.achievementsCompleted, 7, 'mountain_with_flag.svg'));
 
-    completed += this.checkRecentlyAddedAchievement();
+    this.achievementsCompleted += this.checkRecentlyAddedAchievement();
 
     // Has to be last achievement
     this.achievements.push(new Achievement('14', 'AllAchievements',
-        'Achieve ' + this.achievements.length + ' Achievements!', completed, this.achievements.length, 'mountain_with_flag.svg'));
+        'Achieve ' + this.achievements.length + ' Achievements!', this.achievementsCompleted, this.achievements.length, 'mountain_with_flag.svg'));
     // Get next achievement
     this.getNextAchievement();
   }
@@ -150,5 +166,9 @@ export class AchievementService {
       }
     }
     this.nextAchievement = nextAchievement;
+  }
+
+  hasProgress(achievement: Achievement): boolean {
+    return achievement.currentNumber !== 0;
   }
 }

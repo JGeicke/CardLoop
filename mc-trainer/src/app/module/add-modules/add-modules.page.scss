@@ -26,6 +26,9 @@ h3 {
   margin: 0 0 3px 0;
 }
 
+.warning{
+  color: red;
+}
 /**
   HEADERS
  */
@@ -38,6 +41,20 @@ ion-toolbar {
   --background: #4ba3c3;
 }
 
+.delete-box {
+  color: white;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  width: 90%;
+  display: flex;
+}
+ion-icon{
+  font-size: 1.5rem;
+}
 .gobackarrow {
   height: 2rem;
   float: left;

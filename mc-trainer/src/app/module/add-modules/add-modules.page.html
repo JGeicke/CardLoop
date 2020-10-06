@@ -27,8 +27,13 @@
                     <div class="inner-module-wrapper">
                         <span class="module-title">{{moduleTitle}}</span>
                         <div class="white-box">
-                            <div>
+                            <div *ngIf="!isEdit">
                                 <progress-bar [progress]="0"
+                                              [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
+                                </progress-bar>
+                            </div>
+                            <div *ngIf="isEdit">
+                                <progress-bar [progress]="moduleService.currLesson.progress"
                                               [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
                                 </progress-bar>
                             </div>
@@ -39,28 +44,36 @@
                     </div>
                 </div>
             </ion-row>
+            <ion-row class="ion-justify-content-center" *ngIf="hasWarning">
+                <div>
+                    <ion-icon class="warning" name="warning"></ion-icon>
+                </div>
+                <div>
+                    <ion-text class="warning">{{warningText}}</ion-text>
+                </div>
+            </ion-row>
             <ion-row class="ion-justify-content-center">
                 <div class="content-box">
                     <form (ngSubmit)="submit()"></form>
                     <h3>Title</h3>
                     <ion-item>
-                        <ion-input [(ngModel)]="moduleTitle"></ion-input>
+                        <ion-input [(ngModel)]="moduleTitle" placeholder="{{placeholderModuleTitle}}"></ion-input>
                     </ion-item>
                     <h3>Tags</h3>
                     <ion-item>
-                        <ion-input [(ngModel)]="moduleTags"></ion-input>
+                        <ion-input [(ngModel)]="moduleTags" placeholder="{{placeholderModuleTags}}"></ion-input>
                     </ion-item>
                     <h3>Color</h3>
                     <ion-row class="ion-justify-content-around color-row">
                         <div (click)="this.moduleColor = color"
                              class="color-drop"
                              [ngStyle]="{'background-color': color}"
-                             *ngFor="let color of color_arr">
+                             *ngFor="let color of colorArr">
                         </div>
                     </ion-row>
                     <h3>Description</h3>
                     <ion-item>
-                        <ion-textarea [(ngModel)]="moduleDesc"></ion-textarea>
+                        <ion-textarea [(ngModel)]="moduleDesc" placeholder="{{placeholderModuleDesc}}"></ion-textarea>
                     </ion-item>
                 </div>
             </ion-row>
@@ -83,17 +96,24 @@
                             <h3>Options</h3>
                         </ion-col>
                     </ion-row>
-                    <ion-row *ngFor="let question of this.quest_arr"
+                    <ion-row *ngFor="let question of this.questArr; let i = index;"
                              class="ion-justify-content-around ion-align-items-center question-spacing">
-                        <div class="answer-box">
-                            <span>{{question.question}}</span>
-                        </div>
-                        <div class="question-loops">
-                            <span>{{question.solutions.length}}/{{question.answers.length}}</span>
-                        </div>
+                        <ion-col size="7">
+                            <div class="answer-box">
+                                <span>{{question.question}}</span>
+                            </div>
+                        </ion-col>
+                        <ion-col size="5">
+                            <div class="delete-box">
+                                <ion-icon name="trash" (click)="this.questArr.splice(i,1)"></ion-icon>
+                            </div>
+                            <div class="delete-box">
+                                <ion-icon name="pencil" (click)="this.editQuestion(question)"></ion-icon>
+                            </div>
+                        </ion-col>
                     </ion-row>
                     <ion-row class="ion-justify-content-center">
-                        <ion-item class="add-icon">
+                        <ion-item class="add-icon" (click)="createQuestion()">
                             <ion-icon name="add" color="white"></ion-icon>
                         </ion-item>
                     </ion-row>

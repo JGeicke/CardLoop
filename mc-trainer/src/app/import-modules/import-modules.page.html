@@ -23,7 +23,7 @@
                      srcset="../../assets/icons/play-button-orange.svg">
             </div>
         </ion-row>
-        <div class="recommendation">
+        <div class="recommendation" [style.background-color]="lesson.color">
             <ion-row class="ion-justify-content-between ion-align-items-center">
                 <ion-col size="8">
                     <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">
@@ -35,25 +35,6 @@
                     </div>
                 </ion-col>
             </ion-row>
-            <!--                <ion-row class="ion-justify-content-between ion-align-items-center">-->
-            <!--                    <ion-col size="8">-->
-            <!--                        <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">-->
-            <!--                            <span>{{lesson.name}}</span>-->
-            <!--                        </div>-->
-            <!--                    </ion-col>-->
-            <!--                    <ion-col size="4">-->
-            <!--                        <div class="cloud-box">-->
-            <!--                            <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)"-->
-            <!--                                 (click)="importClicked(lesson)"-->
-            <!--                                 src="../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"-->
-            <!--                                 srcset="../../assets/icons/cloud-download-white-bg.svg">-->
-            <!--                            <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)"-->
-            <!--                                 (click)="playClicked(lesson)"-->
-            <!--                                 src="../../assets/icons/play-button-orange.svg" alt="cloud with check"-->
-            <!--                                 srcset="../../assets/icons/play-button-orange.svg">-->
-            <!--                        </div>-->
-            <!--                    </ion-col>-->
-            <!--                </ion-row>-->
             <ion-row class="tag-row">
                 <ion-col size="10">
                         <span class="tags" *ngFor="let tag of this.lesson.tags;">
@@ -79,8 +60,20 @@
     </ion-row>
 
     <ion-row *ngFor="let lesson of filteredModule" class="ion-justify-content-center ion-align-items-center">
-        <div class="recommendation">
-            <ion-row class="ion-justify-content-between">
+        <ion-row class="ion-justify-content-end">
+            <div class="cloud-box">
+                <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)"
+                     (click)="importClicked(lesson)"
+                     src="../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
+                     srcset="../../assets/icons/cloud-download-white-bg.svg">
+                <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)"
+                     (click)="playClicked(lesson)"
+                     src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
+                     srcset="../../assets/icons/play-button-orange.svg">
+            </div>
+        </ion-row>
+        <div class="recommendation" [style.background-color]="lesson.color">
+            <ion-row class="ion-justify-content-between ion-align-items-center">
                 <ion-col size="8">
                     <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">
                         <span>{{lesson.name}}</span>
@@ -88,26 +81,22 @@
                 </ion-col>
                 <ion-col size="4">
                     <div class="cloud-box">
-                        <img class="cloud-down" *ngIf="!this.moduleService.isModuleImported(lesson)"
-                             (click)="importClicked(lesson)"
-                             src="../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
-                             srcset="../../assets/icons/cloud-download-white-bg.svg">
-                        <img class="cloud-down" *ngIf="this.moduleService.isModuleImported(lesson)"
-                             (click)="playClicked(lesson)"
-                             src="../../assets/icons/play-button-orange.svg" alt="cloud with check"
-                             srcset="../../assets/icons/play-button-orange.svg">
                     </div>
                 </ion-col>
             </ion-row>
-            <ion-row class="ion-justify-content-between tag-row">
-                        <span class="tags">#{{lesson.tags[0]}}.. +
-                            {{lesson.tags.length - 1}} more
+            <ion-row class="tag-row">
+                <ion-col size="10">
+                        <span class="tags" *ngFor="let tag of this.lesson.tags;">
+                            <a>#{{tag}}</a>
                         </span>
-                    <span class="tags">
-                    {{lesson.questions.length}}
-                        <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
-                             srcset="../../assets/icons/sd-card-solid.svg">
-                </span>
+                </ion-col>
+                <ion-col size="2">
+                        <span class="tags" style="float: right">
+                            {{lesson.questions.length}}
+                            <img class="cards" src="../../assets/icons/sd-card-solid.svg" alt="arrow pointing right"
+                                 srcset="../../assets/icons/sd-card-solid.svg">
+                        </span>
+                </ion-col>
             </ion-row>
         </div>
     </ion-row>

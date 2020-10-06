@@ -1,10 +1,10 @@
 import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
-import {ModuleService} from "../../../services/module.service";
-import {Router} from "@angular/router";
-import {NavController, PopoverController, ViewWillEnter} from "@ionic/angular";
-import {Module} from "../../../services/module.model";
-import {PopoverPage} from "../../popover/popover.page";
-import {AuthService} from "../../../services/auth.service";
+import {ModuleService} from '../../../services/module.service';
+import {Router} from '@angular/router';
+import {AlertController, NavController, PopoverController, ViewWillEnter} from '@ionic/angular';
+import {Module} from '../../../services/module.model';
+import {PopoverPage} from '../../popover/popover.page';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
     selector: 'app-module-detail',
@@ -14,13 +14,14 @@ import {AuthService} from "../../../services/auth.service";
 export class ModuleDetailPage implements OnInit, ViewWillEnter {
 
     private picked = 'general';
-    questions_arr = [1, 2, 3, 4, 5, 6];
     private currLessonJSON: any;
     private unsure: number;
     private halfway: number;
     private learned: number;
 
-    constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController, private popoverController: PopoverController, private auth: AuthService) {
+    constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController,
+                private popoverController: PopoverController, private auth: AuthService,
+                private alertController: AlertController) {
     }
 
     ngOnInit() {
@@ -31,6 +32,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     ionViewWillEnter() {
         // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
         this.calcQuestionsProgress();
+        console.log(this.moduleService.isModuleOwner(this.moduleService.currLesson));
     }
 
     /**
@@ -62,7 +64,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
      * resets the progress for all Questions of the current Module
      */
     resetModuleProgress() {
-        console.log('resetModuleProgress called')
+        console.log('resetModuleProgress called');
         for (const question of this.moduleService.currLesson.questions) {
             this.moduleService.resetQuestionProgress(question).then(r => question);
         }
@@ -95,6 +97,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
      */
     playLesson(module) {
         this.moduleService.currLesson = module;
+        this.moduleService.recentlyPlayed = module;
         this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
     }
@@ -105,5 +108,33 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     redirectToRegister() {
         this.auth.registerTriggered = true;
         this.router.navigate(['login']);
+    }
+
+    /**
+     * confirmation modal to delete module
+     */
+    async deleteModal() {
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Permanent deletion of module',
+            message: 'Are u sure that u want to continue?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                        alert.dismiss();
+                    }
+                }, {
+                    text: 'Continue',
+                    handler: () => {
+                        this.moduleService.deleteModule(this.moduleService.currLesson);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }

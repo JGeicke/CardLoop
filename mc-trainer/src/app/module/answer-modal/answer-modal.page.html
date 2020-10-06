@@ -10,9 +10,17 @@
 <!--    <ion-row>-->
 <!--        <p>To select the right answer to a question, click the check button</p>-->
 <!--    </ion-row>-->
+    <ion-row class="ion-justify-content-center" *ngIf="hasWarning">
+        <div>
+            <ion-icon class="warning" name="warning"></ion-icon>
+        </div>
+        <div>
+            <ion-text class="warning">{{warningText}}</ion-text>
+        </div>
+    </ion-row>
     <ion-row class="ion-justify-content-center">
         <div class="question-box">
-            <ion-textarea [(ngModel)]="this.question"></ion-textarea>
+            <ion-textarea [(ngModel)]="this.question" placeholder="{{this.placeholderQuestion}}"></ion-textarea>
         </div>
     </ion-row>
     <ion-row class="ion-justify-content-center">
@@ -22,7 +30,7 @@
                      class="ion-justify-content-center ion-align-items-center">
                 <ion-col size="9">
                     <div class="answer-box" [class.right]="this.solutions[i]">
-                        <ion-textarea [(ngModel)]="answers[i]"></ion-textarea>
+                        <ion-textarea [(ngModel)]="answers[i]" placeholder="{{placeholderAnswers[i]}}"></ion-textarea>
                     </div>
                 </ion-col>
                 <ion-col size="3">
