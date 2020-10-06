@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson) && this.auth.isLoggedIn" class="incitement-box">
-                    <img (click)="playLesson(this.moduleService.currLesson)"
+                    <img (click)="this.moduleService.importModule(this.moduleService.currLesson)"
                          src="../../../assets/icons/cloud-download-orange-circle.svg"
                          alt="arrow pointing right"
                          srcset="../../../assets/icons/cloud-download-orange-circle.svg">

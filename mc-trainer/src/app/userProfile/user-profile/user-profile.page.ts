@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
 import {ModuleService} from '../../../services/module.service';
+import {StatisticService} from '../../../services/statistic.service';
+import {AchievementService} from '../../../services/achievement.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -23,7 +25,9 @@ export class UserProfilePage implements OnInit {
     private userOldPW = '';
 
 
-    constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) {
+    constructor(private authService: AuthService, private router: Router,
+                private moduleService: ModuleService, private statisticService: StatisticService,
+                private achievementService: AchievementService) {
         this.loggedIn = this.authService.isLoggedIn;
         if (this.loggedIn) {
             this.userMail = this.authService.getUserMail();
@@ -45,9 +49,21 @@ export class UserProfilePage implements OnInit {
         this.router.navigate(['login']);
     }
 
+    /**
+     * logs user out and routes to login-page
+     */
     logOut(){
+        // resets userModules, recentlyPlayed, recommendations and currLesson
         this.moduleService.resetUserModuleData();
+        // logs the user out
         this.authService.SignOut();
+        // Reset user stats
+        this.statisticService.resetUserStats();
+        // generates current achievements after removing user progress
+        this.achievementService.generateAchievements(0);
+        // get achievement with highest progress
+        this.achievementService.getNextAchievement();
+        // route back to login
         this.router.navigate(['login']);
     }
 

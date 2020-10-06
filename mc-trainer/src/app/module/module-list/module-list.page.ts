@@ -5,6 +5,7 @@ import {PopoverPage} from '../../popover/popover.page';
 import {Router} from '@angular/router';
 import {AlertController, ModalController} from '@ionic/angular';
 import {Module} from '../../../services/module.model';
+import {AuthService} from '../../../services/auth.service';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class ModuleListPage implements OnInit {
                 private router: Router,
                 private moduleService: ModuleService,
                 private alertController: AlertController,
-                private modalController: ModalController) {
+                private modalController: ModalController,
+                private authService: AuthService) {
+    }
+
+    ionViewWillEnter(){
     }
 
     /**
@@ -43,6 +48,7 @@ export class ModuleListPage implements OnInit {
      */
     playLesson(module) {
         this.moduleService.currLesson = module;
+        this.moduleService.recentlyPlayed = module;
         this.moduleService.saveRecentlyPlayed();
         this.router.navigate(['learn-mode']);
     }

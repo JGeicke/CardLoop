@@ -20,18 +20,23 @@
     <div [ngSwitch]="picked">
         <div *ngSwitchCase="'achievements'">
             <ion-grid>
-                <div *ngIf="this.detailAchievement">
+                <div *ngIf="this.achievementService.detailAchievement">
                     <ion-row class="ion-align-items-around">
                         <ion-col size="12" size-sm="6">
                             <div class="ion-text-center">
-                                <img src="../../assets/icons/{{this.currAchievement.achievementSVG}}"
-                                     alt="{{this.currAchievement.achievementSVG}}"
+                                <img src="../../assets/icons/{{this.achievementService.currAchievement.achievementSVG}}"
+                                     alt="{{this.achievementService.currAchievement.achievementSVG}}"
                                      height="35%" width="35%">
                             </div>
                         </ion-col>
                         <ion-col class="ion-align-self-center ion-text-center">
-                            <ion-text class="achievement_text">{{this.currAchievement.achievementText}}
+                            <ion-text class="achievement_text">{{this.achievementService.currAchievement.achievementText}}
                             </ion-text>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="!this.achievementService.isSuccessAchievement(this.achievementService.currAchievement)" class="ion-align-self-center ion-text-center">
+                        <ion-col>
+                            <ion-text class="achievement_progress_text">Current Progress: {{this.achievementService.currAchievement.currentNumber}}/{{this.achievementService.currAchievement.maxNumber}}</ion-text>
                         </ion-col>
                     </ion-row>
                     <ion-row>
@@ -44,9 +49,9 @@
             <div class="content-box">
                 <div class="flexbox-container">
                     <div class="flexbox-item" *ngFor="let achievement of this.achievementService.achievements"
-                         [ngStyle]="{'filter': this.currAchievement!=this.achievement && this.detailAchievement ? 'blur(2px)' : ''}">
-                        <div *ngIf="this.achievementService.isSuccessAchievement(this.achievement)">
-                            <a [routerLink]="" class="achievement" (click)="inspectAchievement(this.achievement)">
+                         [ngStyle]="{'filter': this.achievementService.currAchievement!=this.achievement && this.achievementService.detailAchievement ? 'blur(2px)' : ''}">
+                        <div *ngIf="this.achievementService.hasProgress(this.achievement)">
+                            <a class="achievement" (click)="inspectAchievement(this.achievement)">
                                 <div class="achievement_image">
                                     <ion-img src="../../assets/icons/{{this.achievement.achievementSVG}}"
                                              alt="{{this.achievement.achievementSVG}}"></ion-img>
@@ -66,7 +71,7 @@
                             </div>
                         </div>
                         <div class="achievement achievement_locked"
-                             *ngIf="!this.achievementService.isSuccessAchievement(this.achievement)">
+                             *ngIf="!this.achievementService.hasProgress(this.achievement)">
                             <div class="achievement_lock_icon">
                                 <ion-img src="../../assets/ach_lock.svg"
                                          alt="a lock icon"></ion-img>
@@ -123,6 +128,12 @@
                         <p>Questions answered</p>
                     </ion-label>
                     <p>{{this.questCount}}</p>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        <p>Achievements completed</p>
+                    </ion-label>
+                    <p>{{this.achievementsCompleted}}</p>
                 </ion-item>
 
             </ion-list>

@@ -21,10 +21,13 @@
                     <h3>Pick up where you left</h3>
 
                     <div class="module" [style.background-color]="this.moduleService.recentlyPlayed.color">
-                        <img (click)="playLesson(this.moduleService.recentlyPlayed)"
+                        <img *ngIf="this.moduleService.isModuleImported(this.moduleService.recentlyPlayed)" (click)="playLesson(this.moduleService.recentlyPlayed)"
                              src="../../../assets/icons/play-button-orange.svg"
                              alt="arrow pointing right"
                              srcset="../../../assets/icons/play-button-orange.svg">
+                        <img *ngIf="!this.moduleService.isModuleImported(this.moduleService.recentlyPlayed)" (click)="this.moduleService.importModule(this.moduleService.recentlyPlayed)"
+                             src="../../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
+                             srcset="../../../assets/icons/cloud-download-white-bg.svg">
                         <div class="inner-module-wrapper">
                             <p (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)"
                                class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
@@ -36,7 +39,7 @@
                                 </div>
                                 <div>
                                     <span class="tags" *ngFor="let tag of this.moduleService.recentlyPlayed.tags; index as i">
-                                        <a>#{{tag}}</a>
+                                        <a>#{{tag}} </a>
                                     </span>
                                 </div>
                             </div>
@@ -58,7 +61,7 @@
                                 <span>{{this.achievementService.nextAchievement.achievementText}}</span>
                             </ion-col>
                             <ion-col size="2">
-                                <a routerLink="/achievement">
+                                <a (click)="inspectNextAchievement()">
                                     <img src="../../../assets/icons/achievement-right-arrow.svg"
                                          alt="arrow pointing right"
                                          srcset="../../../assets/icons/achievement-right-arrow.svg">
@@ -73,7 +76,7 @@
     <ion-col class="ion-float-left">
         <h3>Recommendations</h3>
         <ion-slides [options]="sliderConfig">
-            <ion-slide *ngFor="let recommendation of recommendations">
+            <ion-slide *ngFor="let recommendation of this.moduleService.recommendations">
                 <div class="recommendation" (click)="this.moduleService.getModuleDetails(recommendation)">
                     <ion-row class="ion-justify-content-between">
                         <span class="recommendation-title">{{recommendation.name}}</span>

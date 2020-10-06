@@ -16,14 +16,13 @@ export class AchievementPage implements OnInit {
 
   // statistics variables
   picked: string;
-  detailAchievement: boolean;
-  currAchievement: Achievement;
   avgsessiontime: string;
   correctQuestCount: number;
   wrongQuestCount: number;
   lessonCount: number;
   questCount: number;
   regDate: string;
+  achievementsCompleted: number;
 
   data = [];
   view: any[] = [300, 300];
@@ -45,13 +44,14 @@ export class AchievementPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    console.log(this.achievementService.achievements);
     const userStats = this.statisticService.userStats;
     this.questCount = userStats.questionCount;
     this.correctQuestCount = userStats.correctQuestionCount;
     this.wrongQuestCount = this.questCount - this.correctQuestCount;
     this.lessonCount = userStats.lessonCount;
     this.avgsessiontime = userStats.averageSessionTime.toFixed(2);
-
+    this.achievementsCompleted = this.achievementService.achievementsCompleted;
     const userRegDate = userStats.registrationDate;
     this.regDate = userRegDate.getDate() + '.' + (userRegDate.getMonth() + 1) + '.' + userRegDate.getFullYear();
     this.data = [
@@ -64,8 +64,8 @@ export class AchievementPage implements OnInit {
         value: this.wrongQuestCount
       },
     ];
-    this.picked = 'statistics';
-    this.detailAchievement = false;
+    this.picked = 'achievements';
+    // this.achievementService.detailAchievement = false;
     this.achievementService.generateAchievements(this.moduleService.userModules.length);
     this.achievementService.sortAchievements();
   }
@@ -76,8 +76,8 @@ export class AchievementPage implements OnInit {
      * @param achievement the achievment that will be viewed in detail
      */
     inspectAchievement(achievement: Achievement) {
-        this.detailAchievement = !this.detailAchievement;
-        this.currAchievement = achievement;
+        this.achievementService.detailAchievement = !this.achievementService.detailAchievement;
+        this.achievementService.currAchievement = achievement;
     }
 
   ngOnInit() {
