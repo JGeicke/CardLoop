@@ -138,8 +138,8 @@ export class ModuleService {
                 }
                 await this.statisticService.getUserStats(uid);
                 this.achievementService.generateAchievements(this.userModules.length);
-                return this.loadRecentlyPlayed();
                 this.runningGetUserModules = false;
+                return this.loadRecentlyPlayed();
             }
         }
 

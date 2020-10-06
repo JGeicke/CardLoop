@@ -47,6 +47,10 @@ export class ModuleListPage implements OnInit {
         this.router.navigate(['learn-mode']);
     }
 
+    ionViewWillEnter(){
+        this.moduleService.getUserModules();
+    }
+
     /**
      * presents the popover to see lesson details or delete the lessons of the user
      * @param ev the click event
