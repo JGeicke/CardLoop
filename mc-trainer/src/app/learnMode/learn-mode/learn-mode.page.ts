@@ -48,7 +48,6 @@ export class LearnModePage implements OnInit {
      * inital reset of all fields and loads the needed Data from the Services
      */
     initLearnMode() {
-        console.log('init learn')
         this.randomized = false;
         this.currModuleQuestions = [];
         this.nextQuestion = 0;
@@ -57,13 +56,11 @@ export class LearnModePage implements OnInit {
         this.boxstyle = 'answer-box';
         this.moduleService.incrementModulePlayCount(this.moduleService.currLesson);
         this.currModule = this.moduleService.currLesson;
-        console.log(this.currModuleQuestions);
         for (const question of this.currModule.questions) {
             if (question.progress < 6) {
                 this.currModuleQuestions.push(question);
             }
         }
-        console.log(this.currModuleQuestions);
         this.maxQuestion = this.currModuleQuestions.length;
         this.question = this.currModuleQuestions[0];
         this.growth = 100 / this.currModuleQuestions.length;
