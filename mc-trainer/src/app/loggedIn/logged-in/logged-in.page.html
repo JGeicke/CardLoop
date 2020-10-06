@@ -77,7 +77,7 @@
         <h3>Recommendations</h3>
         <ion-slides [options]="sliderConfig">
             <ion-slide *ngFor="let recommendation of this.moduleService.recommendations">
-                <div class="recommendation" (click)="this.moduleService.getModuleDetails(recommendation)">
+                <div class="recommendation" (click)="this.moduleService.getModuleDetails(recommendation)" [style.background-color]="this.recommendation.color">
                     <ion-row class="ion-justify-content-between">
                         <span class="recommendation-title">{{recommendation.name}}</span>
                         <span>{{recommendation.questions.length}}

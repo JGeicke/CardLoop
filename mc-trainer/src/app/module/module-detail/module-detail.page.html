@@ -49,7 +49,7 @@
                 <div class="content-box">
                     <h4>Description</h4>
                     <div class="content-box">
-                        <span>{{this.moduleService.currLesson.description}}.</span>
+                        <span>{{this.moduleService.currLesson.description}}</span>
                         <p>
                             <span *ngFor="let tag of this.moduleService.currLesson.tags">#{{tag}} </span>
                         </p>
@@ -94,6 +94,9 @@
                         <p class="incitement-text">Reset progress?</p>
                     </div>
                 </div>
+            </ion-row>
+            <ion-row *ngIf="this.moduleService.isModuleOwner(this.moduleService.currLesson)">
+                <ion-button (click)="deleteModal()">Delete module permanently</ion-button>
             </ion-row>
         </div>
         <div *ngSwitchCase="'questions'">

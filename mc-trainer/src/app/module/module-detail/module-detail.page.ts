@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {ModuleService} from '../../../services/module.service';
 import {Router} from '@angular/router';
-import {NavController, PopoverController, ViewWillEnter} from '@ionic/angular';
+import {AlertController, NavController, PopoverController, ViewWillEnter} from '@ionic/angular';
 import {Module} from '../../../services/module.model';
 import {PopoverPage} from '../../popover/popover.page';
 import {AuthService} from '../../../services/auth.service';
@@ -20,7 +20,8 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     private learned: number;
 
     constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController,
-                private popoverController: PopoverController, private auth: AuthService) {
+                private popoverController: PopoverController, private auth: AuthService,
+                private alertController: AlertController) {
     }
 
     ngOnInit() {
@@ -31,6 +32,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     ionViewWillEnter() {
         // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
         this.calcQuestionsProgress();
+        console.log(this.moduleService.isModuleOwner(this.moduleService.currLesson));
     }
 
     /**
@@ -106,5 +108,33 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     redirectToRegister() {
         this.auth.registerTriggered = true;
         this.router.navigate(['login']);
+    }
+
+    /**
+     * confirmation modal to delete module
+     */
+    async deleteModal() {
+        const alert = await this.alertController.create({
+            cssClass: 'my-custom-class',
+            header: 'Permanent deletion of module',
+            message: 'Are u sure that u want to continue?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: () => {
+                        alert.dismiss();
+                    }
+                }, {
+                    text: 'Continue',
+                    handler: () => {
+                        this.moduleService.deleteModule(this.moduleService.currLesson);
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 }

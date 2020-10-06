@@ -103,7 +103,7 @@ export class ModuleService {
     resetUserModuleData(){
         this.userModules = [];
         this.getRecommendations();
-        this.recentlyPlayed = null;
+        this.recentlyPlayed = new Module('', '', '', [], 0, '#000000', '');
         this.currLesson = null;
     }
 
@@ -462,7 +462,7 @@ export class ModuleService {
                 name,
                 tags,
                 playCount: 0,
-                ownerID: userID
+                ownerUID: userID
             });
             const moduleUID = res.id;
             // Add each questions as a document to the question collection of new module
@@ -473,6 +473,8 @@ export class ModuleService {
             }
             // Create new local module
             const module = new Module(moduleUID, description, name, tags, 0, color, userID);
+            // add questions to module
+            module.questions = questions;
             // Add module to all modules
             this.allModules.push(module);
             this.importModule(module);
@@ -514,6 +516,7 @@ export class ModuleService {
              this.updateUserModules(module);
              // update recently played
              await this.loadRecentlyPlayed();
+             this.router.navigate(['module-list']);
         }
     }
 

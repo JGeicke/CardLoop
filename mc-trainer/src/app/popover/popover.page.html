@@ -14,6 +14,11 @@
                     Delete
                 </a>
             </p>
+            <p *ngIf="moduleService.isModuleOwner(moduleService.currLesson)">
+                <a (click)="this.startEdit()">
+                    Edit
+                </a>
+            </p>
         </div>
         <div *ngSwitchCase="'module-detail'">
             <p>
