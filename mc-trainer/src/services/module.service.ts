@@ -31,6 +31,14 @@ export class ModuleService {
      */
     public currLesson: Module;
     public currQuestion = -1;
+    /**
+     * ensures getUserModules can only be run once at the same time
+     */
+    private runningGetUserModules: boolean = false;
+    /**
+     * ensures getAllModules can only be run once at the same time
+     */
+    private runningGetAllModules: boolean = false;
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
@@ -80,7 +88,7 @@ export class ModuleService {
     /**
      * Sorts allModules-array by globalPlayCount and returns sorted array
      */
-    getMostPlayedModules(){
+    getMostPlayedModules() {
         return this.allModules.sort((a, b) => {
 
             if (a.globalPlayCount > b.globalPlayCount) {
@@ -97,7 +105,7 @@ export class ModuleService {
     /**
      * Resets user modules, recentlyPlayed and currLesson - needed for log-out
      */
-    resetUserModuleData(){
+    resetUserModuleData() {
         this.userModules = [];
         this.recentlyPlayed = null;
         this.currLesson = null;
@@ -107,26 +115,32 @@ export class ModuleService {
      * loads all Modules that the currently logged in User has already imported
      */
     async getUserModules() {
-        this.userModules = [];
-        let moduleIds = [];
-        const uid = this.authService.GetUID();
-        if (uid !== '') {
-            await this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
-                moduleIds = res.data().modules;
-            });
-            for (const module of moduleIds) {
-                await this.getUserModule(module);
-            }
-            for (const module of this.userModules) {
-                await this. getModuleQuestions(module);
-                for (const question of module.questions) {
-                    await this.getQuestionProgress(question);
+
+        if (!this.runningGetUserModules) {
+            this.runningGetUserModules = true;
+            let moduleIds = [];
+            const uid = this.authService.GetUID();
+            if (uid !== '') {
+                await this.firestore.collection('userModules').doc(uid).get().toPromise().then((res) => {
+                    moduleIds = res.data().modules;
+                });
+                this.userModules = [];
+                for (const module of moduleIds) {
+                    await this.getUserModule(module);
                 }
-                module.calcProgress();
+                console.log(this.userModules);
+                for (const module of this.userModules) {
+                    await this.getModuleQuestions(module);
+                    for (const question of module.questions) {
+                        await this.getQuestionProgress(question);
+                    }
+                    module.calcProgress();
+                }
+                await this.statisticService.getUserStats(uid);
+                this.achievementService.generateAchievements(this.userModules.length);
+                return this.loadRecentlyPlayed();
+                this.runningGetUserModules = false;
             }
-            await this.statisticService.getUserStats(uid);
-            this.achievementService.generateAchievements(this.userModules.length);
-            return this.loadRecentlyPlayed();
         }
 
     }
@@ -135,19 +149,23 @@ export class ModuleService {
      * loads all Modules that are currently stored in the Database
      */
     async getAllModules() {
-        const moduleIds = [];
-        this.allModules = [];
-        await this.firestore.collection('modules').get().toPromise().then((res) => {
-            res.forEach(a => {
-                moduleIds.push(a.id);
+        if (!this.runningGetAllModules) {
+            this.runningGetAllModules = true;
+            const moduleIds = [];
+            this.allModules = [];
+            await this.firestore.collection('modules').get().toPromise().then((res) => {
+                res.forEach(a => {
+                    moduleIds.push(a.id);
+                });
             });
-        });
-        for (const uid of moduleIds) {
-            await this.getModule(uid);
-        }
-        for (const module of this.allModules) {
-            await this.getModuleQuestions(module);
-            console.log(module);
+            for (const uid of moduleIds) {
+                await this.getModule(uid);
+            }
+            for (const module of this.allModules) {
+                await this.getModuleQuestions(module);
+                console.log(module);
+            }
+            this.runningGetAllModules = false;
         }
     }
 
@@ -155,10 +173,10 @@ export class ModuleService {
      * Increments playCount value of a module in firebase
      * @param module - played module
      */
-    incrementModulePlayCount(module: Module){
-       firebase.firestore().collection('modules').doc(module.uid).update({
-          playCount: firebase.firestore.FieldValue.increment(1)
-       });
+    incrementModulePlayCount(module: Module) {
+        firebase.firestore().collection('modules').doc(module.uid).update({
+            playCount: firebase.firestore.FieldValue.increment(1)
+        });
     }
 
     /**
@@ -373,7 +391,7 @@ export class ModuleService {
             });
 
             // delete question progress
-            for (const question of module.questions){
+            for (const question of module.questions) {
                 await this.firestore.collection('userModules').doc(uid).collection('questionProgress').doc(question.uid).delete();
             }
         }
@@ -436,7 +454,7 @@ export class ModuleService {
      * @param module - module to check the owner from
      * @return: boolean
      */
-    isModuleOwner(module: Module): boolean{
+    isModuleOwner(module: Module): boolean {
         return module.ownerUID === this.authService.GetUID();
     }
 
@@ -448,7 +466,7 @@ export class ModuleService {
      * @param tags - searchable tags of module
      * @param questions - question to add to new module
      */
-    async createModule(name: string, description: string, color: string, tags: string[], questions: Question[]){
+    async createModule(name: string, description: string, color: string, tags: string[], questions: Question[]) {
         const userID = this.authService.GetUID();
         // check if any user is logged in
         if (userID !== '') {
@@ -462,7 +480,7 @@ export class ModuleService {
             });
             const moduleUID = res.id;
             // Add each questions as a document to the question collection of new module
-            for (const question of questions){
+            for (const question of questions) {
                 const result = await this.addQuestionToModule(moduleUID, question);
                 // Sets uid of local question to uid of added document in firebase
                 question.uid = result.id;
@@ -480,7 +498,7 @@ export class ModuleService {
      * @param moduleUID - module where the question will be added
      * @param question - question to add
      */
-    addQuestionToModule(moduleUID: string, question: Question){
+    addQuestionToModule(moduleUID: string, question: Question) {
         return this.firestore.collection('modules').doc(moduleUID).collection('questions').add({
             answers: question.answers,
             question: question.question,
@@ -492,24 +510,24 @@ export class ModuleService {
      * deletes module in firestore, updates allModules, updates userModules and recentlyPlayed
      * @param module - module to delete
      */
-    async deleteModule(module: Module){
+    async deleteModule(module: Module) {
         const userID = this.authService.GetUID();
         // check if any user is logged in
         if (userID !== '' && this.isModuleOwner(module)) {
             // delete every document of subcollection questions
-             for (const question of module.questions){
+            for (const question of module.questions) {
                 await this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).delete();
             }
-             // delete document of module
-             await this.firestore.collection('modules').doc(module.uid).delete();
-             // update allModules
-             this.getAllModules();
-             // update local userModules
-             this.deleteLesson(module);
-             // update all modules of userModules collection
-             this.updateUserModules(module);
-             // update recently played
-             await this.loadRecentlyPlayed();
+            // delete document of module
+            await this.firestore.collection('modules').doc(module.uid).delete();
+            // update allModules
+            this.getAllModules();
+            // update local userModules
+            this.deleteLesson(module);
+            // update all modules of userModules collection
+            this.updateUserModules(module);
+            // update recently played
+            await this.loadRecentlyPlayed();
         }
     }
 
@@ -519,16 +537,16 @@ export class ModuleService {
      * and resets recentlyPlayed if the user recently played the deleted module
      * @param module - imported module that was deleted
      */
-    private async updateUserModules(module: Module){
+    private async updateUserModules(module: Module) {
         // get documents that contain the module id
         const result = await this.firestore.firestore.collection('userModules').where('modules', 'array-contains', module.uid).get();
-        if (!result.empty){
+        if (!result.empty) {
             let modules = [];
             // iterate the documents
-            for (const doc of result.docs){
+            for (const doc of result.docs) {
                 const recentlyPlayedModule = doc.data().recentlyPlayed;
                 // check if recentlyPlayed uid matches deleted module uid
-                if (recentlyPlayedModule === module.uid){
+                if (recentlyPlayedModule === module.uid) {
                     // reset if match
                     await this.firestore.collection('userModules').doc(doc.id).update({
                         recentlyPlayed: ''
@@ -539,8 +557,8 @@ export class ModuleService {
                 // check if modules contain deleted module uid
                 const idx = modules.indexOf(module.uid);
                 // user imported the module - delete possible question progress
-                if (idx !== -1){
-                    for (const question of module.questions){
+                if (idx !== -1) {
+                    for (const question of module.questions) {
                         await this.firestore.collection('userModules').doc(doc.id).collection('questionProgress')
                             .doc(question.uid).delete();
                     }
@@ -565,7 +583,7 @@ export class ModuleService {
      * @param tags - searchable tags of module
      * @param questions - questions of module
      */
-    async editModule(module: Module, name: string, description: string, color: string, tags: string[], questions: Question[]){
+    async editModule(module: Module, name: string, description: string, color: string, tags: string[], questions: Question[]) {
         // edit module in firebase
         this.firestore.collection('modules').doc(module.uid).update({
             name,
@@ -574,9 +592,9 @@ export class ModuleService {
             tags
         });
         // edit questions of module in firebase
-        for (const question of questions){
+        for (const question of questions) {
             // check if question already got id
-            if (question.uid !== '-1' ){
+            if (question.uid !== '-1') {
                 this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).update({
                     answers: question.answers,
                     question: question.question,
