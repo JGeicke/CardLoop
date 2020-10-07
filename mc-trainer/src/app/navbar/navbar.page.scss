@@ -9,8 +9,13 @@ ion-toolbar {
 ion-button {
   background-color: transparent;
   --box-shadow: none;
+  opacity: 0.6;
 }
 
-img{
+.active {
+  opacity: 1;
+}
+
+img {
   height: 1.8rem;
 }
