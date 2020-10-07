@@ -81,6 +81,8 @@ export class LoginPage implements OnInit, ViewWillEnter {
      * handles the registration process
      */
     Register() {
+        const email = this.emailInput;
+        const pass = this.passwordInput;
         if (this.emailInput.length !== 0 && this.passwordInput.length !== 0 && this.matchPassword()) {
             this.authService.Register(this.emailInput, this.passwordInput).then((res) => {
                 if (res === 'auth/email-already-in-use') {
@@ -103,6 +105,10 @@ export class LoginPage implements OnInit, ViewWillEnter {
                 } else if (res === '') {
                     // Successful registration
                     this.toggleLogin();
+                    this.emailInput = email;
+                    this.passwordInput = pass;
+                    this,this.saveUser = true;
+                    this.Login();
                     this.alertText = 'Registered successfully!';
                     if (!this.hasAlert) {
                         this.toggleAlert();
