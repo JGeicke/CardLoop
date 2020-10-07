@@ -26,7 +26,7 @@ export class ModuleService {
      * last played module(lesson) of user
      */
     // new Module('', '', '', [], 0, '#ffffff', '');
-    public recentlyPlayed: Module;
+    public recentlyPlayed: Module = new Module('','','',[],0,'#CF5D5D','');
     /**
      * module(lesson) currently played by user
      */
@@ -45,6 +45,7 @@ export class ModuleService {
      * recommendations for the user based on globalPlayCount
      */
     public recommendations: Module[] = [];
+    private importedModules = new Set();
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService,
                 private alertController: AlertController,
@@ -145,6 +146,7 @@ export class ModuleService {
                 await this.statisticService.getUserStats(uid);
                 this.getRecommendations();
                 this.runningGetUserModules = false;
+                this.setImported();
                 if (routeToLogin){
                     this.router.navigate(['logged-in']);
                 }
@@ -262,12 +264,7 @@ export class ModuleService {
      * @param module - module to check if imported
      */
     isModuleImported(module: Module): boolean {
-        for (const m of this.userModules) {
-            if (m.uid === module.uid) {
-                return true;
-            }
-        }
-        return false;
+        return  this.importedModules.has(module.uid);
     }
 
     /**
@@ -333,8 +330,8 @@ export class ModuleService {
                 .then((res) => {
                     if (res.exists) {
                         const id = res.data().recentlyPlayed;
+                        if (this.userModules != [])
                         for (const module of this.userModules) {
-                            console.log('Recently played check:' + module.name);
                             if (module.uid === id) {
                                 this.recentlyPlayed = module;
                                 break;
@@ -382,6 +379,7 @@ export class ModuleService {
     async deleteLesson(module: Module) {
         const uid = this.authService.GetUID();
         if (uid !== '') {
+            this.importedModules.delete(module.uid);
             const idx = this.userModules.indexOf(module);
             this.userModules.splice(idx, 1);
             const resultArray = [];
@@ -421,6 +419,7 @@ export class ModuleService {
             this.firestore.collection('userModules').doc(userID).update({modules: uModuleIDs}).then(() => {
                 // add module to userModules
                 this.userModules.push(module);
+                this.importedModules.add(module.uid);
             });
         } else {
             // if noone is logged in
@@ -660,7 +659,6 @@ export class ModuleService {
                 }
             }
         }
-        console.log(this.recommendations);
     }
 
     /**
@@ -677,6 +675,12 @@ export class ModuleService {
             }
         }
         return found;
+    }
+
+    private setImported(){
+        for (const module of this.userModules){
+            this.importedModules.add(module.uid);
+        }
     }
 }
 
