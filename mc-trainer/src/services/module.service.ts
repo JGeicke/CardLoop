@@ -26,7 +26,7 @@ export class ModuleService {
      * last played module(lesson) of user
      */
     // new Module('', '', '', [], 0, '#ffffff', '');
-    public recentlyPlayed: Module = new Module('','','',[],0,'#CF5D5D','');
+    public recentlyPlayed: Module = new Module('', '', '', [], 0, '#CF5D5D', '');
     /**
      * module(lesson) currently played by user
      */
@@ -334,7 +334,6 @@ export class ModuleService {
                     if (res.exists) {
                         this.recentlyPlayed = null;
                         const id = res.data().recentlyPlayed;
-                        if (this.userModules != [])
                         for (const module of this.userModules) {
                             if (module.uid === id) {
                                 this.recentlyPlayed = module;
