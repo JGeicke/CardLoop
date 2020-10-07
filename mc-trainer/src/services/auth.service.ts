@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AlertController, ModalController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController} from '@ionic/angular';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {User} from './user.model';
@@ -13,19 +13,20 @@ import {ModuleService} from './module.service';
 })
 export class AuthService {
 
+    loadingModal;
     registerTriggered = false;
     private user: User;
     isLoggedIn = false;
 
     constructor(private firebaseAuth: AngularFireAuth, private alertController: AlertController,
-                private firestore: AngularFirestore, private router: Router, private statisticService: StatisticService) {
+                private firestore: AngularFirestore, private router: Router, private statisticService: StatisticService,
+                private loadingController: LoadingController) {
     }
 
     /**
      * registers a new user in the firebase Auth and returns the thrown error or '' if no error occured
      * @param email the new usere's email
      * @param password  the new usere's password
-     * @constructor
      */
     async Register(email: string, password: string): Promise<string> {
         let errorCode: string;
@@ -50,7 +51,6 @@ export class AuthService {
      * signs in an already existing user with the firebase Auth returns the thrown error or '' if no error occured
      * @param email the user's Email
      * @param password the users's password
-     * @constructor
      */
     async SignIn(email: string, password: string): Promise<string> {
         let errorCode;
@@ -67,7 +67,6 @@ export class AuthService {
 
     /**
      * signs out the current user and redirects them to the login page
-     * @constructor
      */
     SignOut() {
         this.user = null;
@@ -79,7 +78,6 @@ export class AuthService {
 
     /**
      * returns the UID of the currently logged in user or '' if no user is logged in at the moment
-     * @constructor
      */
     GetUID(): string {
         if (this.user != null) {
@@ -204,5 +202,16 @@ export class AuthService {
      */
     toggleRegister(): boolean {
         return this.registerTriggered;
+    }
+
+    /**
+     * function to trigger loading modal
+     */
+    async presentLoading() {
+        this.loadingModal = await this.loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Please wait...',
+        });
+        await this.loadingModal.present();
     }
 }

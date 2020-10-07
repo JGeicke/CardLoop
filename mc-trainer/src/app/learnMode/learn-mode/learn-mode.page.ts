@@ -29,7 +29,7 @@ export class LearnModePage implements OnInit {
     private answered = false;
     private progress;
     private growth;
-    private randomized: boolean = false;
+    private randomized = false;
 
     constructor(private moduleService: ModuleService, private statistic: StatisticService,
                 private router: Router, private navCtrl: NavController) {
@@ -38,11 +38,8 @@ export class LearnModePage implements OnInit {
     }
 
     ionViewWillEnter() {
-
-
         this.initLearnMode();
         this.initNextQuestion();
-
     }
 
     /**
@@ -192,8 +189,8 @@ export class LearnModePage implements OnInit {
      * randomises the order of the questions
      */
     randomQuestion() {
-        let randomizedQuestions: Question[] = [];
-        let tempQuestions: Question[] = [];
+        const randomizedQuestions: Question[] = [];
+        const tempQuestions: Question[] = [];
         for (let i = 0; i < this.currModuleQuestions.length; i++) {
             if (i < this.nextQuestion) {
                 randomizedQuestions.push(this.currModuleQuestions[i]);
@@ -201,9 +198,9 @@ export class LearnModePage implements OnInit {
                 tempQuestions.push(this.currModuleQuestions[i]);
             }
         }
-        let max = tempQuestions.length;
+        const max = tempQuestions.length;
         for (let i = 0; i < max; i++) {
-            let rdm = this.getRandomInt(0, tempQuestions.length);
+            const rdm = this.getRandomInt(0, tempQuestions.length);
             randomizedQuestions.push(tempQuestions[rdm]);
             tempQuestions.splice(rdm, 1);
         }
@@ -214,7 +211,7 @@ export class LearnModePage implements OnInit {
     private getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+        return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
     }
 
     /**

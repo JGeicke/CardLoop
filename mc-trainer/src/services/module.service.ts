@@ -123,6 +123,7 @@ export class ModuleService {
     async getUserModules(routeToLogin: boolean) {
         if (!this.runningGetUserModules) {
             this.runningGetUserModules = true;
+            await this.authService.presentLoading();
             let moduleIds = [];
             const uid = this.authService.GetUID();
             if (uid !== '') {
@@ -146,6 +147,8 @@ export class ModuleService {
                 this.getRecommendations();
                 this.runningGetUserModules = false;
                 if (routeToLogin){
+                    // dismiss loading modal
+                    await this.authService.loadingModal.dismiss();
                     this.router.navigate(['logged-in']);
                 }
             }
@@ -332,6 +335,7 @@ export class ModuleService {
             return this.firestore.collection('userModules').doc(uid).get().toPromise()
                 .then((res) => {
                     if (res.exists) {
+                        this.recentlyPlayed = null;
                         const id = res.data().recentlyPlayed;
                         for (const module of this.userModules) {
                             console.log('Recently played check:' + module.name);
@@ -340,7 +344,7 @@ export class ModuleService {
                                 break;
                             }
                         }
-                        if (this.recentlyPlayed === undefined) {
+                        if (this.recentlyPlayed === null) {
                             this.recentlyPlayed = this.allModules[Math.floor(Math.random() * this.allModules.length)];
                         }
                     }
