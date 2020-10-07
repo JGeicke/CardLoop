@@ -34,6 +34,10 @@ p {
   cursor: pointer;
 }
 
+.pushed-in {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 1px 1px 4px 5px #0006 !important;
+}
+
 .answer-box {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
@@ -41,7 +45,8 @@ p {
   padding: 1rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
-  width: 90%;
+  width: 100%;
+  height: 100%;
   display: flex;
 }
 
@@ -61,16 +66,6 @@ p {
 
 .right {
   background: #66be90;
-}
-
-.add-icon {
-  height: 3rem;
-  width: 3rem;
-  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
-  background: rgb(255, 75, 5);
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
 }
 
 .confirm {
@@ -93,4 +88,15 @@ ion-icon {
 
 ion-textarea {
   color: white;
+  resize: vertical;
+}
+
+ion-icon[name = "add"] {
+  height: 3rem;
+  width: 3rem;
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
+  background: #ff9955;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
 }

@@ -6,6 +6,18 @@
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
+/**
+  HEADERS
+ */
+
+ion-header {
+  --ion-background-color: #4ba3c3;
+}
+
+ion-toolbar {
+  --background: #4ba3c3;
+}
+
 .header-wrapper {
   display: flex;
   justify-content: center;
@@ -70,6 +82,15 @@ ion-segment-button {
   padding: 0.7rem 0 0.7rem 3rem;
 }
 
+.dbl-btn {
+  opacity: 1;
+  color: white;
+  font-size: 1.2rem;
+  font-variant: small-caps;
+  text-align: center;
+  padding: 0.7rem 0 0.7rem 0;
+}
+
 .incitement-box {
   width: 100%;
 }
@@ -79,6 +100,14 @@ ion-segment-button {
   float: right;
   position: relative;
   right: -0.3rem;
+  top: 0.4rem
+}
+
+.delete-btn {
+  height: 3rem;
+  float: left;
+  position: relative;
+  left: -0.3rem;
   top: 0.4rem
 }
 

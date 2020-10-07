@@ -2,6 +2,14 @@ ion-content {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
+ion-header {
+  --ion-background-color: #4ba3c3;
+}
+
+.topbar {
+  --background: #4ba3c3 !important;
+}
+
 .question-box {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);

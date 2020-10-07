@@ -4,23 +4,19 @@ ion-content {
 
 /* Custom Slide Padding */
 #onboarding_slide1 > ion-grid {
-  --ion-grid-column-padding: 32px;
+  --ion-grid-column-padding: 28px;
 }
 
 #onboarding_slide2 > ion-grid {
-  --ion-grid-column-padding: 23px;
+  --ion-grid-column-padding: 10px;
 }
 
 #onboarding_slide3 > ion-grid {
-  --ion-grid-column-padding: 30px;
+  --ion-grid-column-padding: 20px;
 }
 
 #onboarding_slide4 > ion-grid {
   --ion-grid-column-padding: 15px;
-}
-
-.question_red {
-  padding-bottom: 20px;
 }
 
 #onboarding_slide5 > ion-grid {
@@ -28,7 +24,23 @@ ion-content {
 }
 
 #onboarding_slide6 > ion-grid {
+  --ion-grid-column-padding: 10px;
+}
+
+#onboarding_slide7 > ion-grid {
   --ion-grid-column-padding: 20px;
+}
+
+#onboarding_slide8 > ion-grid {
+  --ion-grid-column-padding: 20px;
+}
+
+#onboarding_slide9 > ion-grid {
+  --ion-grid-column-padding: 15px;
+}
+
+.question_red {
+  padding-bottom: 20px;
 }
 
 /* --------------- */
@@ -39,6 +51,10 @@ ion-slides {
 
 ion-text {
   font-variant: small-caps;
+}
+
+.white_color {
+  color: white;
 }
 
 #slide1_confetti {
@@ -107,8 +123,18 @@ ion-button {
 }
 
 .round_svg {
-  height: 10rem;
-  width: 10rem;
+  height: 8rem;
+  width: 8rem;
+}
+
+/*Custom CSS Slide 7 */
+#new_lesson_icon {
+  --background: #c90b2d;
+}
+
+/*Custom CSS Slide 8*/
+#new_question_icon {
+  --background: #FFB763;
 }
 
 /*# sourceMappingURL=onboarding.page.css.map */

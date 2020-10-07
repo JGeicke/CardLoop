@@ -3,16 +3,17 @@ import {ModuleService} from '../../../services/module.service';
 import {Question} from '../../../services/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionStorageService} from './question-storage.service';
+import {ViewWillEnter} from "@ionic/angular";
 
 @Component({
   selector: 'app-add-modules',
   templateUrl: './add-modules.page.html',
   styleUrls: ['./add-modules.page.scss'],
 })
-export class AddModulesPage implements OnInit {
+export class AddModulesPage implements OnInit, ViewWillEnter {
 
   // module variables
-  private picked = 'general';
+  private picked = 'questions';
   private moduleTitle: string;
   private moduleTags: string;
   private moduleDesc: string;
