@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
-import {IonInput, ViewWillEnter} from '@ionic/angular';
+import {IonInput, LoadingController, ViewWillEnter} from '@ionic/angular';
 import {ModuleService} from '../../../services/module.service';
 
 @Component({
@@ -23,19 +23,21 @@ export class LoginPage implements OnInit, ViewWillEnter {
     private saveUser = false;
     private user: any;
 
+
+    private loginSpinner: boolean;
     @ViewChild('loginMail')
     private loginEmailInput: IonInput;
     @ViewChild('signUpMail')
     private signUpEmailInput: IonInput;
 
-    constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService) {
+    constructor(private authService: AuthService, private router: Router, private moduleService: ModuleService,
+                private loadingController: LoadingController) {
         if (this.authService.registerTriggered) {
             this.toggleLogin();
         }
         console.log(JSON.parse(localStorage.getItem('saveUser')));
         if (JSON.parse(localStorage.getItem('saveUser')) === true) {
             if (localStorage.getItem('user') != null) {
-
                 this.saveUser = true;
                 this.user = JSON.parse(localStorage.getItem('user'));
                 this.emailInput = this.user.email;
@@ -70,6 +72,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
 
     ionViewDidLeave(){
         this.ClearInput();
+        this.loginSpinner = false;
     }
 
 
@@ -85,6 +88,18 @@ export class LoginPage implements OnInit, ViewWillEnter {
                     if (!this.hasWarning) {
                         this.toggleWarning();
                     }
+                    // email invalid e.g. 't@t.t'
+                } else if (res === 'auth/invalid-email') {
+                    this.warningText = 'Email is not valid!';
+                    if (!this.hasWarning) {
+                        this.toggleWarning();
+                    }
+                    // password to weak e.g. '1'
+                } else if (res === 'auth/weak-password') {
+                    this.warningText = 'Weak password!';
+                    if (!this.hasWarning) {
+                        this.toggleWarning();
+                    }
                 } else if (res === '') {
                     // Successful registration
                     this.toggleLogin();
@@ -92,8 +107,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
                     if (!this.hasAlert) {
                         this.toggleAlert();
                     }
-                } else {
-                    console.log(res);
                 }
             });
         } else if (!this.matchPassword()) {
@@ -153,7 +166,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
                 }
                 await this.moduleService.getUserModules(true);
             }
-            // this.ClearInput();
         }
     }
     /**

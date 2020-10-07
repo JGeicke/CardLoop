@@ -83,6 +83,21 @@ ion-button {
     color: red;
   }
 
+  ion-spinner{
+    --color: white;
+    transform: scale(2);
+    display: block;
+    margin:  auto;
+  }
+
+  .spinner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
   // success styling
   .success{
     color: #8fe431;
