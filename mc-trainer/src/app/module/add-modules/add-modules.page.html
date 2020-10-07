@@ -73,7 +73,7 @@
                     </ion-row>
                     <h3>Description</h3>
                     <ion-item>
-                        <ion-textarea [(ngModel)]="moduleDesc" placeholder="{{placeholderModuleDesc}}"></ion-textarea>
+                        <ion-textarea  auto-grow="true" rows="4" [(ngModel)]="moduleDesc" placeholder="{{placeholderModuleDesc}}"></ion-textarea>
                     </ion-item>
                 </div>
             </ion-row>
@@ -87,28 +87,27 @@
             <ion-row class="ion-justify-content-center">
                 <div class="questions-content">
                     <ion-row class="ion-justify-content-around">
-                        <ion-col>
-                            <h3>Questions</h3>
-                        </ion-col>
-                        <ion-col>
-                        </ion-col>
-                        <ion-col>
-                            <h3>Options</h3>
-                        </ion-col>
+                        <h3>Questions</h3>
                     </ion-row>
                     <ion-row *ngFor="let question of this.questArr; let i = index;"
                              class="ion-justify-content-around ion-align-items-center question-spacing">
-                        <ion-col size="7">
+                        <ion-col size="9">
                             <div class="answer-box">
                                 <span>{{question.question}}</span>
                             </div>
                         </ion-col>
-                        <ion-col size="5">
-                            <div class="delete-box">
-                                <ion-icon name="trash" (click)="this.questArr.splice(i,1)"></ion-icon>
+                        <ion-col size="3">
+                            <div class="delete-box ion-justify-content-around ion-align-items-center">
+                                <img (click)="this.questArr.splice(i,1)"
+                                     src="../../../assets/icons/trash-alt-solid.svg"
+                                     alt="arrow pointing right"
+                                     srcset="../../../assets/icons/trash-alt-solid.svg">
                             </div>
-                            <div class="delete-box">
-                                <ion-icon name="pencil" (click)="this.editQuestion(question)"></ion-icon>
+                            <div class="delete-box ion-justify-content-around ion-align-items-center">
+                                <img (click)="this.editQuestion(question)"
+                                     src="../../../assets/icons/pencil-alt-solid.svg"
+                                     alt="arrow pointing right"
+                                     srcset="../../../assets/icons/pencil-alt-solid.svg">
                             </div>
                         </ion-col>
                     </ion-row>

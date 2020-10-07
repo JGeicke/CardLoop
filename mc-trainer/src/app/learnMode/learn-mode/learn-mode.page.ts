@@ -4,7 +4,7 @@ import {Module} from '../../../services/module.model';
 import {Question} from '../../../services/question.model';
 import {StatisticService} from '../../../services/statistic.service';
 import {Router} from '@angular/router';
-import {NavController} from '@ionic/angular';
+import {NavController, ViewWillEnter} from '@ionic/angular';
 import {addRouteDeclarationToModule} from '@ionic/angular-toolkit/schematics/util/ast-util';
 
 @Component({
@@ -12,7 +12,7 @@ import {addRouteDeclarationToModule} from '@ionic/angular-toolkit/schematics/uti
     templateUrl: './learn-mode.page.html',
     styleUrls: ['./learn-mode.page.scss'],
 })
-export class LearnModePage implements OnInit {
+export class LearnModePage implements OnInit, ViewWillEnter {
 
     private boxstyle: string;
     private rightanswer = null;
@@ -38,11 +38,8 @@ export class LearnModePage implements OnInit {
     }
 
     ionViewWillEnter() {
-
-
         this.initLearnMode();
         this.initNextQuestion();
-
     }
 
     /**

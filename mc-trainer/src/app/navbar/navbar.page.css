@@ -8,6 +8,11 @@ ion-toolbar {
 ion-button {
   background-color: transparent;
   --box-shadow: none;
+  opacity: 0.6;
+}
+
+.active {
+  opacity: 1;
 }
 
 img {

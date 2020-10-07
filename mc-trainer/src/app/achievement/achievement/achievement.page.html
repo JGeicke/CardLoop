@@ -139,7 +139,11 @@
             </ion-list>
             <h2>Total Question Results</h2>
             <ion-row class="ion-justify-content-around">
-                    <p class="wronglabel">Wrong: {{this.wrongQuestCount}}</p>
+                <p class="wronglabel">Wrong: {{this.wrongQuestCount}}</p>
+                <p class="rightlabel">Right: {{this.correctQuestCount}}</p>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+
                 <ngx-charts-pie-chart
                         [view]="view"
                         [scheme]="colorScheme"
@@ -151,7 +155,6 @@
                         [doughnut]="isDoughnut"
                 >
                 </ngx-charts-pie-chart>
-                    <p class="rightlabel">Right: {{this.correctQuestCount}}</p>
             </ion-row>
         </div>
     </div>

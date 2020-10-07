@@ -46,11 +46,12 @@ ion-toolbar {
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  padding: 1rem;
+  padding: 1.2rem;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   width: 90%;
   display: flex;
+  cursor: pointer;
 }
 ion-icon{
   font-size: 1.5rem;
@@ -125,6 +126,11 @@ ion-input, ion-textarea {
   color: white;
 }
 
+ion-textarea {
+  color: white;
+  resize: vertical;
+}
+
 ion-label:focus {
   color: #e0ac08;
 }
@@ -161,6 +167,7 @@ ion-label:focus {
   border-radius: 15px;
   padding: 1rem;
   margin-top: 1rem;
+  width: 100%;
 }
 
 .question-spacing {
@@ -173,15 +180,13 @@ ion-label:focus {
   box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   padding: 0.8rem;
-  width: 70%;
+  height: 100%;
 }
 
 .answer-box span {
   opacity: 1;
   color: white;
   font-size: 1rem;
-  display: table;
-  text-align: center;
 }
 
 .question-loops {

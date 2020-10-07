@@ -1,9 +1,12 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="white"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding">
-        <img (click)="this.navCtrl.pop();" class="gobackarrow"
-             src="../../../assets/icons/goback-arrow-topnav.svg"
-             alt="arrow pointing right"
-                 srcset="../../../assets/icons/goback-arrow-topnav.svg">
-            <h2 class="ion-text-center">{{this.moduleService.currLesson.name}}</h2>
+    <h2 class="ion-text-center">{{this.moduleService.currLesson.name}}</h2>
     <ion-row class="ion-justify-content-center">
         <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="picked">
             <ion-segment-button value="general">
@@ -26,7 +29,8 @@
                         <p class="incitement-text">Jump right in!</p>
                     </div>
                 </div>
-                <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson) && this.auth.isLoggedIn" class="incitement-box">
+                <div *ngIf="!this.moduleService.isModuleImported(this.moduleService.currLesson) && this.auth.isLoggedIn"
+                     class="incitement-box">
                     <img (click)="this.moduleService.importModule(this.moduleService.currLesson)"
                          src="../../../assets/icons/cloud-download-orange-circle.svg"
                          alt="arrow pointing right"
@@ -95,8 +99,22 @@
                     </div>
                 </div>
             </ion-row>
-            <ion-row *ngIf="this.moduleService.isModuleOwner(this.moduleService.currLesson)">
-                <ion-button (click)="deleteModal()">Delete module permanently</ion-button>
+            <ion-row *ngIf="this.moduleService.isModuleOwner(this.moduleService.currLesson)"
+                     class="ion-justify-content-center">
+                <div class="incitement-box">
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="6">
+                            <div class="incitement" (click)="this.router.navigate(['add-modules'])">
+                                <p class="dbl-btn">Edit</p>
+                            </div>
+                        </ion-col>
+                        <ion-col size="6">
+                            <div class="incitement" (click)="deleteModal()">
+                                <p class="dbl-btn">Delete</p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </div>
             </ion-row>
         </div>
         <div *ngSwitchCase="'questions'">

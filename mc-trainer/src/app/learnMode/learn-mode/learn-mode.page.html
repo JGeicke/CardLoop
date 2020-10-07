@@ -1,8 +1,12 @@
+<ion-header *ngIf="this.moduleService.currQuestion !== -1">
+    <ion-toolbar class="topbar">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content class="ion-padding">
-    <img *ngIf="this.moduleService.currQuestion !== -1" (click)="this.navCtrl.pop();" class="gobackarrow"
-         src="../../../assets/icons/goback-arrow-topnav.svg"
-         alt="arrow pointing right"
-         srcset="../../../assets/icons/goback-arrow-topnav.svg">
     <div *ngIf="this.moduleService.currQuestion === -1">
         <progress-bar [progress]="this.progress" [color-degraded]="{'0': '#798A93', '99': '#66BE90'}">
         </progress-bar>
@@ -54,7 +58,7 @@
 </ion-content>
 
 <ion-footer *ngIf="this.moduleService.currQuestion === -1">
-    <ion-toolbar>
+    <ion-toolbar class="botbar">
         <ion-row class="ion-justify-content-around" >
             <ion-button size="small" color="none" (click)="randomQuestion()" *ngIf="!randomized">
                 <img src="../../../assets/icons/random-solid.svg" alt="little house"

@@ -90,6 +90,13 @@ round-progress {
   color: white;
 }
 
+.achievement_progress_text {
+  font-size: 1.2em;
+  font-variant: small-caps;
+  padding: 0 10px;
+  color: white;
+}
+
 .ach_num_div {
   margin-top: 0.5em;
 }

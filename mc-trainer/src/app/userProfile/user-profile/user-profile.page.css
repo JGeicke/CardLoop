@@ -116,4 +116,10 @@ ion-item.item-has-focus > .label {
   margin-top: 1rem;
 }
 
+.button {
+  margin-top: 2rem;
+  height: 2.4rem;
+  margin-bottom: 0.6rem;
+}
+
 /*# sourceMappingURL=user-profile.page.css.map */
