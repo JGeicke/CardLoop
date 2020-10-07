@@ -3,6 +3,7 @@ import {ModuleService} from '../../services/module.service';
 import {Router} from '@angular/router';
 import {StatisticService} from '../../services/statistic.service';
 import {AuthService} from '../../services/auth.service';
+import {AchievementService} from '../../services/achievement.service';
 
 @Component({
   selector: 'app-feedback',
@@ -37,7 +38,8 @@ export class FeedbackPage implements OnInit {
   }
 
   constructor(private moduleService: ModuleService, private router: Router,
-              private statisticService: StatisticService, private authService: AuthService) {
+              private statisticService: StatisticService, private authService: AuthService,
+              private achievementService: AchievementService) {
   }
 
   ionViewDidEnter(){
@@ -58,6 +60,7 @@ export class FeedbackPage implements OnInit {
     this.halfwayQuestions = sessionStats[1];
     this.learnedQuestions = sessionStats[2];
     this.statisticService.generateUserStats(this.authService.GetUID(), this.statisticService.session);
+    this.achievementService.generateAchievements(this.moduleService.userModules.length);
   }
 
   /**

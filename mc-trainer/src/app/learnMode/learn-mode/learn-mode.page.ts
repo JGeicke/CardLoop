@@ -4,8 +4,8 @@ import {Module} from '../../../services/module.model';
 import {Question} from '../../../services/question.model';
 import {StatisticService} from '../../../services/statistic.service';
 import {Router} from '@angular/router';
-import {NavController} from "@ionic/angular";
-import {addRouteDeclarationToModule} from "@ionic/angular-toolkit/schematics/util/ast-util";
+import {NavController} from '@ionic/angular';
+import {addRouteDeclarationToModule} from '@ionic/angular-toolkit/schematics/util/ast-util';
 
 @Component({
     selector: 'app-learn-mode',
@@ -31,7 +31,8 @@ export class LearnModePage implements OnInit {
     private growth;
     private randomized: boolean = false;
 
-    constructor(private moduleService: ModuleService, private statistic: StatisticService, private router: Router, private navCtrl: NavController) {
+    constructor(private moduleService: ModuleService, private statistic: StatisticService,
+                private router: Router, private navCtrl: NavController) {
         this.initLearnMode();
         this.initNextQuestion();
     }
@@ -99,6 +100,8 @@ export class LearnModePage implements OnInit {
                 this.multipleChoise = false;
             }
         } else {
+            // calculate progress again
+            this.moduleService.currLesson.calcProgress();
             this.endSession();
             console.log('last Question reached redirect to stats..');
         }

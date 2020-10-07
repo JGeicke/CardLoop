@@ -80,4 +80,11 @@ export class StatisticService {
     });
   }
 
+  /**
+   * Resets userStats to dummy stats
+   */
+  resetUserStats(){
+    this.userStats = new Statistic(0, 0, 0, 0, new Date(2000, 1, 1));
+  }
+
 }

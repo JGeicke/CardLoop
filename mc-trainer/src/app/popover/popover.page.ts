@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { ModuleService } from '../../services/module.service';
-import {Module} from "../../services/module.model";
-import {NavParams, PopoverController} from "@ionic/angular";
-import {Router} from "@angular/router";
+import {Module} from '../../services/module.model';
+import {NavParams, PopoverController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {QuestionStorageService} from '../module/add-modules/question-storage.service';
 @Component({
   selector: 'app-popover',
   templateUrl: './popover.page.html',
@@ -14,8 +15,9 @@ export class PopoverPage implements OnInit {
 
   constructor(private moduleService: ModuleService,
               public popoverController: PopoverController,
-              public navParams : NavParams,
-              private router: Router) { }
+              public navParams: NavParams,
+              private router: Router,
+              private data: QuestionStorageService) { }
 
   ngOnInit() {
     this.calledfrom = this.navParams.get('from');
@@ -29,6 +31,24 @@ export class PopoverPage implements OnInit {
   async startDelete() {
     await this.popoverController.dismiss();
     await this.moduleService.delDialog();
+  }
+
+  async startEdit(){
+    await this.popoverController.dismiss();
+    // generate tags string
+    let tag = '';
+    for (const t of this.moduleService.currLesson.tags){
+      tag += '#' + t + ' ';
+    }
+    this.data.module = {
+      moduleUID: this.moduleService.currLesson.uid,
+      moduleTitle: this.moduleService.currLesson.name,
+      moduleTags: tag,
+      moduleDesc: this.moduleService.currLesson.description,
+      moduleColor: this.moduleService.currLesson.color,
+      questions: this.moduleService.currLesson.questions
+    };
+    this.router.navigate(['add-modules']);
   }
 
   async getQuestionDetails() {

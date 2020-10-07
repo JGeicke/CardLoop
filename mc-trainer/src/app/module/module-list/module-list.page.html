@@ -34,7 +34,7 @@
                         </div>
                         <div>
                         <span class="tags" *ngFor="let tag of this.module.tags; index as i">
-                            <a>#{{tag}}</a>
+                            <a>#{{tag}} </a>
                         </span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         </div>
                         <div>
                         <span class="tags" *ngFor="let tag of this.module.tags; index as i">
-                            <a>#{{tag}}</a>
+                            <a>#{{tag}} </a>
                         </span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             </div>
         </ion-row>
     </div>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="this.router.navigate(['add-modules'])">
+    <ion-fab *ngIf="this.authService.isLoggedIn" vertical="bottom" horizontal="end" slot="fixed" (click)="this.router.navigate(['add-modules'])">
         <ion-fab-button>
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
