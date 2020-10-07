@@ -5,7 +5,7 @@ import {ImportModulesPageModule} from './import-modules/import-modules-page.modu
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'onboarding',
     pathMatch: 'full'
   },
   {
