@@ -25,6 +25,7 @@ export class ModuleService {
     /**
      * last played module(lesson) of user
      */
+    // new Module('', '', '', [], 0, '#ffffff', '');
     public recentlyPlayed: Module;
     /**
      * module(lesson) currently played by user
@@ -34,11 +35,11 @@ export class ModuleService {
     /**
      * ensures getUserModules can only be run once at the same time
      */
-    private runningGetUserModules: boolean = false;
+    private runningGetUserModules = false;
     /**
      * ensures getAllModules can only be run once at the same time
      */
-    private runningGetAllModules: boolean = false;
+    private runningGetAllModules = false;
 
     /**
      * recommendations for the user based on globalPlayCount
@@ -119,7 +120,7 @@ export class ModuleService {
     /**
      * loads all Modules that the currently logged in User has already imported
      */
-    async getUserModules() {
+    async getUserModules(routeToLogin: boolean) {
         if (!this.runningGetUserModules) {
             this.runningGetUserModules = true;
             let moduleIds = [];
@@ -140,11 +141,13 @@ export class ModuleService {
                     }
                     module.calcProgress();
                 }
+                await this.loadRecentlyPlayed();
                 await this.statisticService.getUserStats(uid);
-                // this.achievementService.generateAchievements(this.userModules.length);
-                this.runningGetUserModules = false;
                 this.getRecommendations();
-                return this.loadRecentlyPlayed();
+                this.runningGetUserModules = false;
+                if (routeToLogin){
+                    this.router.navigate(['logged-in']);
+                }
             }
         }
 
@@ -526,17 +529,17 @@ export class ModuleService {
             for (const question of module.questions) {
                 await this.firestore.collection('modules').doc(module.uid).collection('questions').doc(question.uid).delete();
             }
-             // delete document of module
-             await this.firestore.collection('modules').doc(module.uid).delete();
-             // update allModules
-             this.getAllModules();
-             // update local userModules
-             this.deleteLesson(module);
-             // update all modules of userModules collection
-             this.updateUserModules(module);
-             // update recently played
-             await this.loadRecentlyPlayed();
-             this.router.navigate(['module-list']);
+            // delete document of module
+            await this.firestore.collection('modules').doc(module.uid).delete();
+            // update allModules
+            this.getAllModules();
+            // update local userModules
+            this.deleteLesson(module);
+            // update all modules of userModules collection
+            this.updateUserModules(module);
+            // update recently played
+            await this.loadRecentlyPlayed();
+            this.router.navigate(['module-list']);
         }
     }
 

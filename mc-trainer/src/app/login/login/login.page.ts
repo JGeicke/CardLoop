@@ -32,18 +32,17 @@ export class LoginPage implements OnInit, ViewWillEnter {
         if (this.authService.registerTriggered) {
             this.toggleLogin();
         }
-        console.log(JSON.parse(localStorage.getItem('saveUser')))
+        console.log(JSON.parse(localStorage.getItem('saveUser')));
         if (JSON.parse(localStorage.getItem('saveUser')) === true) {
             if (localStorage.getItem('user') != null) {
 
-                this.saveUser =true;
+                this.saveUser = true;
                 this.user = JSON.parse(localStorage.getItem('user'));
                 this.emailInput = this.user.email;
                 this.passwordInput = this.user.password;
                 this.Login();
             }
         }
-        ;
     }
 
     ngOnInit() {
@@ -69,10 +68,14 @@ export class LoginPage implements OnInit, ViewWillEnter {
         }
     }
 
+    ionViewDidLeave(){
+        this.ClearInput();
+    }
+
+
 
     /**
      * handles the registration process
-     * @constructor
      */
     Register() {
         if (this.emailInput.length !== 0 && this.passwordInput.length !== 0 && this.matchPassword()) {
@@ -109,9 +112,8 @@ export class LoginPage implements OnInit, ViewWillEnter {
 
     /**
      * handles the login process
-     * @constructor
      */
-    Login() {
+    async Login() {
         // No email input
         if (this.emailInput.length === 0) {
             this.warningText = 'Email was empty!';
@@ -125,7 +127,8 @@ export class LoginPage implements OnInit, ViewWillEnter {
                 this.toggleWarning();
             }
         } else {
-            this.authService.SignIn(this.emailInput, this.passwordInput).then((res) => {
+            let success = false;
+            await this.authService.SignIn(this.emailInput, this.passwordInput).then((res) => {
                 // wrong password
                 if (res === 'auth/wrong-password') {
                     this.warningText = 'Wrong password!';
@@ -140,20 +143,19 @@ export class LoginPage implements OnInit, ViewWillEnter {
                     }
                     // successful login
                 } else {
-                    console.log('hello again');
-                    if (this.saveUser) {
-                        localStorage.setItem('saveUser', JSON.parse('true'));
-                        this.authService.rememberUser();
-                    }
-                    this.moduleService.getUserModules().then((r) => {
-                        this.router.navigate(['logged-in']);
-                    });
+                    success = true;
                 }
             });
+            if (success) {
+                if (this.saveUser) {
+                    localStorage.setItem('saveUser', JSON.parse('true'));
+                    this.authService.rememberUser();
+                }
+                await this.moduleService.getUserModules(true);
+            }
+            // this.ClearInput();
         }
-        this.ClearInput();
     }
-
     /**
      * Toggles Login-View/Sign-Up View
      */
@@ -207,7 +209,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
 
     /**
      * Clears all input forms
-     * @constructor
      */
     private ClearInput() {
         this.emailInput = '';
