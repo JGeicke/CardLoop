@@ -7,4 +7,4 @@ CardLoop ist ein von Studenten der Technischen Hochschule Mittelhessen entwickel
 als native mobile Anwendungen im Rahmen einer Projektarbeit für das Modul "Entwicklung mobiler Applikationen":
 
 
-Unsere Sodtwaredokumentation findet sich im GitLab [Wiki](https://git.thm.de/ema-ss20/mc-trainer-leichner/-/wikis/home).
+Unsere Softwaredokumentation findet sich im GitLab [Wiki](https://git.thm.de/ema-ss20/mc-trainer-leichner/-/wikis/home).
