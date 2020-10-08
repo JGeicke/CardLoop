@@ -170,7 +170,6 @@ export class AuthService {
                     text: 'YES',
                     cssClass: 'secondary',
                     handler: () => {
-                        console.log('delete');
                         this.deleteUser();
                         returnBoolean = true;
                     }

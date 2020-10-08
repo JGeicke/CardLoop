@@ -54,12 +54,10 @@ export class PopoverPage implements OnInit {
   async getQuestionDetails() {
     await this.popoverController.dismiss();
     this.moduleService.currQuestion = this.navParams.get('qindex');
-    console.log(this.moduleService.currQuestion);
     await this.router.navigate(['learn-mode']);
   }
 
   async startTestWith() {
-    await console.log('startTestWith was called');
   }
 
 }

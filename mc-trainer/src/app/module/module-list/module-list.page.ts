@@ -36,12 +36,9 @@ export class ModuleListPage implements OnInit {
     searchModules() {
         this.searchBool = true;
         this.filteredModules = this.moduleService.searchModules(this.moduleService.userModules, this.searchQuery);
-        this.filteredModules.forEach(module => console.log(module));
     }
 
     ngOnInit() {
-        console.log(this.moduleService.userModules);
-        console.log('length of userModules: ' + this.moduleService.userModules.length);
     }
 
     /**

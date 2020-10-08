@@ -35,7 +35,6 @@ export class LoginPage implements OnInit, ViewWillEnter {
         if (this.authService.registerTriggered) {
             this.toggleLogin();
         }
-        console.log(JSON.parse(localStorage.getItem('saveUser')));
         if (JSON.parse(localStorage.getItem('saveUser')) === true) {
             if (localStorage.getItem('user') != null) {
                 this.saveUser = true;
@@ -107,7 +106,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
                     this.toggleLogin();
                     this.emailInput = email;
                     this.passwordInput = pass;
-                    this,this.saveUser = true;
+                    this.saveUser = true;
                     this.Login();
                     this.alertText = 'Registered successfully!';
                     if (!this.hasAlert) {
