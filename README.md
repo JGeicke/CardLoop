@@ -1,1 +1,1 @@
-Hallo das ist unser Projekt. Hier geht ihr auf die Wiki.
+Hallo das ist unser Projekt. Hier geht ihr auf die [Wiki](https://git.thm.de/ema-ss20/mc-trainer-leichner/-/wikis/home).
