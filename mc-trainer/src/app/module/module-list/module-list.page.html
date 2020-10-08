@@ -12,7 +12,6 @@
             <h2 class="ion-text-center">Your Lessons</h2>
         </ion-row>
 
-
         <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
             <div class="module" [style.background-color]="module.color">
                 <img *ngIf="module.progress < 100" (click)="playLesson(module)"
