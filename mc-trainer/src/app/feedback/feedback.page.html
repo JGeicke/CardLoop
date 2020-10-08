@@ -16,9 +16,9 @@
                     <span class="tags">
                         #{{moduleService.currLesson.tags[0]}}
                         <span *ngIf="this.moduleService.currLesson.tags.length > 1">
-                            #{{moduleService.currLesson.tags[1]}}..
+                            #{{moduleService.currLesson.tags[1]}}
                         </span>
-                        <span *ngIf="moduleService.currLesson.tags.length >= 2">
+                        <span *ngIf="moduleService.currLesson.tags.length > 2">
                             +{{this.moduleService.currLesson.tags.length - 2}} more
                         </span>
                     </span>
