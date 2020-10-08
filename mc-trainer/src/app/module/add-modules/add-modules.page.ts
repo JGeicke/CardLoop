@@ -13,7 +13,7 @@ import {ViewWillEnter} from '@ionic/angular';
 export class AddModulesPage implements OnInit, ViewWillEnter {
 
   // module variables
-  private picked = 'questions';
+  private picked = 'general';
   private moduleTitle: string;
   private moduleTags: string;
   private moduleDesc: string;

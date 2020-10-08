@@ -23,10 +23,10 @@
                      srcset="../../assets/icons/play-button-orange.svg">
             </div>
         </ion-row>
-        <div class="recommendation" [style.background-color]="lesson.color">
+        <div class="recommendation" [style.background-color]="lesson.color" (click)="this.moduleService.getModuleDetails(lesson)">
             <ion-row class="ion-justify-content-between ion-align-items-center">
                 <ion-col size="8">
-                    <div class="recommendation-title" (click)="this.moduleService.getModuleDetails(lesson)">
+                    <div class="recommendation-title">
                         <span>{{lesson.name}}</span>
                     </div>
                 </ion-col>
@@ -51,6 +51,11 @@
             </ion-row>
         </div>
     </ion-row>
+    <ion-fab *ngIf="this.authService.isLoggedIn" vertical="bottom" horizontal="end" slot="fixed" (click)="this.router.navigate(['add-modules'])">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
 <ion-content class="ion-padding" [hidden]="!this.searchBool">
 
@@ -100,5 +105,11 @@
             </ion-row>
         </div>
     </ion-row>
+
+    <ion-fab *ngIf="this.authService.isLoggedIn" vertical="bottom" horizontal="end" slot="fixed" (click)="this.router.navigate(['add-modules'])">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
 <app-navbar></app-navbar>
