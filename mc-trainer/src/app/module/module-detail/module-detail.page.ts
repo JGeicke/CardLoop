@@ -5,6 +5,7 @@ import {AlertController, NavController, PopoverController, ViewWillEnter} from '
 import {Module} from '../../../services/module.model';
 import {PopoverPage} from '../../popover/popover.page';
 import {AuthService} from '../../../services/auth.service';
+import {QuestionStorageService} from "../add-modules/question-storage.service";
 
 @Component({
     selector: 'app-module-detail',
@@ -21,7 +22,7 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
 
     constructor(private moduleService: ModuleService, private router: Router, private navCtrl: NavController,
                 private popoverController: PopoverController, private auth: AuthService,
-                private alertController: AlertController) {
+                private alertController: AlertController, private data: QuestionStorageService) {
     }
 
     ngOnInit() {
@@ -136,5 +137,26 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
         });
 
         await alert.present();
+    }
+
+    /**
+     * Prepares service to edit module and routes to add-modules
+     */
+    editModule(){
+        // generate tags string
+        let tagString = '';
+        for (const t of this.moduleService.currLesson.tags){
+            tagString += '#' + t + ' ';
+        }
+
+        this.data.module = {
+            moduleUID: this.moduleService.currLesson.uid,
+            moduleTitle: this.moduleService.currLesson.name,
+            moduleTags: tagString,
+            moduleDesc: this.moduleService.currLesson.description,
+            moduleColor: this.moduleService.currLesson.color,
+            questions: this.moduleService.currLesson.questions
+        };
+        this.router.navigate(['add-modules']);
     }
 }
