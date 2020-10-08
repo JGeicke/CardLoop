@@ -71,17 +71,14 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
       this.questArr = this.data.module.questions;
       if (this.data.module.moduleUID !== undefined){
         this.moduleUID = this.data.module.moduleUID;
-        console.log(this.moduleUID);
         this.isEdit = true;
       }
-      console.log('isEdit ' + this.isEdit);
       this.data.resetModule();
     }
     // check if user created question in storage
     if (this.data.storage !== null){
       if (this.data.storage.questionUID === null){
         const q = Question.localQuestion(this.data.storage.question, this.data.storage.answers, this.data.storage.solutions);
-        console.log(q);
         this.questArr.push(q);
       } else {
         const uid = this.data.storage.questionUID;
@@ -90,7 +87,6 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
             question.question = this.data.storage.question;
             question.answers = this.data.storage.answers;
             question.solutions = this.data.storage.solutions;
-            console.log(question);
             break;
           }
         }
@@ -191,7 +187,6 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
    * @param $event that is triggered when the segement of the button switches sides
    */
   segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
   }
 
   private checkForWarnings(){

@@ -100,7 +100,6 @@ export class LearnModePage implements OnInit, ViewWillEnter {
             // calculate progress again
             this.moduleService.currLesson.calcProgress();
             this.endSession();
-            console.log('last Question reached redirect to stats..');
         }
     }
 

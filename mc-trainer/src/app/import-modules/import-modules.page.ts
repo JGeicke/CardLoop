@@ -43,7 +43,6 @@ export class ImportModulesPage implements OnInit {
      * filters the Module list
      */
     searchModules() {
-        console.log(this.searchBool);
         this.filteredModule = this.moduleService.searchModules(this.moduleService.allModules, this.searchQuery);
     }
 
@@ -53,7 +52,6 @@ export class ImportModulesPage implements OnInit {
      */
     cancelSearch() {
         this.searchBool = false;
-        console.log(this.searchBool);
     }
 
     /**
