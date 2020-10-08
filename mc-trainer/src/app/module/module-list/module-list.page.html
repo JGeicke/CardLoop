@@ -12,16 +12,6 @@
             <h2 class="ion-text-center">Your Lessons</h2>
         </ion-row>
 
-        <ion-row class="ion-justify-content-center" *ngIf="this.moduleService.userModules.length === 0">
-            <ion-col size="9">
-                <p>Seems kind of empty and boring, <br>
-                    click here to import a module
-                    <img (click)="this.router.navigate(['import-modules'])" src="../../../assets/icons/cloud-download-orange-circle.svg"
-                         alt="arrow pointing right"
-                         srcset="../../../assets/icons/cloud-download-orange-circle.svg">
-                </p>
-            </ion-col>
-        </ion-row>
         <ion-row class="ion-justify-content-center" *ngFor="let module of moduleService.userModules">
             <div class="module" [style.background-color]="module.color">
                 <img *ngIf="module.progress < 100" (click)="playLesson(module)"
