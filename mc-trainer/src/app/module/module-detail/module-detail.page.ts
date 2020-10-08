@@ -5,7 +5,7 @@ import {AlertController, NavController, PopoverController, ViewWillEnter} from '
 import {Module} from '../../../services/module.model';
 import {PopoverPage} from '../../popover/popover.page';
 import {AuthService} from '../../../services/auth.service';
-import {QuestionStorageService} from "../add-modules/question-storage.service";
+import {QuestionStorageService} from '../add-modules/question-storage.service';
 
 @Component({
     selector: 'app-module-detail',
@@ -33,7 +33,6 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
     ionViewWillEnter() {
         // this.moduleService.currLesson = JSON.parse(localStorage.getItem('currLesson'));
         this.calcQuestionsProgress();
-        console.log(this.moduleService.isModuleOwner(this.moduleService.currLesson));
     }
 
     /**
@@ -58,14 +57,12 @@ export class ModuleDetailPage implements OnInit, ViewWillEnter {
      * @param $event that is triggered when the segement of the button switches sides
      */
     segmentChanged(ev: any) {
-        console.log('Segment changed', ev);
     }
 
     /**
      * resets the progress for all Questions of the current Module
      */
     resetModuleProgress() {
-        console.log('resetModuleProgress called');
         for (const question of this.moduleService.currLesson.questions) {
             this.moduleService.resetQuestionProgress(question).then(r => question);
         }

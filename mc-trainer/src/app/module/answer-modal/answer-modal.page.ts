@@ -69,11 +69,9 @@ export class AnswerModalPage implements OnInit {
   }
 
   showAnswers_arr() {
-    console.log(this.answers);
   }
 
   showSolutions_arr() {
-    console.log(this.solutions);
   }
 
   trackByIndex(index: number, obj: any): any {

@@ -34,7 +34,6 @@ export class FeedbackPage implements OnInit {
 
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   constructor(private moduleService: ModuleService, private router: Router,
@@ -68,7 +67,6 @@ export class FeedbackPage implements OnInit {
    * @param $event that is triggered when the segement of the button switches sides
    */
   segmentChanged(ev: any) {
-    console.log(this.picked);
   }
 
 

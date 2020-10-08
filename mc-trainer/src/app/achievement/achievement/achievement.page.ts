@@ -44,7 +44,6 @@ export class AchievementPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    console.log(this.achievementService.achievements);
     const userStats = this.statisticService.userStats;
     this.questCount = userStats.questionCount;
     this.correctQuestCount = userStats.correctQuestionCount;

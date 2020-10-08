@@ -69,7 +69,6 @@ export class ModuleService {
                     role: 'cancel',
                     cssClass: 'secondary',
                     handler: (blah) => {
-                        console.log('Confirm Cancel: blah');
                     }
                 }, {
                     text: 'Okay',
@@ -133,7 +132,6 @@ export class ModuleService {
                 for (const module of moduleIds) {
                     await this.getUserModule(module);
                 }
-                console.log(this.userModules);
                 for (const module of this.userModules) {
                     await this.getModuleQuestions(module);
                     for (const question of module.questions) {
@@ -174,7 +172,6 @@ export class ModuleService {
             }
             for (const module of this.allModules) {
                 await this.getModuleQuestions(module);
-                console.log(module);
             }
             this.getRecommendations();
             this.runningGetAllModules = false;
