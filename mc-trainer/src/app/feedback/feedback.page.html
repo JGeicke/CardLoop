@@ -15,12 +15,12 @@
                 <div>
                     <span class="tags">
                         #{{moduleService.currLesson.tags[0]}}
-                        <div *ngIf="this.moduleService.currLesson.tags.length > 1">
+                        <span *ngIf="this.moduleService.currLesson.tags.length > 1">
                             #{{moduleService.currLesson.tags[1]}}..
-                        </div>
-                        <div *ngIf="moduleService.currLesson.tags.length >= 2">
+                        </span>
+                        <span *ngIf="moduleService.currLesson.tags.length >= 2">
                             +{{this.moduleService.currLesson.tags.length - 2}} more
-                        </div>
+                        </span>
                     </span>
                 </div>
             </div>
@@ -29,45 +29,47 @@
     <div>
         <ion-row class="ion-justify-content-center">
             <div class="question-box">
-                <ion-row class="ion-justify-content-center">
-                    <div>
-                        <ngx-charts-pie-chart
-                                [view]="view"
-                                [scheme]="colorScheme"
-                                [results]="data"
-                                [gradient]="gradient"
-                                [legend]="showLegend"
-                                [legendPosition]="legendPosition"
-                                [labels]="showLabels"
-                                [doughnut]="isDoughnut"
-                        >
-                        </ngx-charts-pie-chart>
-                        <div class="center-chart">
-                            <p>{{questionsInSession}}
-                                <span>Questions</span>
-                            </p>
+                <ion-row>
+                    <ion-row class="ion-justify-content-around">
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                        <div>
+                            <ngx-charts-pie-chart
+                                    [view]="view"
+                                    [scheme]="colorScheme"
+                                    [results]="data"
+                                    [gradient]="gradient"
+                                    [legend]="showLegend"
+                                    [legendPosition]="legendPosition"
+                                    [labels]="showLabels"
+                                    [doughnut]="isDoughnut"
+                            >
+                            </ngx-charts-pie-chart>
+                            <div class="center-chart">
+                                <p>{{this.statisticService.session.rightQuestions.length}}/{{questionsInSession}}
+                                </p>
 
+                            </div>
                         </div>
-                    </div>
+                    </ion-row>
                 </ion-row>
                 <ion-row class="ion-justify-content-around loop-row">
                     <div>
                         <div class="loop-count">
-                            <span class="green">{{learnedQuestions}}</span>
+                            <span class="green">{{this.statisticService.session.rightQuestions.length}}</span>
                         </div>
-                        <span>Learned</span>
+                        <span>Right</span>
                     </div>
                     <div>
                         <div class="loop-count">
-                            <span class="yellow">{{halfwayQuestions}}</span>
                         </div>
-                        <span>Halfway</span>
+                        <span></span>
                     </div>
                     <div>
                         <div class="loop-count">
-                            <span class="red">{{unsureQuestions}}</span>
+                            <span class="red">{{this.statisticService.session.wrongQuestions.length}}</span>
                         </div>
-                        <span>Unsure</span>
+                        <span>Wrong</span>
                     </div>
                 </ion-row>
             </div>

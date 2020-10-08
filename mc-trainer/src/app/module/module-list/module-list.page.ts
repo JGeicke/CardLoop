@@ -40,6 +40,8 @@ export class ModuleListPage implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.moduleService.userModules);
+        console.log('length of userModules: ' + this.moduleService.userModules.length);
     }
 
     /**

@@ -37,15 +37,6 @@ export class LoggedInPage implements OnInit {
         }
     }
 
-    sumuptags(tag_arr: string[], tagIndex: number) {
-        let sumtag = '';
-        for (let i = 0; i < tagIndex; i++) {
-            sumtag += tag_arr[i];
-        }
-
-        return sumtag.length;
-    }
-
     /**
      * redirect the view to learn-mode to learn a module
      *
