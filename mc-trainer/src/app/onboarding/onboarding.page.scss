@@ -3,14 +3,13 @@ ion-content {
 }
 
 .flexbox-container {
-  height: 650px;
+  height: 600px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-end;
   max-width: 400px;
-  padding: 30px;
-  margin: 50px 0;
+  padding: 20px;
   text-align: center;
 }
 
@@ -33,13 +32,13 @@ ion-content {
   width: 6rem;
   float: left;
   position: relative;
-  bottom: -2rem;
+  bottom: -4rem;
   left: -6rem;
 }
 
 .text_position {
   margin-top: 10px;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .custom_svg {
@@ -56,7 +55,7 @@ ion-content {
 }
 
 .onboard1 > div > div {
-  margin: 2rem;
+  margin: 1rem;
 }
 
 .onboard3 > div > .tut_background > div {
@@ -122,7 +121,10 @@ ion-content {
 ion-slides {
   --bullet-background-active: white;
   --bullet-background: #BBCDD6;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
 }
 
 ion-text {
