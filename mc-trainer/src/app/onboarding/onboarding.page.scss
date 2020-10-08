@@ -2,6 +2,79 @@ ion-content {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
 }
 
+.flexbox-container {
+  height: 650px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-end;
+  max-width: 400px;
+  padding: 30px;
+  margin: 50px 0;
+  text-align: center;
+}
+
+.tut_background {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 3px 4px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  height: 30rem;
+  width: 100%;
+  text-align: center;
+}
+
+.tut_icon {
+  height: 6rem;
+  width: 6rem;
+  float: left;
+  position: relative;
+  bottom: -2rem;
+  left: -6rem;
+}
+
+.text_position {
+  margin-top: 10px;
+  padding: 0 2rem;
+}
+
+.custom_svg {
+  position: relative;
+  width: 12rem;
+  height: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.onboard3_text {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.onboard1 > div > div {
+  margin: 2rem;
+}
+
+.onboard3 > div > .tut_background > div {
+  margin: 1.5rem;
+}
+
+.onboard4 > div > .tut_background > img {
+  margin: 1.2rem;
+}
+
+.onboard5 > div > .tut_background {
+  padding-top: 1rem !important;
+}
+
+.onboard6 > div > div {
+  margin: 2.5rem;
+}
+
 /* Custom Slide Padding */
 
 #onboarding_slide1 > ion-grid {
@@ -9,7 +82,7 @@ ion-content {
 }
 
 #onboarding_slide2 > ion-grid {
-  --ion-grid-column-padding: 10px;
+  --ion-grid-column-padding: 25px;
 }
 
 #onboarding_slide3 > ion-grid {
@@ -61,8 +134,8 @@ ion-text {
 }
 
 #slide1_confetti {
-  height: 7rem;
-  width: 7rem;
+  height: 15rem;
+  width: 15rem;
 }
 
 /* different text sizes */
@@ -92,13 +165,13 @@ ion-text {
 }
 
 ion-footer {
-  background-color: #175676;
+  --ion-background-color: none;
   --ion-border-box-shadow: none;
 }
 
-.skip_button {
+/* .skip_button {
   background-color: #175676;
-}
+} */
 
 .onboard_icon {
   height: 2rem;
@@ -111,19 +184,17 @@ ion-footer {
 
 ion-button {
   --box-shadow: none;
+  --ion-background-color: none;
 }
 
-.custom_svg {
-  width: 16rem;
-  height: auto;
-}
+
 
 /*Custom CSS Slide 1*/
 
 
 /* Custom CSS Slide 4 */
 .slide4_color[color] {
-  --ion-color-success: #66BE90;
+  --ion-color-success: #2C7595;
   --ion-color-warning: #FFB763;
   --ion-color-danger: #CF5D5D;
   float: right;

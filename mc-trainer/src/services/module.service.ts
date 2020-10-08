@@ -7,7 +7,6 @@ import {Question} from './question.model';
 import {Router} from '@angular/router';
 import {StatisticService} from './statistic.service';
 import * as firebase from 'firebase/app';
-import {AchievementService} from './achievement.service';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +25,7 @@ export class ModuleService {
      * last played module(lesson) of user
      */
     // new Module('', '', '', [], 0, '#ffffff', '');
-    public recentlyPlayed: Module = new Module('','','',[],0,'#CF5D5D','');
+    public recentlyPlayed: Module = new Module('', '', '', [], 0, '#CF5D5D', '');
     /**
      * module(lesson) currently played by user
      */
@@ -50,8 +49,7 @@ export class ModuleService {
                 private authService: AuthService,
                 private alertController: AlertController,
                 private router: Router,
-                private statisticService: StatisticService,
-                private achievementService: AchievementService) {
+                private statisticService: StatisticService){
         this.getAllModules();
     }
 
@@ -334,7 +332,6 @@ export class ModuleService {
                     if (res.exists) {
                         this.recentlyPlayed = null;
                         const id = res.data().recentlyPlayed;
-                        if (this.userModules != [])
                         for (const module of this.userModules) {
                             if (module.uid === id) {
                                 this.recentlyPlayed = module;

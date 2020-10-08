@@ -61,11 +61,11 @@
     <ion-toolbar class="botbar">
         <ion-row class="ion-justify-content-around" >
             <ion-button size="small" color="none" (click)="randomQuestion()" *ngIf="!randomized">
-                <img src="../../../assets/icons/random-solid.svg" alt="little house"
-                     srcset="../../../assets/icons/random-solid.svg" >
+                <img src="../../../assets/icons/random-solid.svg" alt="two arrows"
+                     srcset="../../../assets/icons/random-solid.svg" class="not_randomized">
             </ion-button>
             <ion-button size="small" color="none"  *ngIf="randomized" disabled="true">
-                <img src="../../../assets/icons/random-solid.svg" alt="little house"
+                <img src="../../../assets/icons/random-solid.svg" alt="two arrows"
                      srcset="../../../assets/icons/random-solid.svg" fill="#585858">
             </ion-button>
             <ion-button size="small" color="none" (click)="gesLastQuestion()">

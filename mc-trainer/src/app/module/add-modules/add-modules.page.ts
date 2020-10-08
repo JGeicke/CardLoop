@@ -3,7 +3,7 @@ import {ModuleService} from '../../../services/module.service';
 import {Question} from '../../../services/question.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionStorageService} from './question-storage.service';
-import {ViewWillEnter} from "@ionic/angular";
+import {ViewWillEnter} from '@ionic/angular';
 
 @Component({
   selector: 'app-add-modules',
@@ -54,6 +54,7 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
     this.moduleTags = '';
     this.moduleDesc = '';
     this.moduleColor = '#BA6363';
+    this.isEdit = false;
     this.questArr = [Question.localQuestion('a', [], [])];
     // check which view should be displayed
     const paramMap = this.route.snapshot.paramMap;
@@ -68,8 +69,9 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
       this.moduleDesc = this.data.module.moduleDesc;
       this.moduleColor = this.data.module.moduleColor;
       this.questArr = this.data.module.questions;
-      if (this.data.module.moduleUID !== null){
+      if (this.data.module.moduleUID !== undefined){
         this.moduleUID = this.data.module.moduleUID;
+        console.log(this.moduleUID);
         this.isEdit = true;
       }
       console.log('isEdit ' + this.isEdit);
@@ -78,7 +80,9 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
     // check if user created question in storage
     if (this.data.storage !== null){
       if (this.data.storage.questionUID === null){
-        this.questArr.push(Question.localQuestion(this.data.storage.question, this.data.storage.answers, this.data.storage.solutions));
+        const q = Question.localQuestion(this.data.storage.question, this.data.storage.answers, this.data.storage.solutions);
+        console.log(q);
+        this.questArr.push(q);
       } else {
         const uid = this.data.storage.questionUID;
         for (const question of this.questArr){

@@ -92,6 +92,7 @@ export class AnswerModalPage implements OnInit {
     if (!this.hasWarning) {
       if (this.questionUID === null) {
         this.data.storage = {
+          questionUID: null,
           question: this.question,
           answers: this.answers,
           solutions: sols
