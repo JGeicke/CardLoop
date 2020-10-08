@@ -88,9 +88,14 @@ ion-button {
   background-color: transparent;
   --box-shadow: none;
 }
-img{
+
+img {
   height: 1.8rem;
   cursor: pointer;
+}
+
+.not_randomized {
+  opacity: 0.5;
 }
 
 
