@@ -1,16 +1,21 @@
 ion-content {
   --ion-background-color: linear-gradient(179.97deg, #4BA3C3 12.04%, #175676 77.49%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flexbox-container {
-  height: 600px;
+  //height: 80%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: flex-end;
+  align-content: center;
   max-width: 400px;
   padding: 20px;
   text-align: center;
+  //margin-top: 3rem;
+  margin-bottom: 4rem;
 }
 
 .tut_background {
@@ -124,7 +129,20 @@ ion-slides {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onboarding-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ion-text {
@@ -189,6 +207,9 @@ ion-button {
   --ion-background-color: none;
 }
 
+.center-text {
+  text-align: center;
+}
 
 
 /*Custom CSS Slide 1*/
