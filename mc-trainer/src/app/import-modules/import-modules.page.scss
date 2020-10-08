@@ -126,11 +126,11 @@ ion-icon[name="search-outline"] {
   color: #FFFFFF;
   padding: 0.5rem 0.8rem 0.5rem 0.8rem;
   width: 100%;
+  cursor: pointer;
 }
 
 .recommendation-title {
   font-size: 1.1rem;
-  cursor: pointer;
 }
 
 .cards {
@@ -168,4 +168,8 @@ ion-icon[name="search-outline"] {
   color: white;
   float: right;
   position: relative;
+}
+
+ion-fab-button {
+  --background: #c90b2d;
 }

@@ -28,9 +28,8 @@
                         <img *ngIf="!this.moduleService.isModuleImported(this.moduleService.recentlyPlayed)" (click)="this.moduleService.importModule(this.moduleService.recentlyPlayed)"
                              src="../../../assets/icons/cloud-download-white-bg.svg" alt="cloud with downarrow"
                              srcset="../../../assets/icons/cloud-download-white-bg.svg">
-                        <div class="inner-module-wrapper">
-                            <p (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)"
-                               class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
+                        <div class="inner-module-wrapper" (click)="this.moduleService.getModuleDetails(this.moduleService.recentlyPlayed)">
+                            <p class="module-title">{{this.moduleService.recentlyPlayed.name}}</p>
                             <div class="white-box">
                                 <div>
                                     <progress-bar [progress]="this.moduleService.recentlyPlayed.progress"

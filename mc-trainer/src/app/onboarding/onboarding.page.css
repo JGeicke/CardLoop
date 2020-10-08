@@ -120,6 +120,7 @@ ion-content {
 ion-slides {
   --bullet-background-active: white;
   --bullet-background: #BBCDD6;
+  height: 100%;
 }
 
 ion-text {
