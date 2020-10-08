@@ -2,7 +2,7 @@
 ## Ein gamifizierter Multiple-Choice-Trainer
 
 
-[CardLoop Logo](../src/assets/img/logo-simple-ring.svg)
+[CardLoop Logo](./mc-trainer/src/assets/img/logo-simple-ring.svg)
 
 
 CardLoop ist ein von Studenten der Technischen Hochschule Mittelhessen entwickelte Multiple-Choice-App 
