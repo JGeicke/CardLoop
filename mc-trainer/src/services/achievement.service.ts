@@ -117,7 +117,7 @@ export class AchievementService {
    * checks if achievement is completed
    * @param achievement - achievement to check
    */
-  isSuccessAchievement(achievement: Achievement) {
+  isSuccessAchievement(achievement: Achievement): boolean {
     return achievement.currentNumber === achievement.maxNumber;
   }
 

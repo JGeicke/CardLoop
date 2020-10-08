@@ -7,7 +7,6 @@ import {Question} from './question.model';
 import {Router} from '@angular/router';
 import {StatisticService} from './statistic.service';
 import * as firebase from 'firebase/app';
-import {AchievementService} from './achievement.service';
 
 @Injectable({
     providedIn: 'root'
@@ -50,8 +49,7 @@ export class ModuleService {
                 private authService: AuthService,
                 private alertController: AlertController,
                 private router: Router,
-                private statisticService: StatisticService,
-                private achievementService: AchievementService) {
+                private statisticService: StatisticService){
         this.getAllModules();
     }
 
