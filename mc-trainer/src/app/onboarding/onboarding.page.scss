@@ -11,6 +11,7 @@ ion-content {
   max-width: 400px;
   padding: 30px;
   margin: 50px 0;
+  text-align: center;
 }
 
 .tut_background {
@@ -33,7 +34,7 @@ ion-content {
   float: left;
   position: relative;
   bottom: -2rem;
-  left: -4rem;
+  left: -6rem;
 }
 
 .text_position {
@@ -52,6 +53,26 @@ ion-content {
 .onboard3_text {
   text-align: left;
   margin-top: 1rem;
+}
+
+.onboard1 > div > div {
+  margin: 2rem;
+}
+
+.onboard3 > div > .tut_background > div {
+  margin: 1.5rem;
+}
+
+.onboard4 > div > .tut_background > img {
+  margin: 1.2rem;
+}
+
+.onboard5 > div > .tut_background {
+  padding-top: 1rem !important;
+}
+
+.onboard6 > div > div {
+  margin: 2.5rem;
 }
 
 /* Custom Slide Padding */

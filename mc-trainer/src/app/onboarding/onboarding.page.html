@@ -4,14 +4,23 @@ TODO: Resize Pagination Bullets
 <ion-content>
     <ion-slides pager="true">
         <ion-slide class="onboard1">
-            <div class="flexbox-container">
-                <ion-text class="onboarding_text_2 white_color text_position">
-                    Welcome to
-                </ion-text>
-                <img src="../../assets/img/logo-simple-ring.svg" alt="cardloop logo">
-                <ion-text class="onboarding_text_2 white_color text_position">
-                    Don't worry, we will show you everything you need!
-                </ion-text>
+            <div class="flexbox-container ion-justify-content-center">
+                <div class="ion-justify-content-center">
+                    <ion-text class="onboarding_text_2 white_color text_position">
+                        Welcome to
+                    </ion-text>
+                </div>
+                <div>
+                    <img src="../../assets/img/logo-simple-ring.svg" alt="cardloop logo">
+                    <ion-text class="onboarding_text_3 white_color text_position">
+                        CardLoop
+                    </ion-text>
+                </div>
+                <div>
+                    <ion-text class="onboarding_text_2 white_color text_position ion-text-center">
+                        Don't worry, we will show you everything you need!
+                    </ion-text>
+                </div>
             </div>
         </ion-slide>
         <ion-slide class="onboard2">
@@ -64,7 +73,7 @@ TODO: Resize Pagination Bullets
                     </div>
                 </div>
                 <ion-text class="onboarding_text_2 white_color text_position">
-                    Inspect your Lessons and get Feedback.
+                    Inspect your Lessons for Feedback.
                 </ion-text>
             </div>
         </ion-slide>
@@ -96,7 +105,7 @@ TODO: Resize Pagination Bullets
         <ion-slide class="onboard5">
             <div class="flexbox-container">
                 <div class="tut_icon">
-                    <img src="../../assets/icons/achiev_chess.svg" srcset="../../assets/icons/achiev_chess.svg"
+                    <img src="../../assets/icons/user.svg" srcset="../../assets/icons/user.svg"
                          alt="a book with a download icon">
                 </div>
                 <div class="tut_background">
@@ -120,14 +129,23 @@ TODO: Resize Pagination Bullets
         </ion-slide>
         <ion-slide class="onboard6">
             <div class="flexbox-container">
-                <img src="../../assets/img/logo-simple-ring.svg" alt="cardloop logo">
-                <ion-button size="medium" color="primary" class="onboarding_text_1" (click)="onboardingFinish()"
-                            [routerLink]="['/logged-in']">
-                    Get Started.
-                </ion-button>
-                <ion-text class="onboarding_text_1 white_color text_position">
-                    For more Information, <a [routerLink]="['/aboutpage']">Click here.</a>
-                </ion-text>
+                <div>
+                    <img src="../../assets/img/logo-simple-ring.svg" alt="cardloop logo">
+                    <ion-text class="onboarding_text_3 white_color text_position">
+                        CardLoop
+                    </ion-text>
+                </div>
+                <div>
+                    <ion-button size="medium" color="primary" class="onboarding_text_1" (click)="onboardingFinish()"
+                                [routerLink]="['/logged-in']">
+                        Get Started.
+                    </ion-button>
+                </div>
+                <div>
+                    <ion-text class="onboarding_text_1 white_color text_position">
+                        For more Information, <a [routerLink]="['/aboutpage']" class="onboarding_skip">Click here.</a>
+                    </ion-text>
+                </div>
             </div>
         </ion-slide>
 
