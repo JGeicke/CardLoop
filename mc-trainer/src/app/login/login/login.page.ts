@@ -58,9 +58,9 @@ export class LoginPage implements OnInit, ViewWillEnter {
     ionViewWillEnter(): void {
         this.hasWarning = false;
         this.hasAlert = false;
-        if (localStorage.getItem('saveUser') === null) {
+        if (localStorage.getItem('saveUser') === null || localStorage.getItem(('saveUser')) === 'false') {
             this.saveUser = false;
-        }   else {
+        } else {
             this.saveUser = true;
             this.user = JSON.parse(localStorage.getItem('user'));
             this.emailInput = this.user.email;
@@ -69,11 +69,10 @@ export class LoginPage implements OnInit, ViewWillEnter {
         }
     }
 
-    ionViewDidLeave(){
+    ionViewDidLeave() {
         this.ClearInput();
         this.loginSpinner = false;
     }
-
 
 
     /**
@@ -173,6 +172,7 @@ export class LoginPage implements OnInit, ViewWillEnter {
             }
         }
     }
+
     /**
      * Toggles Login-View/Sign-Up View
      */
