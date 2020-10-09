@@ -87,7 +87,7 @@ export class AchievementService {
         'Import 50 Lessons!', imported > 50 ? 50 : imported, 50, 'apple.svg'));
 
     this.achievements.push(new Achievement('13', 'CardLoopAcc',
-        'Create a CardLoop Account!', this.authService.isLoggedIn ? 1 : 0, 1, 'mountain_with_flag.svg'));
+        'Create a CardLoop Account!', this.authService.isLoggedIn ? 1 : 0, 1, 'confetti.svg'));
 
     // Check how many achievements the user completed
     for (const achievement of this.achievements){
