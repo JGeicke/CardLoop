@@ -529,7 +529,7 @@ export class ModuleService {
             // delete document of module
             await this.firestore.collection('modules').doc(module.uid).delete();
             // update allModules
-            this.getAllModules();
+            await this.getAllModules();
             // update local userModules
             this.deleteLesson(module);
             // update all modules of userModules collection

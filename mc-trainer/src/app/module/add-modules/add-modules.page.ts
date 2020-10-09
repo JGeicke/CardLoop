@@ -55,12 +55,13 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
     this.moduleDesc = '';
     this.moduleColor = '#BA6363';
     this.isEdit = false;
-    this.questArr = [Question.localQuestion('a', [], [])];
     // check which view should be displayed
     const paramMap = this.route.snapshot.paramMap;
     const pickedParam = paramMap.get('picked');
     if (pickedParam !== null){
       this.picked = pickedParam;
+    } else {
+      this.picked = 'general';
     }
     // check if module is in storage
     if (this.data.module !== null){
