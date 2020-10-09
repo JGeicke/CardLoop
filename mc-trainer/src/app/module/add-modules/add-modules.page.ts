@@ -60,6 +60,8 @@ export class AddModulesPage implements OnInit, ViewWillEnter {
     const pickedParam = paramMap.get('picked');
     if (pickedParam !== null){
       this.picked = pickedParam;
+    } else {
+      this.picked = 'general';
     }
     // check if module is in storage
     if (this.data.module !== null){
